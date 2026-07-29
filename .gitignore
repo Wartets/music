@@ -1,0 +1,65 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Music folders
+# Album 2 (2018-2019-2020)
+# Album 3 (2020-2021)
+# Album 4 (2021-2022-2023)
+# Album 5 (2023-2024)
+# Album 6 (2025)
+# Album 7 (2026)
+# Single
+
+# Data files
+# musicBib.json
+
+# Other
+architechture.md
+features.txt
+problems.txt
+architecture.md
+save
+/docs
+features.md
+problems.md
+roadmap.md
+UX_AUDIT.md
+UX_AUDIT_1.md
+UX_AUDIT_2.md
+tsconfig.tsbuildinfo
+/.kilo
+.github/copilot-instructions.md
+CLAUDE.md
+.claude*
+.playwright-mcp*
+.planning*
+scripts/models/discogs-effnet-bs64-1.pb
+scripts/models/genre_discogs400-discogs-effnet-1.json
+scripts/models/genre_discogs400-discogs-effnet-1.pb
+graphify-out
+AGENT.md
+AUDIT.md
+
+assets

@@ -1,0 +1,43 @@
+export interface PackageLink {
+    name: string;
+    version: string;
+    url: string;
+}
+
+const toPackageLinks = (entries: Array<[string, string]>): PackageLink[] => {
+    return entries
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([name, version]) => ({
+            name,
+            version,
+            url: `https://www.npmjs.com/package/${name}`
+        }));
+};
+
+export const runtimeDependencyLinks: PackageLink[] = toPackageLinks([
+    ['@dnd-kit/core', '^6.3.1'],
+    ['@dnd-kit/sortable', '^8.0.0'],
+    ['@dnd-kit/utilities', '^3.2.2'],
+    ['@tanstack/react-virtual', '^3.13.24'],
+    ['clsx', '^2.1.0'],
+    ['framer-motion', '^11.0.24'],
+    ['lucide-react', '^0.475.0'],
+    ['react', '^19.0.0'],
+    ['react-dom', '^19.0.0'],
+    ['react-error-boundary', '^6.1.1'],
+    ['react-router-dom', '^6.22.3'],
+    ['tailwind-merge', '^2.2.2'],
+    ['uuid', '^14.0.0'],
+]);
+
+export const developmentDependencyLinks: PackageLink[] = toPackageLinks([
+    ['@types/node', '^25.6.0'],
+    ['@types/react', '^19.0.0'],
+    ['@types/react-dom', '^19.0.0'],
+    ['@vitejs/plugin-react', '^4.2.1'],
+    ['autoprefixer', '^10.4.19'],
+    ['postcss', '^8.4.38'],
+    ['tailwindcss', '^3.4.3'],
+    ['typescript', '^5.7.0'],
+    ['vite', '^5.2.2'],
+]);

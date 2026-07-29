@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="color-scheme" content="dark light" />
+    
+    <title>Music Library</title>
+    <meta name="description" content="A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer." />
+    <meta name="keywords" content="music library, audio player, lossless, FLAC, offline, PWA, music collection, music management, audiophile, gapless playback" />
+    <meta name="author" content="Colin Bossu Réaubourg" />
+    <meta name="creator" content="Colin Bossu Réaubourg" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="language" content="English" />
+
+    <link rel="canonical" href="https://wartets.github.io/Music-Library/" />
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wartets.github.io/Music-Library/" />
+    <meta property="og:title" content="Music Library" />
+    <meta property="og:description" content="A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer." />
+    <meta property="og:site_name" content="Music Library" />
+    <meta property="og:locale" content="en_US" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Music Library" />
+    <meta name="twitter:description" content="A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer." />
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://api.cloudflare.com https://pub-8098e280aaf7439d92f35a1eb8ed94fb.r2.dev; media-src 'self' https://pub-8098e280aaf7439d92f35a1eb8ed94fb.r2.dev; worker-src 'self'" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icon-192.svg" />
+    <link rel="shortcut icon" href="%BASE_URL%icon-192.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.svg" />
+    <link rel="mask-icon" href="%BASE_URL%icon-512.svg" color="#111111" />
+    
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Music Library" />
+    <meta name="apple-mobile-web-app-status-bar" content="black-translucent" />
+    <meta name="application-name" content="Music Library" />
+    <meta name="msapplication-config" content="%BASE_URL%browserconfig.xml" />
+    <meta name="msapplication-TileColor" content="#111111" />
+    <meta name="msapplication-TileImage" content="%BASE_URL%icon-192.svg" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.cloudflare.com" />
+    
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-itunes-app" content="app-id=disable" />
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Music Library",
+      "description": "A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer.",
+      "url": "https://wartets.github.io/Music-Library/",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Colin Bossu Réaubourg"
+      },
+      "version": "1.1.0",
+      "operatingSystem": ["Windows", "macOS", "Linux", "iOS", "Android"]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

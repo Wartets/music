@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Music Library icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#13131a" />
+      <stop offset="100%" stop-color="#1f1f2a" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#e11d48" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="42" fill="url(#bg)" />
+  <circle cx="96" cy="96" r="58" fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="10" />
+  <path d="M119 58v58.5a20 20 0 1 1-10-17.4V74.4l-35 8.6v43.5a20 20 0 1 1-10-17.4V76c0-4.6 3.1-8.7 7.6-9.8l40-9.8c3-0.7 6.1 1.5 6.1 4.6Z" fill="url(#accent)" />
+</svg>

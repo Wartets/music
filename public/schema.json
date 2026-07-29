@@ -1,0 +1,58 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Music Library",
+  "alternateName": ["Music Player", "Local Music Manager"],
+  "description": "A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer.",
+  "url": "https://wartets.github.io/Music-Library/",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "MusicApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Colin Bossu Réaubourg"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Colin Bossu Réaubourg"
+  },
+  "version": "1.1.0",
+  "releaseNotes": "https://github.com/Wartets/Music-Library/releases",
+  "softwareRequirements": "Modern web browser with JavaScript and Service Worker support",
+  "browserRequirements": "ES6+, Web Audio API, localStorage",
+  "operatingSystem": ["Windows", "macOS", "Linux", "iOS", "Android"],
+  "downloadUrl": "https://github.com/Wartets/Music-Library",
+  "codeRepository": "https://github.com/Wartets/Music-Library",
+  "issueTracker": "https://github.com/Wartets/Music-Library/issues",
+  "fileFormat": ["audio/flac", "audio/mpeg", "audio/wav", "audio/ogg", "audio/aac"],
+  "runtimePlatform": "Web Browsers",
+  "featureList": [
+    "Offline-capable music playback",
+    "High-resolution lossless audio support",
+    "Gapless playback with crossfade",
+    "Adaptive UI theming based on album artwork",
+    "Full-screen immersive visualizer",
+    "Playlist management",
+    "Smart playlists with dynamic rules",
+    "Track version comparison",
+    "Web Audio API 10-band EQ",
+    "Dark mode support"
+  ],
+  "screenshots": [
+    {
+      "@type": "ImageObject",
+      "url": "https://wartets.github.io/Music-Library/assets/screenshot-1.png",
+      "width": 1200,
+      "height": 800
+    }
+  ],
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true,
+  "datePublished": "2024-01-01",
+  "dateModified": "2026-05-03"
+}

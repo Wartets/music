@@ -1,0 +1,41 @@
+# Music Library Robots Configuration
+# https://www.robotstxt.org/
+
+# Allow all robots
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /*.json$
+Disallow: /*.config.*
+Disallow: /dist/
+
+# Specific crawl delay settings
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://wartets.github.io/Music-Library/sitemap.xml
+Sitemap: https://wartets.github.io/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

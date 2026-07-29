@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square150x150logo src="/Music-Library/icon-192.svg" />
+      <wide310x150logo src="/Music-Library/icon-512.svg" />
+      <square310x310logo src="/Music-Library/icon-512.svg" />
+      <TileColor>#111111</TileColor>
+      <TileImage src="/Music-Library/icon-192.svg" />
+    </tile>
+    <notification>
+      <frequency_ms>60000</frequency_ms>
+      <polling-uri></polling-uri>
+    </notification>
+  </msapplication>
+</browserconfig>
