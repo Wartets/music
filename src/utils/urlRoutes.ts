@@ -99,3 +99,4 @@ export const parseAppRoute = (pathname: string, search: string): ParsedAppRoute 
 
     return { kind: 'none' };
 };
+

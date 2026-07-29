@@ -91,3 +91,4 @@ export const AlbumContentsView: React.FC<AlbumContentsViewProps> = ({ album: ini
         />
     );
 };
+

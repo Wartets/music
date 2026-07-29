@@ -51,3 +51,4 @@ export const AllTracksView: React.FC<AllTracksViewProps> = ({ onNavigate, initia
         />
     );
 };
+

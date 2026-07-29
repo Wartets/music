@@ -58,3 +58,4 @@ export const TrackCard: React.FC<TrackCardProps> = ({
         </div>
     );
 };
+

@@ -35,3 +35,4 @@ sharedScope.onconnect = (e: SharedWorkerConnectEvent) => {
 
     port.start?.();
 };
+

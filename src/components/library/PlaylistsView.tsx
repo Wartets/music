@@ -685,3 +685,4 @@ export const PlaylistsView: React.FC<PlaylistsViewProps> = ({ onNavigate }) => {
 };
 
 const AnimatePresence: React.FC<{ children: React.ReactNode, mode?: string }> = ({ children }) => <>{children}</>;
+

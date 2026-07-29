@@ -260,3 +260,4 @@ export const ShortcutEditor: React.FC = () => {
         </div>
     );
 };
+

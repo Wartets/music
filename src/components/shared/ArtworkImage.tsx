@@ -239,3 +239,4 @@ const dimensions = React.useMemo(() => parseDimensions(details?.dimensions), [de
         </div>
     );
 };
+

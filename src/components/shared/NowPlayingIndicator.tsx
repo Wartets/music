@@ -37,3 +37,4 @@ export const NowPlayingIndicator: React.FC<NowPlayingIndicatorProps> = ({
         {variant === 'dot' ? <Dot isAnimating={isAnimating} /> : <Bars isAnimating={isAnimating} />}
     </div>
 );
+

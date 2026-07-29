@@ -141,3 +141,4 @@ export const AlbumsView: React.FC<AlbumsViewProps> = ({ onNavigate }) => {
     );
 };
 
+

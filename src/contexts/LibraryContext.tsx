@@ -377,3 +377,4 @@ export const useLibrary = () => {
     if (!context) throw new Error('useLibrary must be used within LibraryProvider');
     return context;
 };
+

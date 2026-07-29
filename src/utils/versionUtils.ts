@@ -150,3 +150,4 @@ export const compareTrackVersions = (a: TrackItem, b: TrackItem): number => {
 export const rankTrackVersions = (versions: TrackItem[]): TrackItem[] => {
     return [...versions].sort(compareTrackVersions);
 };
+

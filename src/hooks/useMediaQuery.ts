@@ -46,3 +46,4 @@ export const usePrefersReducedMotion = (): boolean => {
 export const useTouchScreen = (): boolean => {
     return useMediaQuery('(pointer: coarse)', false);
 };
+

@@ -83,3 +83,4 @@ export const formatTotalDuration = (tracks: TrackItem[]): string => {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
 };
+

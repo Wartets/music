@@ -177,3 +177,4 @@ export const MainView: React.FC<MainViewProps> = ({ currentView, viewData, onNav
         </main>
     );
 };
+

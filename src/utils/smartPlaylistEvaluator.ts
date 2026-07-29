@@ -180,3 +180,4 @@ export const evaluateRuleGroup = (track: TrackItem, group: RuleGroup): boolean =
 export const evaluateSmartPlaylist = (tracks: TrackItem[], config: SmartPlaylistDefinition): TrackItem[] => {
     return tracks.filter(track => evaluateRuleGroup(track, config.group));
 };
+

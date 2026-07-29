@@ -128,7 +128,7 @@ function musicFilesMiddleware(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-    base: mode === 'production' ? '/Music-Library/' : '/',
+    base: mode === 'production' ? '/music/' : '/',
     plugins: [react(), copyPublicAssets(), copyMusicBibJson(), musicFilesMiddleware()],
     build: {
         rollupOptions: {
@@ -173,3 +173,4 @@ export default defineConfig(({ mode }) => ({
         format: 'es',
     },
 }));
+

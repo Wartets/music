@@ -81,3 +81,4 @@ export const SettingsView: React.FC<{ initialTab?: string }> = ({ initialTab }) 
         <SettingsViewLayout />
     </SettingsViewProvider>
 );
+

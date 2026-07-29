@@ -483,3 +483,4 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
 };
 
 const activeClass = (track: any, classes: string) => track ? classes : 'opacity-50 cursor-not-allowed text-gray-600';
+

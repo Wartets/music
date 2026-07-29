@@ -62,3 +62,4 @@ export const getCollectionArtwork = (tracks?: TrackItem[] | null): ImageDetails 
 
     return undefined;
 };
+

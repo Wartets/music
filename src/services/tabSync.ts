@@ -140,3 +140,4 @@ class TabSync {
 }
 
 export const tabSync = new TabSync();
+

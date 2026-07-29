@@ -780,3 +780,4 @@ export const ParametricEqEditor: React.FC = () => {
         </div>
     );
 };
+

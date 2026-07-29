@@ -47,3 +47,4 @@ export const LanguageSettingsTab: React.FC = () => {
         </div>
     );
 };
+

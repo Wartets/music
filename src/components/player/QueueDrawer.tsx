@@ -126,3 +126,4 @@ export const QueueDrawer: React.FC<QueueDrawerProps> = ({ isOpen, onClose }) => 
         </div>
     );
 };
+

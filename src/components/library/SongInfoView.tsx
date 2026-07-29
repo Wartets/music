@@ -187,3 +187,4 @@ export const SongInfoView: React.FC<SongInfoViewProps> = ({ track, onNavigate })
         </div>
     );
 };
+

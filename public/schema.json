@@ -4,7 +4,7 @@
   "name": "Music Library",
   "alternateName": ["Music Player", "Local Music Manager"],
   "description": "A local-first, offline-capable music library for managing high-resolution lossless music collections with adaptive UI theming, gapless playback, and immersive visualizer.",
-  "url": "https://wartets.github.io/Music-Library/",
+  "url": "https://wartets.github.io/music/",
   "applicationCategory": "MultimediaApplication",
   "applicationSubCategory": "MusicApplication",
   "offers": {
@@ -22,13 +22,13 @@
     "name": "Colin Bossu Réaubourg"
   },
   "version": "1.1.0",
-  "releaseNotes": "https://github.com/Wartets/Music-Library/releases",
+  "releaseNotes": "https://github.com/Wartets/music/releases",
   "softwareRequirements": "Modern web browser with JavaScript and Service Worker support",
   "browserRequirements": "ES6+, Web Audio API, localStorage",
   "operatingSystem": ["Windows", "macOS", "Linux", "iOS", "Android"],
-  "downloadUrl": "https://github.com/Wartets/Music-Library",
-  "codeRepository": "https://github.com/Wartets/Music-Library",
-  "issueTracker": "https://github.com/Wartets/Music-Library/issues",
+  "downloadUrl": "https://github.com/Wartets/music",
+  "codeRepository": "https://github.com/Wartets/music",
+  "issueTracker": "https://github.com/Wartets/music/issues",
   "fileFormat": ["audio/flac", "audio/mpeg", "audio/wav", "audio/ogg", "audio/aac"],
   "runtimePlatform": "Web Browsers",
   "featureList": [
@@ -46,7 +46,7 @@
   "screenshots": [
     {
       "@type": "ImageObject",
-      "url": "https://wartets.github.io/Music-Library/assets/screenshot-1.png",
+      "url": "https://wartets.github.io/music/assets/screenshot-1.png",
       "width": 1200,
       "height": 800
     }
@@ -56,3 +56,4 @@
   "datePublished": "2024-01-01",
   "dateModified": "2026-05-03"
 }
+

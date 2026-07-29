@@ -34,7 +34,7 @@ const normalizeRepositoryRelativePath = (inputPath: string): string => {
 
     let normalized = toPosixPath(stripped);
 
-    // Strip repository anchor (e.g., '/Music-Library/')
+    // Strip repository anchor (e.g., '/music/')
     const repoAnchorIndex = normalized.toLowerCase().indexOf('/music-library/');
     if (repoAnchorIndex >= 0) {
         normalized = normalized.slice(repoAnchorIndex + '/music-library/'.length);
@@ -95,3 +95,4 @@ export const resolvePreferredAssetUrl = (assetPath: string): string => {
 };
 
 export const resolveRepositoryRelativePath = normalizeRepositoryRelativePath;
+

@@ -65,3 +65,4 @@ export const getInitials = (value: string, maxLetters?: number): string => {
     const initials = selectedTokens.map(token => Array.from(token)[0] || '').join('');
     return initials.toUpperCase();
 };
+

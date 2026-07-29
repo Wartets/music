@@ -482,3 +482,4 @@ export const getSingleBandResponseDb = (
         20 * Math.log10(Math.max(getBiquadMagnitude(coeffs, frequency, sampleRate), 1e-8))
     ));
 };
+

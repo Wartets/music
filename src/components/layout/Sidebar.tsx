@@ -574,3 +574,4 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onNavigate }) => 
     );
 };
 
+

@@ -12,3 +12,4 @@ export const resolveHistoryTracks = (
         .map(id => resolveTrackVersion(id, tracks, versionToPrimaryMap))
         .filter((track): track is TrackItem => Boolean(track));
 };
+

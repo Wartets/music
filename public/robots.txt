@@ -13,7 +13,7 @@ Disallow: /dist/
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://wartets.github.io/Music-Library/sitemap.xml
+Sitemap: https://wartets.github.io/music/sitemap.xml
 Sitemap: https://wartets.github.io/sitemap.xml
 
 # Google-specific
@@ -39,3 +39,4 @@ Disallow: /
 
 User-agent: DotBot
 Disallow: /
+

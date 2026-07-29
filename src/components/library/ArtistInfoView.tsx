@@ -196,3 +196,4 @@ export const ArtistInfoView: React.FC<ArtistInfoViewProps> = ({ artistName, onNa
         </div>
     );
 };
+

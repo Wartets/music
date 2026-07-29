@@ -100,3 +100,4 @@ export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[]) => {
 
     return { visibleColumns, colWidths, measureRef };
 };
+

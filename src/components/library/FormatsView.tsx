@@ -135,3 +135,4 @@ export const FormatsView: React.FC<FormatsViewProps> = ({ onNavigate }) => {
         />
     );
 };
+

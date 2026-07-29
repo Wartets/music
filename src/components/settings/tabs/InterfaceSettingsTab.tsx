@@ -184,3 +184,4 @@ export const InterfaceSettingsTab: React.FC = () => {
         </div>
     );
 };
+

@@ -83,3 +83,4 @@ export const useGlobalShortcuts = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [togglePlay, playNext, playPrevious, seek, getProgress]);
 };
+

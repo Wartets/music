@@ -13,3 +13,4 @@
   <circle cx="256" cy="256" r="154" fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="28" />
   <path d="M318 154v156a53 53 0 1 1-27-46.5V197.4L198 220v116a53 53 0 1 1-27-46.5V201c0-12.3 8.3-23.2 20.4-26.2l106-26c7.8-1.9 15.6 4 15.6 12.2Z" fill="url(#accent)" />
 </svg>
+

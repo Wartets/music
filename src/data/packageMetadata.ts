@@ -41,3 +41,4 @@ export const developmentDependencyLinks: PackageLink[] = toPackageLinks([
     ['typescript', '^5.7.0'],
     ['vite', '^5.2.2'],
 ]);
+

@@ -446,3 +446,4 @@ export const ImmersiveVisualizer: React.FC<ImmersiveVisualizerProps> = React.mem
 });
 
 ImmersiveVisualizer.displayName = 'ImmersiveVisualizer';
+

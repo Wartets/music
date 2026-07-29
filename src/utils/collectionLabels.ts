@@ -50,3 +50,4 @@ export const getTrackCollectionKey = (track: TrackItem) => {
 
     return `folder:${folder.toLowerCase() || title.toLowerCase()}`;
 };
+

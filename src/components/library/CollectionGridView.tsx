@@ -266,3 +266,4 @@ export const CollectionGridView: React.FC<CollectionGridViewProps> = ({
         </div>
     );
 };
+

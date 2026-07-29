@@ -2,69 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main application entry point -->
   <url>
-    <loc>https://wartets.github.io/Music-Library/</loc>
+    <loc>https://wartets.github.io/music/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Primary navigation routes -->
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=all-tracks</loc>
+    <loc>https://wartets.github.io/music/?view=all-tracks</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=albums</loc>
+    <loc>https://wartets.github.io/music/?view=albums</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=artists</loc>
+    <loc>https://wartets.github.io/music/?view=artists</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=genres</loc>
+    <loc>https://wartets.github.io/music/?view=genres</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=years</loc>
+    <loc>https://wartets.github.io/music/?view=years</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=formats</loc>
+    <loc>https://wartets.github.io/music/?view=formats</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=playlists</loc>
+    <loc>https://wartets.github.io/music/?view=playlists</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=favorites</loc>
+    <loc>https://wartets.github.io/music/?view=favorites</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=history</loc>
+    <loc>https://wartets.github.io/music/?view=history</loc>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://wartets.github.io/Music-Library/?view=settings</loc>
+    <loc>https://wartets.github.io/music/?view=settings</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 </urlset>
+

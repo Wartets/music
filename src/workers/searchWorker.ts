@@ -538,3 +538,4 @@ self.onmessage = (e: MessageEvent) => {
         postSearchError(requestId, error instanceof Error ? error.message : 'Search worker failed.');
     }
 };
+

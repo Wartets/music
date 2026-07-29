@@ -160,3 +160,4 @@ export const YearsView: React.FC<YearsViewProps> = ({ onNavigate }) => {
         />
     );
 };
+

@@ -72,8 +72,8 @@ The data model relies on a JSON database file named `musicBib.json` that serves 
 ### Cloning the Repository
 
 ```bash
-git clone https://github.com/wartets/Music-Library.git
-cd Music-Library
+git clone https://github.com/wartets/music.git
+cd music
 ```
 
 ### Dependency Installation
@@ -127,7 +127,7 @@ Start the development server with hot module replacement:
 npm run dev
 ```
 
-Open a browser to `http://localhost:5173` to access the application. The development server proxies requests for audio files to the parent Music-Library directory, allowing playback of files outside the project workspace.
+Open a browser to `http://localhost:5173` to access the application. The development server proxies requests for audio files to the parent music directory, allowing playback of files outside the project workspace.
 
 ## Usage
 
@@ -328,7 +328,7 @@ The primary key for each track is the `logic.hash_sha256` value; this identifier
 
 ### Path Normalization
 
-All file paths in `musicBib.json` use Windows-style backslash separators. The application normalizes these to forward slashes for URL construction. When serving files from the local filesystem during development, the Vite configuration includes middleware to resolve paths from the parent Music-Library directory.
+All file paths in `musicBib.json` use Windows-style backslash separators. The application normalizes these to forward slashes for URL construction. When serving files from the local filesystem during development, the Vite configuration includes middleware to resolve paths from the parent music directory.
 
 Three asset resolution strategies are employed, in order:
 
@@ -408,7 +408,7 @@ The software itself is provided as-is; refer to the repository for licensing ter
 
 The application is deployed as a static site on GitHub Pages at:
 
-https://wartets.github.io/Music-Library/
+https://wartets.github.io/music/
 
 The production build consists of static HTML, CSS, and JavaScript files that can be served from any static hosting provider. The build output is generated in the `dist/` directory.
 
@@ -434,7 +434,7 @@ This starts a local server serving the built assets, allowing verification of th
 
 ### GitHub Pages Configuration
 
-The repository is configured with GitHub Pages enabled on the `gh-pages` branch or the `/docs` folder depending on repository settings. The Vite base path is configured as `/Music-Library/` to accommodate GitHub Pages' subdirectory deployment model.
+The repository is configured with GitHub Pages enabled on the `gh-pages` branch or the `/docs` folder depending on repository settings. The Vite base path is configured as `/music/` to accommodate GitHub Pages' subdirectory deployment model.
 
 ### Self-Hosting
 
@@ -455,3 +455,4 @@ The application requires a modern web browser with support for:
 - CSS Grid and Flexbox
 
 Supported browsers include the latest versions of Chrome, Firefox, Safari, and Edge on Windows, macOS, Linux, iOS, and Android. Internet Explorer is not supported.
+

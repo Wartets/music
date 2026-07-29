@@ -248,3 +248,4 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
         </div>
     );
 };
+

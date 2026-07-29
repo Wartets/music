@@ -171,3 +171,4 @@ export const ArtistsView: React.FC<ArtistsViewProps> = ({ onNavigate }) => {
         />
     );
 };
+

@@ -140,3 +140,4 @@ export const SpectrumAnalyser: React.FC<SpectrumAnalyserProps> = ({ enabled, acc
         />
     );
 };
+

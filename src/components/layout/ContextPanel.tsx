@@ -266,3 +266,4 @@ export const ContextPanel: React.FC<{ isOpen: boolean; onClose: () => void }> = 
         </>
     );
 };
+

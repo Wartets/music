@@ -39,3 +39,4 @@ export interface SettingsDetailedStats {
     genreByFormat: Array<{ genre: string; lossless: number; lossy: number }>;
     maxGenreCount: number;
 }
+

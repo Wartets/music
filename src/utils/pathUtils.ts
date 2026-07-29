@@ -68,3 +68,4 @@ export const getDirectChildPath = (parentPath: string | null | undefined, candid
 
     return joinPathSegments(candidateSegments.slice(0, parentSegments.length + 1));
 };
+

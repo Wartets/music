@@ -187,3 +187,4 @@ export const SearchResultsView: React.FC<SearchResultsViewProps> = ({ query, sou
         </div>
     );
 };
+

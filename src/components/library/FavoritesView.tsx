@@ -87,3 +87,4 @@ export const FavoritesView: React.FC<FavoritesViewProps> = ({ onNavigate }) => {
         </div>
     );
 };
+

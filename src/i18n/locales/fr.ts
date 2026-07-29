@@ -1046,3 +1046,4 @@ const fr: any = {
 };
 
 export default fr;
+

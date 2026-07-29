@@ -160,3 +160,4 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({ currentView, onNavig
         </>
     );
 };
+

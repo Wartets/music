@@ -263,3 +263,4 @@ export const extractDominantColors = async (imageUrl: string, colorCount: number
         img.src = imageUrl;
     });
 };
+

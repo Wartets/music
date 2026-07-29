@@ -438,3 +438,4 @@ export const BigScreenView: React.FC<{ onBack: () => void; onNavigate: (view: Vi
     );
 };
 
+

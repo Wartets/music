@@ -247,3 +247,4 @@ export const StatsSettingsTab: React.FC = () => {
         </div>
     );
 };
+

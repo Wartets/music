@@ -34,7 +34,7 @@ export const CredentialsSettingsTab: React.FC = () => {
                         <div className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">{t('settings.credentials.productLicense')}</div>
                         <div className="text-sm font-bold text-white mb-2">{t('settings.credentials.productLicenseDesc')}</div>
                         <a
-                            href="https://github.com/Wartets/Music-Library/blob/main/LICENSE"
+                            href="https://github.com/Wartets/music/blob/main/LICENSE"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-dominant hover:text-dominant-light transition-colors"
@@ -52,7 +52,7 @@ export const CredentialsSettingsTab: React.FC = () => {
                     </p>
                     <div className="flex flex-wrap gap-3">
                         <a
-                            href="https://github.com/Wartets/Music-Library"
+                            href="https://github.com/Wartets/music"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-gray-200 hover:bg-white/10 transition-all"
@@ -61,7 +61,7 @@ export const CredentialsSettingsTab: React.FC = () => {
                             <ExternalLink size={12} />
                         </a>
                         <a
-                            href="https://wartets.github.io/Music-Library/"
+                            href="https://wartets.github.io/music/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-gray-200 hover:bg-white/10 transition-all"
@@ -113,3 +113,4 @@ export const CredentialsSettingsTab: React.FC = () => {
         </div>
     );
 };
+
