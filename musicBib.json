@@ -1,8 +1,8 @@
 {
  "info":  {
-    "date":  "2026-09-16 19:25:26",
-    "total_tracks_versions":  248,
-    "execution_time_ms":  154842
+    "date":  "2026-09-16 20:25:30",
+    "total_tracks_versions":  250,
+    "execution_time_ms":  162139
    },
  "items":  [
     {
@@ -26,10 +26,10 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\pmlopmlkomml",
         "size_bytes":  2526860,
         "size_mb":  2.41,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:37:14",
-        "epoch_created":  1785280537,
-        "epoch_modified":  1778002635
+        "created":  "2026-09-16 19:49:08",
+        "modified":  "2026-09-16 19:49:08",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "pmlopmlkomml 1",
@@ -128,10 +128,10 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\Sans Nom",
         "size_bytes":  1417623,
         "size_mb":  1.35,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:37:38",
-        "epoch_created":  1785280537,
-        "epoch_modified":  1778002659
+        "created":  "2026-09-16 19:49:08",
+        "modified":  "2026-09-16 19:49:08",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "Sans Nom - 25/03/2018 17.55",
@@ -230,10 +230,10 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\été sun rise",
         "size_bytes":  1718565,
         "size_mb":  1.64,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:37:17",
-        "epoch_created":  1785280537,
-        "epoch_modified":  1778002637
+        "created":  "2026-09-16 19:49:08",
+        "modified":  "2026-09-16 19:49:08",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "été sun rise - 24/03/2018 19.20",
@@ -332,10 +332,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\2020-06-13_23-42-37",
         "size_bytes":  45532904,
         "size_mb":  43.42,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:39:32",
-        "epoch_created":  1785280537,
-        "epoch_modified":  1778002773
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "2020-06-13_23-42-37",
@@ -433,10 +433,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3386526,
         "size_mb":  3.23,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:39:40",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002781
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "79 1.2",
@@ -534,10 +534,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3450832,
         "size_mb":  3.29,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:39:42",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002783
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "79 1.3",
@@ -635,10 +635,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3381387,
         "size_mb":  3.22,
-        "created":  "2026-07-28 23:15:37",
-        "modified":  "2026-05-05 17:39:57",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002798
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588149,
+        "epoch_modified":  1789588149
        },
      "metadata":  {
          "title":  "Mon morceau 79",
@@ -736,10 +736,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Batterie coffre à jouet",
         "size_bytes":  2273041,
         "size_mb":  2.17,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:40:24",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002824
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "Batterie coffre a jouet",
@@ -837,10 +837,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Computers",
         "size_bytes":  1954602,
         "size_mb":  1.86,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:40:25",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002826
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "Computers",
@@ -938,10 +938,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Computers",
         "size_bytes":  1954580,
         "size_mb":  1.86,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:39:18",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002758
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "Mon morceau 55",
@@ -1039,10 +1039,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Ghosts",
         "size_bytes":  2226921,
         "size_mb":  2.12,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:39:19",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002759
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "Ghosts",
@@ -1140,10 +1140,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\II",
         "size_bytes":  3433702,
         "size_mb":  3.27,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:39:21",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002761
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "II",
@@ -1241,10 +1241,10 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 2",
         "size_bytes":  3326029,
         "size_mb":  3.17,
-        "created":  "2026-07-28 23:15:38",
-        "modified":  "2026-05-05 17:40:02",
-        "epoch_created":  1785280538,
-        "epoch_modified":  1778002803
+        "created":  "2026-09-16 19:49:09",
+        "modified":  "2026-09-16 19:49:09",
+        "epoch_created":  1789588150,
+        "epoch_modified":  1789588150
        },
      "metadata":  {
          "title":  "Mon morceau 2",
@@ -21997,7 +21997,7 @@
     {
      "id":  192,
      "logic":  {
-         "hash_sha256":  "229206A1CE1F514691699822492F29895D1E013E3851AE9CD81556BDAF635D6C",
+         "hash_sha256":  "B16D2113D0C91EA2D7079DE4A5E51CCEEDBA47CDACD79123EED365B0BE36886B",
          "track_name":  "Projet 15",
          "version_name":  "Projet 15",
          "total_versions_in_folder":  2,
@@ -22013,12 +22013,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 15\\Projet 15.m4a",
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 15",
-        "size_bytes":  53292213,
-        "size_mb":  50.82,
+        "size_bytes":  53346578,
+        "size_mb":  50.88,
         "created":  "2026-07-28 23:16:41",
-        "modified":  "2026-07-26 16:10:57",
+        "modified":  "2026-09-16 20:07:34",
         "epoch_created":  1785280602,
-        "epoch_modified":  1785082258
+        "epoch_modified":  1789589255
        },
      "metadata":  {
          "title":  "Projet 15",
@@ -22030,7 +22030,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 6.1",
-         "genre":  "",
+         "genre":  "Folk, World, \u0026 Country / Folk",
          "year":  "2026",
          "track_number":  "11",
          "total_tracks":  11,
@@ -24103,10 +24103,10 @@
     {
      "id":  218,
      "logic":  {
-         "hash_sha256":  "A05BA8A48E1C92E8D7D2B46727B7D4DC0ADCB5027A92326752D3A051C5A2AE64",
+         "hash_sha256":  "7014FC2FA1539D238939B1D9E941D3429B9D40CF3663998AF1263DFC3174AA7E",
          "track_name":  "Projet 11",
          "version_name":  "Projet 11",
-         "total_versions_in_folder":  1,
+         "total_versions_in_folder":  2,
          "is_single":  false,
          "hierarchy":  {
              "group":  "Album 7 (2026)",
@@ -24119,12 +24119,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11\\Projet 11.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11",
-        "size_bytes":  23521898,
-        "size_mb":  22.43,
+        "size_bytes":  23546490,
+        "size_mb":  22.46,
         "created":  "2026-09-16 13:01:54",
-        "modified":  "2026-09-16 13:01:54",
+        "modified":  "2026-09-16 20:07:55",
         "epoch_created":  1789563715,
-        "epoch_modified":  1789563715
+        "epoch_modified":  1789589275
        },
      "metadata":  {
          "title":  "Projet 11",
@@ -24136,7 +24136,7 @@
          "album_artist":  "",
          "composer":  "",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Ambient",
          "year":  "",
          "track_number":  "",
          "total_tracks":  10,
@@ -24184,10 +24184,91 @@
     {
      "id":  219,
      "logic":  {
-         "hash_sha256":  "095D708524FCC4DBF9E6C1761B6FC65AAC6D9F204C5C0E8C038F6BE5B326DAF1",
+         "hash_sha256":  "15127EC437A909E1F2B079E209AA1D074785F1C8F7611B5C7481F1B150493938",
+         "track_name":  "Projet 11",
+         "version_name":  "Projet 11",
+         "total_versions_in_folder":  2,
+         "is_single":  false,
+         "hierarchy":  {
+             "group":  "Album 7 (2026)",
+             "album":  "Album 7.1",
+             "folder":  "Projet 11"
+            }
+        },
+     "file":  {
+        "name":  "Projet 11.opus",
+        "ext":  "OPUS",
+        "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11\\Projet 11.opus",
+        "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11",
+        "size_bytes":  585938,
+        "size_mb":  0.56,
+        "created":  "2026-09-16 20:21:19",
+        "modified":  "2026-09-16 20:21:20",
+        "epoch_created":  1789590079,
+        "epoch_modified":  1789590081
+       },
+     "metadata":  {
+         "title":  "Projet 11",
+         "file_title":  "Projet 11",
+         "file_name":  "Projet 11.opus",
+         "artists":  [
+
+            ],
+         "album_artist":  "",
+         "composer":  "",
+         "album":  "Album 7.1",
+         "genre":  "Electronic / Ambient",
+         "year":  "",
+         "track_number":  "",
+         "total_tracks":  10,
+         "disc_number":  "",
+         "total_discs":  "",
+         "bpm":  "",
+         "bpm_source":  "",
+         "lyrics":  "",
+         "comment":  "",
+         "description":  "",
+         "producer":  "",
+         "label":  "",
+         "publisher":  "",
+         "isrc":  "",
+         "upc":  "",
+         "mood":  "",
+         "language":  "",
+         "category":  "",
+         "tags":  [
+
+            ],
+         "remix_artist":  "",
+         "edition":  "",
+         "recording_year":  "",
+         "video_link":  "",
+         "streaming_link":  ""
+        },
+     "audio_specs":  {
+          "is_lossless":  false,
+          "duration":  "00:00:12",
+          "codec":  "OPUS",
+          "bitrate":  "376 Kbits/s",
+          "sample_rate":  "48000 Hz",
+          "channels":  "2"
+         },
+     "artworks":  {
+         "track_artwork":  [
+
+              ],
+         "album_artwork":  [
+
+              ]
+        }
+    },
+    {
+     "id":  220,
+     "logic":  {
+         "hash_sha256":  "AB07D7D0A14AC93338289A4332867EC352087F8C31F2FCFD3538C83C9B32BF4A",
          "track_name":  "Projet 17",
          "version_name":  "Projet 17",
-         "total_versions_in_folder":  1,
+         "total_versions_in_folder":  2,
          "is_single":  false,
          "hierarchy":  {
              "group":  "Album 7 (2026)",
@@ -24200,12 +24281,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17\\Projet 17.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17",
-        "size_bytes":  18980947,
-        "size_mb":  18.1,
+        "size_bytes":  19000999,
+        "size_mb":  18.12,
         "created":  "2026-09-16 13:01:55",
-        "modified":  "2026-09-16 13:01:55",
+        "modified":  "2026-09-16 20:08:10",
         "epoch_created":  1789563716,
-        "epoch_modified":  1789563716
+        "epoch_modified":  1789589291
        },
      "metadata":  {
          "title":  "Projet 17",
@@ -24217,7 +24298,7 @@
          "album_artist":  "",
          "composer":  "",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Ambient",
          "year":  "",
          "track_number":  "",
          "total_tracks":  10,
@@ -24263,9 +24344,90 @@
         }
     },
     {
-     "id":  220,
+     "id":  221,
      "logic":  {
-         "hash_sha256":  "4BC2C42D5CFF6EB01731A13A27FA52299EA075B4161E31B05234F2A3DE277B1C",
+         "hash_sha256":  "BE0644FAF22ED0D394A21EA1BA06C6C66CC8A6A6D34F6E7BC1DD0DB6CAA21595",
+         "track_name":  "Projet 17",
+         "version_name":  "Projet 17",
+         "total_versions_in_folder":  2,
+         "is_single":  false,
+         "hierarchy":  {
+             "group":  "Album 7 (2026)",
+             "album":  "Album 7.1",
+             "folder":  "Projet 17"
+            }
+        },
+     "file":  {
+        "name":  "Projet 17.opus",
+        "ext":  "OPUS",
+        "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17\\Projet 17.opus",
+        "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17",
+        "size_bytes":  599968,
+        "size_mb":  0.57,
+        "created":  "2026-09-16 20:21:19",
+        "modified":  "2026-09-16 20:21:20",
+        "epoch_created":  1789590079,
+        "epoch_modified":  1789590081
+       },
+     "metadata":  {
+         "title":  "Projet 17",
+         "file_title":  "Projet 17",
+         "file_name":  "Projet 17.opus",
+         "artists":  [
+
+            ],
+         "album_artist":  "",
+         "composer":  "",
+         "album":  "Album 7.1",
+         "genre":  "Electronic / Ambient",
+         "year":  "",
+         "track_number":  "",
+         "total_tracks":  10,
+         "disc_number":  "",
+         "total_discs":  "",
+         "bpm":  "",
+         "bpm_source":  "",
+         "lyrics":  "",
+         "comment":  "",
+         "description":  "",
+         "producer":  "",
+         "label":  "",
+         "publisher":  "",
+         "isrc":  "",
+         "upc":  "",
+         "mood":  "",
+         "language":  "",
+         "category":  "",
+         "tags":  [
+
+            ],
+         "remix_artist":  "",
+         "edition":  "",
+         "recording_year":  "",
+         "video_link":  "",
+         "streaming_link":  ""
+        },
+     "audio_specs":  {
+          "is_lossless":  false,
+          "duration":  "00:00:13",
+          "codec":  "OPUS",
+          "bitrate":  "366 Kbits/s",
+          "sample_rate":  "48000 Hz",
+          "channels":  "2"
+         },
+     "artworks":  {
+         "track_artwork":  [
+
+              ],
+         "album_artwork":  [
+
+              ]
+        }
+    },
+    {
+     "id":  222,
+     "logic":  {
+         "hash_sha256":  "A7D78DEDD8F9302AF19D8CF25CB15141A03F42509C34D33271AF0811E61946CF",
          "track_name":  "Projet 24",
          "version_name":  "Projet 24",
          "total_versions_in_folder":  2,
@@ -24281,12 +24443,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 24\\Projet 24.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 24",
-        "size_bytes":  10498052,
-        "size_mb":  10.01,
+        "size_bytes":  10509617,
+        "size_mb":  10.02,
         "created":  "2026-07-28 23:16:48",
-        "modified":  "2026-07-26 16:10:37",
+        "modified":  "2026-09-16 20:08:21",
         "epoch_created":  1785280608,
-        "epoch_modified":  1785082238
+        "epoch_modified":  1789589302
        },
      "metadata":  {
          "title":  "Projet 24",
@@ -24298,7 +24460,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Jazz / Afrobeat",
          "year":  "2026",
          "track_number":  "2",
          "total_tracks":  10,
@@ -24344,7 +24506,7 @@
         }
     },
     {
-     "id":  221,
+     "id":  223,
      "logic":  {
          "hash_sha256":  "66BB33D343344C4924DD1186A59F4CD64703B7CBCB19DB0B85E43D21F05A8225",
          "track_name":  "Projet 24",
@@ -24425,7 +24587,7 @@
         }
     },
     {
-     "id":  222,
+     "id":  224,
      "logic":  {
          "hash_sha256":  "E215CC49438457DB44069249318C86E1291D008F2761EBC57DCAFE675A707F70",
          "track_name":  "Projet 27",
@@ -24506,7 +24668,7 @@
         }
     },
     {
-     "id":  223,
+     "id":  225,
      "logic":  {
          "hash_sha256":  "7463BF65C7D115C7FF897443EC42962DE66FE0B26910C921534F58EB93DF6736",
          "track_name":  "Projet 27",
@@ -24587,7 +24749,7 @@
         }
     },
     {
-     "id":  224,
+     "id":  226,
      "logic":  {
          "hash_sha256":  "412149C61CBBB871B0DE913BC2E9D90E6DF39E92929AC56DB47DBB116FA1B51C",
          "track_name":  "Projet 27",
@@ -24668,7 +24830,7 @@
         }
     },
     {
-     "id":  225,
+     "id":  227,
      "logic":  {
          "hash_sha256":  "BC7703E4A28D3C719270AB46B48D5CF137A01EA92329F0560866B86BEDA4115B",
          "track_name":  "Projet 27",
@@ -24749,7 +24911,7 @@
         }
     },
     {
-     "id":  226,
+     "id":  228,
      "logic":  {
          "hash_sha256":  "E0274B90FD90EFE5DBCB622553764306E3528D74BF336A5AABDDE4D74C8DE358",
          "track_name":  "Projet 27",
@@ -24830,7 +24992,7 @@
         }
     },
     {
-     "id":  227,
+     "id":  229,
      "logic":  {
          "hash_sha256":  "0DFE030279F471372F0F1C793DDCB9911559794A80B8FFAE0185123A062B93C8",
          "track_name":  "Projet 27",
@@ -24911,9 +25073,9 @@
         }
     },
     {
-     "id":  228,
+     "id":  230,
      "logic":  {
-         "hash_sha256":  "75C0B29E83E1FB3F72F2525F44D0274572EA994B5926AC755F014931CBDC8A84",
+         "hash_sha256":  "1158C73FBEFEEA271CF7BED771F2BE9170BB7F5570A6FFD8E03DC09E0332E547",
          "track_name":  "Projet 31",
          "version_name":  "Projet 31",
          "total_versions_in_folder":  2,
@@ -24929,12 +25091,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 31\\Projet 31.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 31",
-        "size_bytes":  31897713,
-        "size_mb":  30.42,
+        "size_bytes":  31930685,
+        "size_mb":  30.45,
         "created":  "2026-07-28 23:16:49",
-        "modified":  "2026-07-26 16:29:40",
+        "modified":  "2026-09-16 20:08:48",
         "epoch_created":  1785280609,
-        "epoch_modified":  1785083381
+        "epoch_modified":  1789589328
        },
      "metadata":  {
          "title":  "Projet 31",
@@ -24946,7 +25108,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Dungeon Synth",
          "year":  "2026",
          "track_number":  "3",
          "total_tracks":  10,
@@ -24992,7 +25154,7 @@
         }
     },
     {
-     "id":  229,
+     "id":  231,
      "logic":  {
          "hash_sha256":  "AC8E0FB5DD3C148BFBA9D47A2FDDD62AE4BDE7DB326DD7CB9D2F0EA6F3AAC8A1",
          "track_name":  "Projet 31",
@@ -25073,9 +25235,9 @@
         }
     },
     {
-     "id":  230,
+     "id":  232,
      "logic":  {
-         "hash_sha256":  "2C86F8BBA5F9EA4F8F9D70B0A714D6EA7FA884521829AD70455EA931E81A3DC8",
+         "hash_sha256":  "252A5C925D276CA0A0ED7761E42BEB4A4D3830EFA1040E430518969DD090C0C9",
          "track_name":  "Projet 34",
          "version_name":  "Projet 34",
          "total_versions_in_folder":  2,
@@ -25091,12 +25253,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 34\\Projet 34.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 34",
-        "size_bytes":  53797489,
-        "size_mb":  51.31,
+        "size_bytes":  53852351,
+        "size_mb":  51.36,
         "created":  "2026-07-28 23:16:50",
-        "modified":  "2026-07-26 16:10:37",
+        "modified":  "2026-09-16 20:09:24",
         "epoch_created":  1785280610,
-        "epoch_modified":  1785082238
+        "epoch_modified":  1789589364
        },
      "metadata":  {
          "title":  "Projet 34",
@@ -25108,7 +25270,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "4",
          "total_tracks":  10,
@@ -25154,7 +25316,7 @@
         }
     },
     {
-     "id":  231,
+     "id":  233,
      "logic":  {
          "hash_sha256":  "93327F69AEE3753085C2A6A4921A079E83A3612FC926CCFF713D76324B36A32C",
          "track_name":  "Projet 34",
@@ -25235,9 +25397,9 @@
         }
     },
     {
-     "id":  232,
+     "id":  234,
      "logic":  {
-         "hash_sha256":  "7592097966ED4EB4F5B4117F6A75418FD8F6E0A698CCD4E6890DBDADF02F668E",
+         "hash_sha256":  "2FEC6311546AE99B8E8E3D876DCB23714EE44FD30C41BA11F79E41691900A643",
          "track_name":  "Projet 37",
          "version_name":  "Projet 37.1",
          "total_versions_in_folder":  2,
@@ -25253,12 +25415,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 37\\Projet 37.1.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 37",
-        "size_bytes":  53033020,
-        "size_mb":  50.58,
+        "size_bytes":  53087120,
+        "size_mb":  50.63,
         "created":  "2026-07-28 23:16:51",
-        "modified":  "2026-07-26 16:10:37",
+        "modified":  "2026-09-16 20:10:01",
         "epoch_created":  1785280611,
-        "epoch_modified":  1785082238
+        "epoch_modified":  1789589401
        },
      "metadata":  {
          "title":  "Projet 37",
@@ -25270,7 +25432,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Downtempo",
          "year":  "2026",
          "track_number":  "5",
          "total_tracks":  10,
@@ -25316,7 +25478,7 @@
         }
     },
     {
-     "id":  233,
+     "id":  235,
      "logic":  {
          "hash_sha256":  "D464B3819BAA889CC1AA672CC5938E584C3FF3E730DE94F1B9F5D77619F1F396",
          "track_name":  "Projet 37",
@@ -25397,9 +25559,9 @@
         }
     },
     {
-     "id":  234,
+     "id":  236,
      "logic":  {
-         "hash_sha256":  "4248BCF4CFEEF7614160D12253D1F54DCB377D520F898218FA861F7730869E3C",
+         "hash_sha256":  "5439C36055DAAA6A4C5C2FB72227DAEA845D0303997AEC31F048D53CCB3EF53B",
          "track_name":  "Projet 41",
          "version_name":  "Projet 41.1",
          "total_versions_in_folder":  2,
@@ -25415,12 +25577,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 41\\Projet 41.1.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 41",
-        "size_bytes":  25272906,
-        "size_mb":  24.1,
+        "size_bytes":  25299243,
+        "size_mb":  24.13,
         "created":  "2026-07-28 23:16:54",
-        "modified":  "2026-07-26 16:10:37",
+        "modified":  "2026-09-16 20:10:22",
         "epoch_created":  1785280614,
-        "epoch_modified":  1785082238
+        "epoch_modified":  1789589422
        },
      "metadata":  {
          "title":  "Projet 41",
@@ -25432,7 +25594,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Jazz / Big Band",
          "year":  "2026",
          "track_number":  "6",
          "total_tracks":  10,
@@ -25478,7 +25640,7 @@
         }
     },
     {
-     "id":  235,
+     "id":  237,
      "logic":  {
          "hash_sha256":  "832CB641A9AA279EF527E5AE8A21894745674434A039AC61BAEEAC2A65F1F949",
          "track_name":  "Projet 41",
@@ -25559,9 +25721,9 @@
         }
     },
     {
-     "id":  236,
+     "id":  238,
      "logic":  {
-         "hash_sha256":  "C43E6EDBE0C8F4BAC35A2CB7604DE869637AD9BEA002B1F4B836686C29AA8B81",
+         "hash_sha256":  "38D5589404065DA9588D5E3EAC8CB079B82084D23CAF8A4E348BEB83CA9A7C40",
          "track_name":  "Projet 43",
          "version_name":  "Projet 43.1",
          "total_versions_in_folder":  4,
@@ -25577,12 +25739,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43\\Projet 43.1.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
-        "size_bytes":  30235611,
-        "size_mb":  28.83,
+        "size_bytes":  30266915,
+        "size_mb":  28.86,
         "created":  "2026-07-28 23:16:56",
-        "modified":  "2026-07-26 19:29:49",
+        "modified":  "2026-09-16 20:10:44",
         "epoch_created":  1785280617,
-        "epoch_modified":  1785094189
+        "epoch_modified":  1789589444
        },
      "metadata":  {
          "title":  "Projet 43.1",
@@ -25594,7 +25756,7 @@
          "album_artist":  "",
          "composer":  "",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Ambient",
          "year":  "",
          "track_number":  "",
          "total_tracks":  10,
@@ -25640,7 +25802,7 @@
         }
     },
     {
-     "id":  237,
+     "id":  239,
      "logic":  {
          "hash_sha256":  "9B89C3D10F5C6BC82800D08EE75E24F2FF488B0B124FAA9AA6C4E0EB041F8084",
          "track_name":  "Projet 43",
@@ -25721,9 +25883,9 @@
         }
     },
     {
-     "id":  238,
+     "id":  240,
      "logic":  {
-         "hash_sha256":  "8AE5ABBF20EA81CA3BDA10081C9D80AD56D30F8CAE800005AE51A00A481D9C23",
+         "hash_sha256":  "B6CDB7F876FA44B4BB5C1D42484DCDCE92892DFC99EF285FF8546CB77E5FE410",
          "track_name":  "Projet 43",
          "version_name":  "Projet 43",
          "total_versions_in_folder":  4,
@@ -25739,12 +25901,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43\\Projet 43.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
-        "size_bytes":  20284699,
-        "size_mb":  19.34,
+        "size_bytes":  20306054,
+        "size_mb":  19.37,
         "created":  "2026-07-28 23:16:58",
-        "modified":  "2026-07-26 16:10:37",
+        "modified":  "2026-09-16 20:10:45",
         "epoch_created":  1785280618,
-        "epoch_modified":  1785082238
+        "epoch_modified":  1789589445
        },
      "metadata":  {
          "title":  "Projet 43",
@@ -25756,7 +25918,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "7",
          "total_tracks":  10,
@@ -25802,7 +25964,7 @@
         }
     },
     {
-     "id":  239,
+     "id":  241,
      "logic":  {
          "hash_sha256":  "CBE22BDAC176C212A045DD44D4FB9C221EC0E1A62F96AAC98B3549F19FB66776",
          "track_name":  "Projet 43",
@@ -25883,9 +26045,9 @@
         }
     },
     {
-     "id":  240,
+     "id":  242,
      "logic":  {
-         "hash_sha256":  "3579A86E3E66EFBD733EFDD5D1BF052E38136091A3DF885611B5832D69EDB873",
+         "hash_sha256":  "A64D2B792E46C5833B15F8F2D7E50A0B30E9662F869E9CAE629B6E9B64AAAB87",
          "track_name":  "Projet 45",
          "version_name":  "Projet 45",
          "total_versions_in_folder":  2,
@@ -25901,12 +26063,12 @@
         "ext":  "M4A",
         "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 45\\Projet 45.m4a",
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 45",
-        "size_bytes":  21982696,
-        "size_mb":  20.96,
+        "size_bytes":  22005747,
+        "size_mb":  20.99,
         "created":  "2026-07-28 23:16:58",
-        "modified":  "2026-07-26 16:10:40",
+        "modified":  "2026-09-16 20:11:02",
         "epoch_created":  1785280619,
-        "epoch_modified":  1785082241
+        "epoch_modified":  1789589462
        },
      "metadata":  {
          "title":  "Projet 45",
@@ -25918,7 +26080,7 @@
          "album_artist":  "Colin Bossu Réaubourg",
          "composer":  "Colin Bossu Réaubourg",
          "album":  "Album 7.1",
-         "genre":  "",
+         "genre":  "Electronic / House",
          "year":  "2026",
          "track_number":  "8",
          "total_tracks":  10,
@@ -25964,7 +26126,7 @@
         }
     },
     {
-     "id":  241,
+     "id":  243,
      "logic":  {
          "hash_sha256":  "44BFCBB76D417596EAD3EE12C0708E427526BD00C63FB1B387514741652EBF77",
          "track_name":  "Projet 45",
@@ -26045,7 +26207,7 @@
         }
     },
     {
-     "id":  242,
+     "id":  244,
      "logic":  {
          "hash_sha256":  "BA6C7AD7F9058865C42F11F3062B8DBF9F5A89D31A21FC970757EF98569BAD77",
          "track_name":  "Ayrton farfadet malicieux",
@@ -26147,7 +26309,7 @@
         }
     },
     {
-     "id":  243,
+     "id":  245,
      "logic":  {
          "hash_sha256":  "6206A6103BCB0A512DDE17A3C500194CDD3EE90A904B2B97D0E6E1561023E840",
          "track_name":  "Corazóni",
@@ -26229,7 +26391,7 @@
         }
     },
     {
-     "id":  244,
+     "id":  246,
      "logic":  {
          "hash_sha256":  "AD8FEC6F478615661CE0ABD83A4AB0D257CBA6D36084F0E90CA94B3A8DD32858",
          "track_name":  "Corazóni",
@@ -26310,7 +26472,7 @@
         }
     },
     {
-     "id":  245,
+     "id":  247,
      "logic":  {
          "hash_sha256":  "0F2736445F9F3072114126BEDCB7DC8C31C43A5D1D5283969881876B7BCAD1A8",
          "track_name":  "ouia",
@@ -26391,7 +26553,7 @@
         }
     },
     {
-     "id":  246,
+     "id":  248,
      "logic":  {
          "hash_sha256":  "E4A616B20CC87183E66C67E567A20F9C5754C2005CEA390A3B2C6BF9AC63F4CF",
          "track_name":  "Projet max",
@@ -26473,7 +26635,7 @@
         }
     },
     {
-     "id":  247,
+     "id":  249,
      "logic":  {
          "hash_sha256":  "C4F9ACB07426D1F7F3E62A3118007E871A1F98ABF9A4FBFD4372AECBCE600DBE",
          "track_name":  "quatro",
@@ -26555,7 +26717,7 @@
         }
     },
     {
-     "id":  248,
+     "id":  250,
      "logic":  {
          "hash_sha256":  "A860938183AA3D187D6CF3B8C7BB784A9CF121EFF49F83AAC5E50DBECC1AE2BF",
          "track_name":  "quatro",
