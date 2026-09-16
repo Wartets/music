@@ -1,4 +1,5 @@
 import type { TrackItem } from '../types/music';
+import type { ViewType } from '../components/layout/viewRouting';
 import { getTrackDisplayName } from './trackUtils';
 
 export type ParsedAppRoute =
@@ -29,6 +30,25 @@ export const getBasePath = (): string => {
         }
     }
     return '';
+};
+
+const VIEW_PATH_MAP: Partial<Record<ViewType, string>> = {
+    Dashboard: '/',
+    AllTracks: '/tracks',
+    Albums: '/albums',
+    Artists: '/artists',
+    Playlists: '/playlists',
+    Favorites: '/favorites',
+    Settings: '/settings',
+    Queue: '/queue'
+};
+
+export const routeForView = (view: ViewType): string => {
+    const suffix = VIEW_PATH_MAP[view];
+    if (!suffix || suffix === '/') {
+        return getBasePath() || '/';
+    }
+    return `${getBasePath()}${suffix}`;
 };
 
 export const routeForTrack = (track: TrackItem): string => {

@@ -13,7 +13,7 @@ import { MobileTabBar } from './MobileTabBar';
 import { useIsMobile } from '../../hooks/useMediaQuery';
 import { useLibrary } from '../../contexts/LibraryContext';
 import { useTranslation } from '../../i18n/I18nContext';
-import { parseAppRoute, routeForAlbum, routeForArtist, routeForTrack, slugify } from '../../utils/urlRoutes';
+import { parseAppRoute, routeForAlbum, routeForArtist, routeForTrack, routeForView, slugify } from '../../utils/urlRoutes';
 import {
     DEFAULT_VIEW,
     NavigationEntry,
@@ -94,17 +94,7 @@ export const AppLayout: React.FC = () => {
             } else if (safeView === 'AlbumDetail' && typeof data === 'string') {
                 nextPath = routeForAlbum(data);
             } else {
-                const viewPaths: Partial<Record<ViewType, string>> = {
-                    Dashboard: '/',
-                    AllTracks: '/tracks',
-                    Albums: '/albums',
-                    Artists: '/artists',
-                    Playlists: '/playlists',
-                    Favorites: '/favorites',
-                    Settings: '/settings',
-                    Queue: '/queue'
-                };
-                nextPath = viewPaths[safeView] || '/';
+                nextPath = routeForView(safeView);
             }
 
             window.history.pushState({ navIndex: newIndex }, '', nextPath);
@@ -291,17 +281,7 @@ const AppContent: React.FC<AppContentProps> = ({
         } else if (currentView === 'AlbumDetail' && typeof viewData === 'string') {
             nextPath = routeForAlbum(viewData);
         } else {
-                const viewPaths: Partial<Record<ViewType, string>> = {
-                Dashboard: '/',
-                AllTracks: '/tracks',
-                Albums: '/albums',
-                Artists: '/artists',
-                Playlists: '/playlists',
-                Favorites: '/favorites',
-                Settings: '/settings',
-                Queue: '/queue'
-            };
-            nextPath = viewPaths[currentView] || '/';
+            nextPath = routeForView(currentView);
         }
 
         const current = `${window.location.pathname}${window.location.search}`;
@@ -377,17 +357,7 @@ const AppContent: React.FC<AppContentProps> = ({
                         else if (h.view === 'ArtistDetail' && typeof h.data === 'string') p = routeForArtist(h.data as string);
                         else if (h.view === 'AlbumDetail' && typeof h.data === 'string') p = routeForAlbum(h.data as string);
                         else {
-                            const viewPaths: Partial<Record<ViewType, string>> = {
-                                Dashboard: '/',
-                                AllTracks: '/tracks',
-                                Albums: '/albums',
-                                Artists: '/artists',
-                                Playlists: '/playlists',
-                                Favorites: '/favorites',
-                                Settings: '/settings',
-                                Queue: '/queue'
-                            };
-                            p = viewPaths[h.view] || '/';
+                            p = routeForView(h.view);
                         }
                         return p === window.location.pathname + window.location.search;
                     } catch { return false; }

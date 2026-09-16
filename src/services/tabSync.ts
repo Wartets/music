@@ -1,6 +1,6 @@
 // Tab synchronization service: uses SharedWorker when available and falls back to BroadcastChannel
 
-import { routeForAlbum, routeForArtist } from '../utils/urlRoutes';
+import { getBasePath, routeForAlbum, routeForArtist } from '../utils/urlRoutes';
 
 type TabMessage = { type: string; payload?: any };
 
@@ -102,7 +102,7 @@ class TabSync {
 
         if (action === 'openTrack' && payload?.trackId) {
             const short = String(payload.trackId).slice(0, 8);
-            url.pathname = `/t/${short}`;
+            url.pathname = `${getBasePath()}/t/${short}`;
             url.search = '';
             url.hash = '';
             this.openNewTab(url.toString());

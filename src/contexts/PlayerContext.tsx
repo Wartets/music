@@ -315,6 +315,10 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     }, [t]);
 
     const handlePlaybackFailure = useCallback((error: Error, failedTrack?: TrackItem | null) => {
+        if (error instanceof AudioPlaybackError && error.code === 'superseded') {
+            return;
+        }
+
         const cur = stateRef.current;
         const failed = failedTrack || cur.currentTrack;
         const showOnce = (

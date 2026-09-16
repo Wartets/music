@@ -14,6 +14,7 @@ export type AudioPlaybackErrorCode =
     | 'format_unsupported'
     | 'autoplay_blocked'
     | 'playback_interrupted'
+    | 'superseded'
     | 'unknown';
 
 export class AudioPlaybackError extends Error {
@@ -66,6 +67,8 @@ export class AudioEngine {
     private crossfadeTimer: number | null = null;
     private crossfadeAnimationFrame: number | null = null;
     private playInvocationDepth: number = 0;
+    private playGeneration: number = 0;
+    private opusPlaybackSupported: boolean = true;
 
     // Crossfade configuration
     private crossfadeEnabled: boolean = false;
@@ -106,6 +109,19 @@ export class AudioEngine {
         this.applyPitchPreservation(this.secondaryAudioElement);
 
         this.setupListeners();
+        this.opusPlaybackSupported = this.detectOpusSupport();
+    }
+
+    private detectOpusSupport(): boolean {
+        if (typeof Audio === 'undefined') return false;
+        try {
+            const probe = new Audio();
+            const oggResult = probe.canPlayType('audio/ogg; codecs="opus"');
+            const opusResult = probe.canPlayType('audio/opus');
+            return oggResult === 'probably' || oggResult === 'maybe' || opusResult === 'probably' || opusResult === 'maybe';
+        } catch {
+            return false;
+        }
     }
 
     private applyPitchPreservation(el: HTMLAudioElement): void {
@@ -422,15 +438,28 @@ export class AudioEngine {
         const path = track.file?.path || '';
         if (!path) return [];
 
-        const candidates = new Set<string>(dbService.getAssetCandidates(path));
-        const ext = (track.file?.ext || '').toLowerCase();
+        const candidates: string[] = [];
+        const seen = new Set<string>();
 
-        if (ext === 'm4a' && !/_compatible_aac\.m4a$/i.test(path)) {
-            const compatiblePath = path.replace(/\.m4a$/i, '_compatible_aac.m4a');
-            dbService.getAssetCandidates(compatiblePath).forEach(candidate => candidates.add(candidate));
+        const pushCandidatesFor = (candidatePath: string) => {
+            dbService.getAssetCandidates(candidatePath).forEach(url => {
+                if (!seen.has(url)) {
+                    seen.add(url);
+                    candidates.push(url);
+                }
+            });
+        };
+
+        if (this.opusPlaybackSupported) {
+            const opusPath = path.replace(/\.[^./\\]+$/i, '.opus');
+            if (opusPath.toLowerCase() !== path.toLowerCase()) {
+                pushCandidatesFor(opusPath);
+            }
         }
 
-        return Array.from(candidates);
+        pushCandidatesFor(path);
+
+        return candidates;
     }
 
     private shouldRetryWithAlternateSource(error: AudioPlaybackError): boolean {
@@ -438,6 +467,7 @@ export class AudioEngine {
     }
 
     private async playElement(el: HTMLAudioElement, track?: TrackItem): Promise<void> {
+        const generation = this.playGeneration;
         const sourceCandidates = track ? this.buildTrackSourceCandidates(track) : [];
         const playCandidates = sourceCandidates.length > 0 ? sourceCandidates : [el.src].filter(Boolean);
 
@@ -448,6 +478,11 @@ export class AudioEngine {
             for (const candidate of playCandidates) {
                 if (!candidate) continue;
 
+                if (generation !== this.playGeneration) {
+                    throw new AudioPlaybackError('superseded', 'Superseded by a newer playback request.');
+                }
+
+                const isOpusCandidate = /\.opus(?:[?#]|$)/i.test(candidate);
                 const resolvedCandidate = new URL(candidate, window.location.href).href;
                 if (el.src !== resolvedCandidate) {
                     this.applyPlaybackRateToElement(el, this.userPlaybackRate);
@@ -455,16 +490,29 @@ export class AudioEngine {
                     el.load();
                 }
 
-                // Ensure rate/pitch settings survive load() and are in place before play().
                 this.applyPlaybackRateToElement(el, this.userPlaybackRate);
 
                 try {
                     await el.play();
+
+                    if (generation !== this.playGeneration) {
+                        el.pause();
+                        throw new AudioPlaybackError('superseded', 'Superseded by a newer playback request.');
+                    }
+
                     this.applyPlaybackRateToElement(el, this.userPlaybackRate);
                     return;
                 } catch (error) {
+                    if (error instanceof AudioPlaybackError && error.code === 'superseded') {
+                        throw error;
+                    }
+
                     const playbackError = this.normalizePlaybackException(error);
                     lastError = playbackError;
+
+                    if (isOpusCandidate && (playbackError.code === 'format_unsupported' || playbackError.code === 'media_decode' || playbackError.code === 'media_network')) {
+                        this.opusPlaybackSupported = false;
+                    }
 
                     if (!this.shouldRetryWithAlternateSource(playbackError)) {
                         break;
@@ -609,6 +657,8 @@ export class AudioEngine {
     }
 
     async play(track?: TrackItem, isEndOfTrackTransition: boolean = false): Promise<void> {
+        this.playGeneration++;
+
         if (track) {
             const isDifferentTrack = this.currentTrack?.logic.hash_sha256 !== track.logic.hash_sha256;
             const isPreloaded = this.nextTrackPreloaded?.logic.hash_sha256 === track.logic.hash_sha256;
