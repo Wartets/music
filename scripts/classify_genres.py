@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Genre Classification Pipeline v2 for Music-Library
+Genre Classification Pipeline v3 for Music-Library
 ===================================================
 Classifies tracks using Essentia's Discogs-EfficientNet model (400 genre classes).
 Outputs results to genreClassification.json (separate from musicBib.json).
@@ -64,6 +64,10 @@ METADATA_FILE_PATH = MODELS_DIR / "genre_discogs400-discogs-effnet-1.json"
 SAMPLE_RATE = 16000
 DEFAULT_SEGMENT_DURATION = 30
 MIN_SEGMENT_SECONDS = 2
+SUPPORTED_AUDIO_EXTENSIONS = {
+    ".mp3", ".wav", ".flac", ".ogg", ".oga", ".m4a", ".aac",
+    ".aif", ".aiff", ".wma", ".opus", ".alac", ".ape", ".wv"
+}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -89,7 +93,7 @@ Examples:
     parser.add_argument("--dry-run", action="store_true",
                         help="Preview what would be analyzed without running inference")
     parser.add_argument("--skip-existing", action="store_true",
-                        help="Skip tracks already classified in output JSON")
+                        help="Skip tracks whose genre is already determined (JSON, tags, or bib)")
     parser.add_argument("--no-embed-tags", action="store_true",
                         help="Skip writing genre metadata to audio files")
     parser.add_argument("--top-n", type=int, default=5,
@@ -264,6 +268,105 @@ def load_models():
     return embedding_model, classification_model
 
 
+def get_ffmpeg_binary():
+    """Détecte l'exécutable ffmpeg (natif Linux ou ffmpeg.exe accessible sous WSL)."""
+    import shutil
+    for bin_name, is_windows in [("ffmpeg", False), ("ffmpeg.exe", True)]:
+        found = shutil.which(bin_name)
+        if found:
+            return found, is_windows
+    for fallback in ("/usr/bin/ffmpeg", "/usr/local/bin/ffmpeg"):
+        if os.path.isfile(fallback) and os.access(fallback, os.X_OK):
+            return fallback, False
+    return None, False
+
+
+def to_ffmpeg_filepath(path_obj, is_windows_bin):
+    """Convertit les chemins WSL (/mnt/c/...) en chemins Windows si ffmpeg.exe est utilisé."""
+    path_str = str(path_obj)
+    if not is_windows_bin:
+        return path_str
+    import subprocess
+    try:
+        res = subprocess.run(["wslpath", "-w", path_str], capture_output=True, text=True, check=True)
+        return res.stdout.strip()
+    except Exception:
+        if path_str.startswith("/mnt/") and len(path_str) > 6 and path_str[6] == "/":
+            drive = path_str[5].upper()
+            rest = path_str[7:].replace("/", "\\")
+            return f"{drive}:\\{rest}"
+    return path_str
+
+
+def load_audio(audio_path, sample_rate=SAMPLE_RATE):
+    """
+    Charge l'audio de manière fiable sous forme de tableau 1D float32.
+    Pour les formats comme .m4a / ALAC / AAC que MonoLoader ne sait pas lire directement,
+    décode en mémoire via FFmpeg ou convertit temporairement en cache PCM WAV dans /tmp,
+    puis supprime immédiatement le cache sans laisser aucun fichier persistant.
+    """
+    import subprocess
+    import tempfile
+    import essentia.standard as es
+
+    ffmpeg_bin, is_win_bin = get_ffmpeg_binary()
+
+    if ffmpeg_bin:
+        input_target = to_ffmpeg_filepath(audio_path, is_win_bin)
+
+        # 1. Tentative de décodage direct en mémoire via stdout (pipe)
+        cmd_pipe = [
+            ffmpeg_bin,
+            "-nostdin",
+            "-threads", "1",
+            "-v", "error",
+            "-i", input_target,
+            "-f", "f32le",
+            "-ac", "1",
+            "-ar", str(sample_rate),
+            "pipe:1",
+        ]
+        try:
+            res = subprocess.run(cmd_pipe, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
+            if res.returncode == 0 and len(res.stdout) > 0:
+                audio_arr = np.frombuffer(res.stdout, dtype=np.float32)
+                if len(audio_arr) > 0:
+                    return audio_arr
+        except Exception:
+            pass
+
+        # 2. Tentative avec cache temporaire PCM WAV (immédiatement supprimé après chargement)
+        tmp_fd, tmp_wav = tempfile.mkstemp(suffix=".wav")
+        os.close(tmp_fd)
+        try:
+            output_target = to_ffmpeg_filepath(tmp_wav, is_win_bin)
+            cmd_convert = [
+                ffmpeg_bin,
+                "-y",
+                "-nostdin",
+                "-v", "error",
+                "-i", input_target,
+                "-ac", "1",
+                "-ar", str(sample_rate),
+                "-c:a", "pcm_s16le",
+                output_target,
+            ]
+            res_conv = subprocess.run(cmd_convert, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
+            if res_conv.returncode == 0 and os.path.exists(tmp_wav) and os.path.getsize(tmp_wav) > 0:
+                return es.MonoLoader(filename=tmp_wav, sampleRate=sample_rate)()
+        except Exception:
+            pass
+        finally:
+            if os.path.exists(tmp_wav):
+                try:
+                    os.remove(tmp_wav)
+                except OSError:
+                    pass
+
+    # 3. Fallback Essentia MonoLoader direct (pour les formats simples comme wav / mp3 / flac)
+    return es.MonoLoader(filename=str(audio_path), sampleRate=sample_rate)()
+
+
 def analyze_track(audio_path, embedding_model, classification_model, segment_duration_s):
     """
     Analyze a single audio file.
@@ -276,9 +379,9 @@ def analyze_track(audio_path, embedding_model, classification_model, segment_dur
         segment_count: int
         duration_s: float
     """
-    import essentia.standard as es
-
-    audio = es.MonoLoader(filename=str(audio_path), sampleRate=SAMPLE_RATE)()
+    audio = load_audio(audio_path, sample_rate=SAMPLE_RATE)
+    if audio is None or len(audio) == 0:
+        raise ValueError(f"Unsupported audio codec or unreadable file: {audio_path.name}")
     duration_s = len(audio) / SAMPLE_RATE
 
     if duration_s < MIN_SEGMENT_SECONDS:
@@ -486,6 +589,122 @@ def write_genre_tag(audio_path, genre_result):
         return False
 
 
+INVALID_GENRE_STRINGS = {
+    "", "unknown", "none", "undefined", "null", "n/a", "inconnu",
+    "genre inconnu", "non défini", "non defini", "unknown genre", "other", "autre"
+}
+
+
+def clean_genre_candidate(val):
+    """Extrait une chaîne de genre valide ou None à partir de divers formats de données."""
+    if val is None:
+        return None
+    if isinstance(val, str):
+        c = val.strip()
+        if c and c.lower() not in INVALID_GENRE_STRINGS:
+            return c
+    elif isinstance(val, (list, tuple, set)):
+        for item in val:
+            res = clean_genre_candidate(item)
+            if res:
+                return res
+    elif isinstance(val, dict):
+        for k in ("full", "genre", "primary_genre", "name", "parent"):
+            if k in val:
+                res = clean_genre_candidate(val[k])
+                if res:
+                    return res
+    return None
+
+
+def read_existing_genre_tag(audio_path):
+    """
+    Lit le genre déjà présent dans les métadonnées d'un fichier audio (MP3, M4A, FLAC, etc.).
+    Supporte les atomes standard MP4/M4A ('\xa9gen', 'gnre' index) et les tags ID3/Vorbis.
+    """
+    try:
+        from mutagen import File as MutagenFile
+
+        # 1. Utilisation de easy=True (normalise automatiquement MP4, ID3, Vorbis, FLAC)
+        easy_audio = MutagenFile(str(audio_path), easy=True)
+        if easy_audio and getattr(easy_audio, "tags", None):
+            genres = easy_audio.tags.get("genre")
+            clean = clean_genre_candidate(genres)
+            if clean:
+                return clean
+
+        # 2. Inspection directe des tags bruts
+        audio = MutagenFile(str(audio_path))
+        if audio is None or not getattr(audio, "tags", None):
+            return None
+
+        # Tags MP4 / M4A
+        if hasattr(audio.tags, "get"):
+            for mp4_key in ("\xa9gen", "©gen", "genre"):
+                val = audio.tags.get(mp4_key)
+                clean = clean_genre_candidate(val)
+                if clean:
+                    return clean
+
+            # Genre standard numérique M4A/iTunes (atome 'gnre')
+            gnre = audio.tags.get("gnre")
+            if gnre:
+                try:
+                    from mutagen.mp4 import MP4Tags
+                    idx = gnre[0][0] if isinstance(gnre[0], (list, tuple)) else gnre[0]
+                    if isinstance(idx, int) and 1 <= idx <= len(MP4Tags.GENRES):
+                        return MP4Tags.GENRES[idx - 1]
+                except Exception:
+                    pass
+
+        # Tags ID3 (TCON)
+        if hasattr(audio.tags, "getall"):
+            tcon = audio.tags.getall("TCON")
+            if tcon and getattr(tcon[0], "text", None):
+                clean = clean_genre_candidate(tcon[0].text)
+                if clean:
+                    return clean
+
+        # Tags Vorbis / FLAC
+        if hasattr(audio.tags, "get"):
+            for k in ("genre", "GENRE", "Genre"):
+                clean = clean_genre_candidate(audio.tags.get(k))
+                if clean:
+                    return clean
+    except Exception:
+        pass
+    return None
+
+
+def get_track_bib_genre(track):
+    """Vérifie récursivement si le morceau a déjà un genre défini dans musicBib.json."""
+    if not isinstance(track, dict):
+        return None
+
+    for key in ("genre", "primary_genre", "genres", "style"):
+        found = clean_genre_candidate(track.get(key))
+        if found:
+            return found
+
+    for section_name in ("tags", "metadata", "logic", "file", "analysis", "music", "id3", "properties"):
+        sub = track.get(section_name)
+        if isinstance(sub, dict):
+            for key in ("genre", "primary_genre", "genres", "style", "GENRE", "TCON"):
+                found = clean_genre_candidate(sub.get(key))
+                if found:
+                    return found
+
+    # Recherche dans les clés imbriquées contenant 'genre'
+    for k, v in track.items():
+        if isinstance(v, dict):
+            for sub_k, sub_v in v.items():
+                if "genre" in sub_k.lower():
+                    found = clean_genre_candidate(sub_v)
+                    if found:
+                        return found
+    return None
+
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # SECTION 7: Output Schema Builder
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -542,7 +761,7 @@ def resolve_audio_path(track):
     rel_path = track["file"]["path"].replace("\\", "/")
     full_path = PROJECT_ROOT / rel_path
     try:
-        if full_path.exists():
+        if full_path.is_file() and full_path.suffix.lower() in SUPPORTED_AUDIO_EXTENSIONS:
             return full_path
     except OSError:
         pass
@@ -587,27 +806,103 @@ def main():
     # ── Check for existing results (idempotency) ───────────────────────────
     existing_data = load_existing_output(output_path)
     existing_hashes = set()
+    existing_names = set()
+    existing_files = set()
+    existing_entries_by_name = {}
+
     if existing_data and args.skip_existing:
-        existing_hashes = set(existing_data.get("tracks", {}).keys())
+        for h, entry in existing_data.get("tracks", {}).items():
+            analysis = entry.get("analysis", {}) if isinstance(entry, dict) else {}
+            existing_genre = (
+                clean_genre_candidate(analysis.get("primary_genre"))
+                or clean_genre_candidate(analysis.get("genre"))
+                or clean_genre_candidate(entry.get("primary_genre"))
+                or clean_genre_candidate(entry.get("genre"))
+            )
+            if existing_genre:
+                existing_hashes.add(str(h).strip().lower())
+                t_name = str(entry.get("track_name", "")).strip().lower()
+                f_name = str(entry.get("file_name", "")).strip().lower()
+                if t_name:
+                    existing_names.add(t_name)
+                    existing_entries_by_name[t_name] = entry
+                if f_name:
+                    existing_files.add(f_name)
+                    existing_entries_by_name[f_name] = entry
 
     # ── Filter tasks ────────────────────────────────────────────────────────
     tasks = []
+    relinked_existing = {}
     skipped_existing = 0
     skipped_no_file = 0
 
     for key in group_keys:
         group = groups[key]
         canonical = group["analyze"]
-        canonical_hash = canonical["logic"]["hash_sha256"]
+        all_group_tracks = [canonical] + group["propagate_to"]
+        canonical_hash = str(canonical.get("logic", {}).get("hash_sha256", "")).strip().lower()
 
-        if canonical_hash in existing_hashes:
-            skipped_existing += 1
-            continue
-
+        # Recherche d'un chemin audio valide parmi les versions du groupe
         audio_path = resolve_audio_path(canonical)
+        if audio_path is None:
+            for alt_track in group["propagate_to"]:
+                alt_path = resolve_audio_path(alt_track)
+                if alt_path is not None:
+                    audio_path = alt_path
+                    break
         if audio_path is None:
             skipped_no_file += 1
             continue
+
+        if args.skip_existing:
+            # Collecte de tous les identifiants, noms et fichiers du groupe
+            group_hashes = set()
+            group_names = set()
+            group_files = set()
+            for t in all_group_tracks:
+                h = t.get("logic", {}).get("hash_sha256") or t.get("hash_sha256")
+                if h:
+                    group_hashes.add(str(h).strip().lower())
+                tn = t.get("logic", {}).get("track_name") or t.get("track_name")
+                if tn:
+                    group_names.add(str(tn).strip().lower())
+                fn = t.get("file", {}).get("name") or t.get("file_name")
+                if fn:
+                    group_files.add(str(fn).strip().lower())
+
+            # 1. Présence dans genreClassification.json
+            in_existing_json = bool(
+                (group_hashes & existing_hashes)
+                or (group_names & existing_names)
+                or (group_files & existing_files)
+            )
+
+            # 2. Présence dans musicBib.json
+            in_bib = any(get_track_bib_genre(t) is not None for t in all_group_tracks)
+
+            # 3. Présence dans les tags audio sur disque d'au moins une version du morceau
+            in_audio_tag = False
+            for t in all_group_tracks:
+                p = resolve_audio_path(t)
+                if p and read_existing_genre_tag(p):
+                    in_audio_tag = True
+                    break
+
+            if in_existing_json or in_bib or in_audio_tag:
+                skipped_existing += 1
+                matched_entry = None
+                for n in group_names:
+                    if n in existing_entries_by_name:
+                        matched_entry = existing_entries_by_name[n]
+                        break
+                if not matched_entry:
+                    for f in group_files:
+                        if f in existing_entries_by_name:
+                            matched_entry = existing_entries_by_name[f]
+                            break
+                if matched_entry and canonical_hash:
+                    relinked_existing[canonical_hash] = matched_entry
+                continue
 
         tasks.append((key, group, audio_path))
 
@@ -629,7 +924,7 @@ def main():
             sys.exit(1)
 
     # ── Print configuration header ──────────────────────────────────────────
-    log.header("GENRE CLASSIFICATION PIPELINE v2")
+    log.header("GENRE CLASSIFICATION PIPELINE v3")
     mode_str = f"TEST ({args.test} random tracks"
     if args.test:
         mode_str += f", seed={args.seed}" if args.seed else ", random"
@@ -662,6 +957,14 @@ def main():
         print(f"\n  Total: {len(tasks)} tracks to analyze")
         total_propagated = sum(len(groups[k]["propagate_to"]) for k, _, _ in tasks)
         print(f"  Versions to propagate: {total_propagated}")
+        return
+
+    # ── Check if any track needs analysis ───────────────────────────────────
+    if not tasks:
+        log.success("Tous les morceaux sélectionnés ont déjà un genre déterminé ! Rien à analyser.")
+        if relinked_existing and existing_data:
+            existing_data["tracks"].update(relinked_existing)
+            save_output(output_path, existing_data)
         return
 
     # ── Load models ─────────────────────────────────────────────────────────
@@ -782,9 +1085,11 @@ def main():
     # Merge with existing data if present
     if existing_data and "tracks" in existing_data:
         merged_tracks = existing_data["tracks"]
+        merged_tracks.update(relinked_existing)
         merged_tracks.update(results)
     else:
-        merged_tracks = results
+        merged_tracks = dict(relinked_existing)
+        merged_tracks.update(results)
 
     total_analyzed = sum(1 for v in merged_tracks.values() if v.get("analyzed", False))
     total_propagated = sum(1 for v in merged_tracks.values() if not v.get("analyzed", True))
