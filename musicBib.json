@@ -1,8 +1,8 @@
 {
  "info":  {
-    "date":  "2026-07-26 19:57:41",
-    "total_tracks_versions":  246,
-    "execution_time_ms":  126514
+    "date":  "2026-09-16 19:25:26",
+    "total_tracks_versions":  248,
+    "execution_time_ms":  154842
    },
  "items":  [
     {
@@ -26,9 +26,9 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\pmlopmlkomml",
         "size_bytes":  2526860,
         "size_mb":  2.41,
-        "created":  "2026-02-20 12:13:24",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:37:14",
-        "epoch_created":  1771589605,
+        "epoch_created":  1785280537,
         "epoch_modified":  1778002635
        },
      "metadata":  {
@@ -128,9 +128,9 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\Sans Nom",
         "size_bytes":  1417623,
         "size_mb":  1.35,
-        "created":  "2026-02-20 12:13:24",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:37:38",
-        "epoch_created":  1771589605,
+        "epoch_created":  1785280537,
         "epoch_modified":  1778002659
        },
      "metadata":  {
@@ -230,9 +230,9 @@
         "dir":  "assets\\Album 2 (2018-2019-2020)\\Album 2.4\\été sun rise",
         "size_bytes":  1718565,
         "size_mb":  1.64,
-        "created":  "2026-02-20 12:13:24",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:37:17",
-        "epoch_created":  1771589605,
+        "epoch_created":  1785280537,
         "epoch_modified":  1778002637
        },
      "metadata":  {
@@ -332,9 +332,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\2020-06-13_23-42-37",
         "size_bytes":  45532904,
         "size_mb":  43.42,
-        "created":  "2026-02-20 12:12:29",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:39:32",
-        "epoch_created":  1771589549,
+        "epoch_created":  1785280537,
         "epoch_modified":  1778002773
        },
      "metadata":  {
@@ -433,9 +433,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3386526,
         "size_mb":  3.23,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:39:40",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002781
        },
      "metadata":  {
@@ -534,9 +534,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3450832,
         "size_mb":  3.29,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:39:42",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002783
        },
      "metadata":  {
@@ -635,9 +635,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\79",
         "size_bytes":  3381387,
         "size_mb":  3.22,
-        "created":  "2021-06-15 20:00:36",
+        "created":  "2026-07-28 23:15:37",
         "modified":  "2026-05-05 17:39:57",
-        "epoch_created":  1623787236,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002798
        },
      "metadata":  {
@@ -736,9 +736,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Batterie coffre à jouet",
         "size_bytes":  2273041,
         "size_mb":  2.17,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:24",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002824
        },
      "metadata":  {
@@ -837,9 +837,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Computers",
         "size_bytes":  1954602,
         "size_mb":  1.86,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:25",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002826
        },
      "metadata":  {
@@ -938,9 +938,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Computers",
         "size_bytes":  1954580,
         "size_mb":  1.86,
-        "created":  "2021-06-15 20:00:36",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:18",
-        "epoch_created":  1623787236,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002758
        },
      "metadata":  {
@@ -1039,9 +1039,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Ghosts",
         "size_bytes":  2226921,
         "size_mb":  2.12,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:19",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002759
        },
      "metadata":  {
@@ -1140,9 +1140,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\II",
         "size_bytes":  3433702,
         "size_mb":  3.27,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:21",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002761
        },
      "metadata":  {
@@ -1241,9 +1241,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 2",
         "size_bytes":  3326029,
         "size_mb":  3.17,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:02",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002803
        },
      "metadata":  {
@@ -1342,9 +1342,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 23",
         "size_bytes":  6972587,
         "size_mb":  6.65,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:06",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002807
        },
      "metadata":  {
@@ -1443,9 +1443,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 3",
         "size_bytes":  1896916,
         "size_mb":  1.81,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:56",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002796
        },
      "metadata":  {
@@ -1544,9 +1544,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 36",
         "size_bytes":  3717471,
         "size_mb":  3.55,
-        "created":  "2026-02-20 12:12:29",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:34",
-        "epoch_created":  1771589549,
+        "epoch_created":  1785280538,
         "epoch_modified":  1778002775
        },
      "metadata":  {
@@ -1645,9 +1645,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 44",
         "size_bytes":  2375321,
         "size_mb":  2.27,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:08",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002808
        },
      "metadata":  {
@@ -1746,9 +1746,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 47",
         "size_bytes":  3282054,
         "size_mb":  3.13,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:23",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002763
        },
      "metadata":  {
@@ -1847,9 +1847,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 57",
         "size_bytes":  2880692,
         "size_mb":  2.75,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:24",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002765
        },
      "metadata":  {
@@ -1948,9 +1948,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 60",
         "size_bytes":  2227572,
         "size_mb":  2.12,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:36",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002776
        },
      "metadata":  {
@@ -2049,9 +2049,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 74",
         "size_bytes":  2809955,
         "size_mb":  2.68,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:39:25",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002765
        },
      "metadata":  {
@@ -2150,9 +2150,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 76",
         "size_bytes":  1705527,
         "size_mb":  1.63,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:38",
         "modified":  "2026-05-05 17:40:03",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002804
        },
      "metadata":  {
@@ -2251,9 +2251,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 78",
         "size_bytes":  764595,
         "size_mb":  0.73,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:05",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002805
        },
      "metadata":  {
@@ -2352,9 +2352,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 94",
         "size_bytes":  1983934,
         "size_mb":  1.89,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:39:25",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002766
        },
      "metadata":  {
@@ -2453,9 +2453,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 95",
         "size_bytes":  2953351,
         "size_mb":  2.82,
-        "created":  "2026-02-20 12:12:31",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:39:27",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002767
        },
      "metadata":  {
@@ -2554,9 +2554,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Mon morceau 95",
         "size_bytes":  2953327,
         "size_mb":  2.82,
-        "created":  "2021-06-15 20:00:36",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:39:54",
-        "epoch_created":  1623787236,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002794
        },
      "metadata":  {
@@ -2655,9 +2655,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Suite d’accords",
         "size_bytes":  3869932,
         "size_mb":  3.69,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:10",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002811
        },
      "metadata":  {
@@ -2756,9 +2756,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Suite d’accords",
         "size_bytes":  1238713,
         "size_mb":  1.18,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:12",
-        "epoch_created":  1771589553,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002812
        },
      "metadata":  {
@@ -2857,9 +2857,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Summer romance",
         "size_bytes":  1133809,
         "size_mb":  1.08,
-        "created":  "2026-02-20 12:12:32",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:01",
-        "epoch_created":  1771589552,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002801
        },
      "metadata":  {
@@ -2958,9 +2958,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Superbe base rythmique",
         "size_bytes":  5135029,
         "size_mb":  4.9,
-        "created":  "2026-02-20 12:12:29",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:39:37",
-        "epoch_created":  1771589549,
+        "epoch_created":  1785280539,
         "epoch_modified":  1778002778
        },
      "metadata":  {
@@ -3102,9 +3102,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.1\\Transpo de +4 -1 octave mis en place",
         "size_bytes":  8201108,
         "size_mb":  7.82,
-        "created":  "2026-02-20 12:12:30",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:15",
-        "epoch_created":  1771589551,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002815
        },
      "metadata":  {
@@ -3203,9 +3203,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\19",
         "size_bytes":  2827947,
         "size_mb":  2.7,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:42:24",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002944
        },
      "metadata":  {
@@ -3370,9 +3370,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\19",
         "size_bytes":  4021682,
         "size_mb":  3.84,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:42",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002843
        },
      "metadata":  {
@@ -3537,9 +3537,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\19",
         "size_bytes":  3958590,
         "size_mb":  3.78,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:40:43",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002844
        },
      "metadata":  {
@@ -3704,9 +3704,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\4",
         "size_bytes":  3960298,
         "size_mb":  3.78,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:39",
         "modified":  "2026-05-05 17:41:12",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002873
        },
      "metadata":  {
@@ -3827,9 +3827,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\59",
         "size_bytes":  3399726,
         "size_mb":  3.24,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:42:01",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002922
        },
      "metadata":  {
@@ -3948,9 +3948,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\59",
         "size_bytes":  3386419,
         "size_mb":  3.23,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:42:17",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002938
        },
      "metadata":  {
@@ -4069,9 +4069,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Asthenia",
         "size_bytes":  3434268,
         "size_mb":  3.28,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:42:25",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002946
        },
      "metadata":  {
@@ -4192,9 +4192,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Asthenia",
         "size_bytes":  3434247,
         "size_mb":  3.28,
-        "created":  "2021-06-15 20:00:36",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:44:42",
-        "epoch_created":  1623787236,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778003083
        },
      "metadata":  {
@@ -4315,9 +4315,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Just a day",
         "size_bytes":  4622173,
         "size_mb":  4.41,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:45:02",
-        "epoch_created":  1771589575,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778003103
        },
      "metadata":  {
@@ -4438,9 +4438,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Just a day",
         "size_bytes":  2968862,
         "size_mb":  2.83,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:41:59",
-        "epoch_created":  1771589575,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002920
        },
      "metadata":  {
@@ -4561,9 +4561,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Lost control",
         "size_bytes":  1776367,
         "size_mb":  1.69,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:40:49",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002849
        },
      "metadata":  {
@@ -4684,9 +4684,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Mon morceau 15",
         "size_bytes":  2046697,
         "size_mb":  1.95,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:41:53",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280540,
         "epoch_modified":  1778002914
        },
      "metadata":  {
@@ -4807,9 +4807,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Mon morceau 423",
         "size_bytes":  3368698,
         "size_mb":  3.21,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:41:00",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778002861
        },
      "metadata":  {
@@ -4930,9 +4930,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Nameless",
         "size_bytes":  4520251,
         "size_mb":  4.31,
-        "created":  "2026-02-20 12:12:54",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:41:14",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778002875
        },
      "metadata":  {
@@ -5053,9 +5053,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.2\\Peaceful journey",
         "size_bytes":  2320340,
         "size_mb":  2.21,
-        "created":  "2026-02-20 12:12:53",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:42:22",
-        "epoch_created":  1771589574,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778002942
        },
      "metadata":  {
@@ -5176,9 +5176,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\-V3",
         "size_bytes":  3888183,
         "size_mb":  3.71,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:47:06",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003227
        },
      "metadata":  {
@@ -5299,9 +5299,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\2.4 (i) - Outrø",
         "size_bytes":  576216,
         "size_mb":  0.55,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:51:44",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003505
        },
      "metadata":  {
@@ -5422,9 +5422,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\2.4 (i) - Outrø",
         "size_bytes":  2230364,
         "size_mb":  2.13,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:51:45",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003506
        },
      "metadata":  {
@@ -5545,9 +5545,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\2.4 (i) - Outrø",
         "size_bytes":  2481866,
         "size_mb":  2.37,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:51:48",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003508
        },
      "metadata":  {
@@ -5668,9 +5668,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\633B.2",
         "size_bytes":  3917578,
         "size_mb":  3.74,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:48:05",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003286
        },
      "metadata":  {
@@ -5791,9 +5791,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\633B.2",
         "size_bytes":  3908663,
         "size_mb":  3.73,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:40",
         "modified":  "2026-05-05 17:50:52",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003453
        },
      "metadata":  {
@@ -5914,9 +5914,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Beautiful home Beautiful clock",
         "size_bytes":  5171768,
         "size_mb":  4.93,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:38",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003318
        },
      "metadata":  {
@@ -6037,9 +6037,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Bip - Intrø",
         "size_bytes":  2474853,
         "size_mb":  2.36,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:45:06",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003107
        },
      "metadata":  {
@@ -6160,9 +6160,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Bip - Intrø",
         "size_bytes":  2779532,
         "size_mb":  2.65,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:45:07",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003108
        },
      "metadata":  {
@@ -6283,9 +6283,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Bip - Intrø",
         "size_bytes":  2287224,
         "size_mb":  2.18,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:17",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003297
        },
      "metadata":  {
@@ -6406,9 +6406,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Don\u0027t care",
         "size_bytes":  4320670,
         "size_mb":  4.12,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:49",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003329
        },
      "metadata":  {
@@ -6529,9 +6529,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Don\u0027t care",
         "size_bytes":  4386125,
         "size_mb":  4.18,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:41",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003321
        },
      "metadata":  {
@@ -6652,9 +6652,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Don\u0027t care",
         "size_bytes":  3220153,
         "size_mb":  3.07,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:40",
-        "epoch_created":  1771589593,
+        "epoch_created":  1785280541,
         "epoch_modified":  1778003320
        },
      "metadata":  {
@@ -6775,9 +6775,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Interlude",
         "size_bytes":  3339922,
         "size_mb":  3.19,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:50:18",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003418
        },
      "metadata":  {
@@ -6898,9 +6898,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Mon morceau 19",
         "size_bytes":  4612029,
         "size_mb":  4.4,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:51:51",
-        "epoch_created":  1771589593,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003512
        },
      "metadata":  {
@@ -7000,9 +7000,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Mon morceau 4",
         "size_bytes":  1189502,
         "size_mb":  1.13,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:51:50",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003511
        },
      "metadata":  {
@@ -7102,9 +7102,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Quantum spin-liquid",
         "size_bytes":  7248238,
         "size_mb":  6.91,
-        "created":  "2026-02-20 12:13:09",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:51:52",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003513
        },
      "metadata":  {
@@ -7225,9 +7225,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Une balade en Fa mineur",
         "size_bytes":  2828955,
         "size_mb":  2.7,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:31",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003311
        },
      "metadata":  {
@@ -7348,9 +7348,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Une balade en Fa mineur",
         "size_bytes":  2344474,
         "size_mb":  2.24,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:31",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003312
        },
      "metadata":  {
@@ -7471,9 +7471,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Une balade en Fa mineur",
         "size_bytes":  2333450,
         "size_mb":  2.23,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:32",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003312
        },
      "metadata":  {
@@ -7594,9 +7594,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Une balade en Fa mineur",
         "size_bytes":  2347933,
         "size_mb":  2.24,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:33",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003314
        },
      "metadata":  {
@@ -7717,9 +7717,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Une balade en Fa mineur",
         "size_bytes":  2587753,
         "size_mb":  2.47,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:48:30",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003311
        },
      "metadata":  {
@@ -7840,9 +7840,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Vehemence",
         "size_bytes":  1448993,
         "size_mb":  1.38,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:50:17",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003417
        },
      "metadata":  {
@@ -7963,9 +7963,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Vehemence",
         "size_bytes":  2051744,
         "size_mb":  1.96,
-        "created":  "2026-02-20 12:13:12",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:50:20",
-        "epoch_created":  1771589592,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003420
        },
      "metadata":  {
@@ -8086,9 +8086,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Wie soll ich ihn nemmen",
         "size_bytes":  3802439,
         "size_mb":  3.63,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:41",
         "modified":  "2026-05-05 17:47:52",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003273
        },
      "metadata":  {
@@ -8209,9 +8209,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Wie soll ich ihn nemmen",
         "size_bytes":  3782113,
         "size_mb":  3.61,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:47:53",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003273
        },
      "metadata":  {
@@ -8332,9 +8332,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Wie soll ich ihn nemmen",
         "size_bytes":  4580412,
         "size_mb":  4.37,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:47:54",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003274
        },
      "metadata":  {
@@ -8455,9 +8455,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Wie soll ich ihn nemmen",
         "size_bytes":  723951,
         "size_mb":  0.69,
-        "created":  "2026-02-20 12:13:11",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:50:24",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003424
        },
      "metadata":  {
@@ -8578,9 +8578,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\YKS",
         "size_bytes":  1047311,
         "size_mb":  1,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:50:38",
-        "epoch_created":  1771589590,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003439
        },
      "metadata":  {
@@ -8701,9 +8701,9 @@
         "dir":  "assets\\Album 3 (2020-2021)\\Album 3.3\\Время дьявола",
         "size_bytes":  6788651,
         "size_mb":  6.47,
-        "created":  "2026-02-20 12:13:10",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:50:27",
-        "epoch_created":  1771589591,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003428
        },
      "metadata":  {
@@ -8824,9 +8824,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  22838357,
         "size_mb":  21.78,
-        "created":  "2026-02-20 12:11:33",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:55:21",
-        "epoch_created":  1771589493,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003721
        },
      "metadata":  {
@@ -8947,9 +8947,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  4005908,
         "size_mb":  3.82,
-        "created":  "2026-04-29 00:57:07",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:55:21",
-        "epoch_created":  1777424228,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003722
        },
      "metadata":  {
@@ -9070,9 +9070,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  23384571,
         "size_mb":  22.3,
-        "created":  "2026-02-20 12:11:31",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:55:20",
-        "epoch_created":  1771589492,
+        "epoch_created":  1785280542,
         "epoch_modified":  1778003720
        },
      "metadata":  {
@@ -9193,9 +9193,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  4113748,
         "size_mb":  3.92,
-        "created":  "2026-04-29 00:57:33",
+        "created":  "2026-07-28 23:15:42",
         "modified":  "2026-05-05 17:55:21",
-        "epoch_created":  1777424253,
+        "epoch_created":  1785280543,
         "epoch_modified":  1778003721
        },
      "metadata":  {
@@ -9316,9 +9316,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  23463955,
         "size_mb":  22.38,
-        "created":  "2026-02-20 12:11:32",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:22",
-        "epoch_created":  1771589492,
+        "epoch_created":  1785280543,
         "epoch_modified":  1778003722
        },
      "metadata":  {
@@ -9439,9 +9439,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  4087312,
         "size_mb":  3.9,
-        "created":  "2026-04-29 00:57:59",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:22",
-        "epoch_created":  1777424279,
+        "epoch_created":  1785280543,
         "epoch_modified":  1778003723
        },
      "metadata":  {
@@ -9562,9 +9562,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  31317773,
         "size_mb":  29.87,
-        "created":  "2026-02-20 12:11:32",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:22",
-        "epoch_created":  1771589493,
+        "epoch_created":  1785280543,
         "epoch_modified":  1778003723
        },
      "metadata":  {
@@ -9685,9 +9685,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  5407609,
         "size_mb":  5.16,
-        "created":  "2026-04-29 00:58:24",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:23",
-        "epoch_created":  1777424304,
+        "epoch_created":  1785280544,
         "epoch_modified":  1778003723
        },
      "metadata":  {
@@ -9808,9 +9808,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36901114,
         "size_mb":  35.19,
-        "created":  "2026-02-20 12:11:26",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:23",
-        "epoch_created":  1771589487,
+        "epoch_created":  1785280544,
         "epoch_modified":  1778003724
        },
      "metadata":  {
@@ -9931,9 +9931,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6627121,
         "size_mb":  6.32,
-        "created":  "2026-04-29 00:58:55",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:24",
-        "epoch_created":  1777424336,
+        "epoch_created":  1785280544,
         "epoch_modified":  1778003724
        },
      "metadata":  {
@@ -10054,9 +10054,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36948680,
         "size_mb":  35.24,
-        "created":  "2026-02-20 12:11:28",
+        "created":  "2026-07-28 23:15:43",
         "modified":  "2026-05-05 17:55:24",
-        "epoch_created":  1771589488,
+        "epoch_created":  1785280544,
         "epoch_modified":  1778003724
        },
      "metadata":  {
@@ -10177,9 +10177,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6638415,
         "size_mb":  6.33,
-        "created":  "2026-04-29 00:59:34",
+        "created":  "2026-07-28 23:15:44",
         "modified":  "2026-05-05 17:55:24",
-        "epoch_created":  1777424375,
+        "epoch_created":  1785280545,
         "epoch_modified":  1778003725
        },
      "metadata":  {
@@ -10300,9 +10300,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36364705,
         "size_mb":  34.68,
-        "created":  "2026-02-20 12:11:27",
+        "created":  "2026-07-28 23:15:45",
         "modified":  "2026-05-05 17:55:25",
-        "epoch_created":  1771589488,
+        "epoch_created":  1785280545,
         "epoch_modified":  1778003725
        },
      "metadata":  {
@@ -10423,9 +10423,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6616020,
         "size_mb":  6.31,
-        "created":  "2026-04-29 01:00:13",
+        "created":  "2026-07-28 23:15:45",
         "modified":  "2026-05-05 17:55:25",
-        "epoch_created":  1777424414,
+        "epoch_created":  1785280546,
         "epoch_modified":  1778003726
        },
      "metadata":  {
@@ -10546,9 +10546,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36375605,
         "size_mb":  34.69,
-        "created":  "2026-02-20 12:11:31",
+        "created":  "2026-07-28 23:15:45",
         "modified":  "2026-05-05 17:55:26",
-        "epoch_created":  1771589491,
+        "epoch_created":  1785280546,
         "epoch_modified":  1778003726
        },
      "metadata":  {
@@ -10669,9 +10669,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6629260,
         "size_mb":  6.32,
-        "created":  "2026-04-29 01:00:56",
+        "created":  "2026-07-28 23:15:46",
         "modified":  "2026-05-05 17:55:26",
-        "epoch_created":  1777424457,
+        "epoch_created":  1785280547,
         "epoch_modified":  1778003726
        },
      "metadata":  {
@@ -10792,9 +10792,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36572590,
         "size_mb":  34.88,
-        "created":  "2026-02-20 12:11:30",
+        "created":  "2026-07-28 23:15:46",
         "modified":  "2026-05-05 17:55:26",
-        "epoch_created":  1771589491,
+        "epoch_created":  1785280547,
         "epoch_modified":  1778003727
        },
      "metadata":  {
@@ -10915,9 +10915,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6694989,
         "size_mb":  6.38,
-        "created":  "2026-04-29 01:01:34",
+        "created":  "2026-07-28 23:15:46",
         "modified":  "2026-05-05 17:55:27",
-        "epoch_created":  1777424495,
+        "epoch_created":  1785280547,
         "epoch_modified":  1778003727
        },
      "metadata":  {
@@ -11038,9 +11038,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36543901,
         "size_mb":  34.85,
-        "created":  "2026-02-20 12:11:29",
+        "created":  "2026-07-28 23:15:47",
         "modified":  "2026-05-05 17:55:27",
-        "epoch_created":  1771589489,
+        "epoch_created":  1785280547,
         "epoch_modified":  1778003728
        },
      "metadata":  {
@@ -11161,9 +11161,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6698677,
         "size_mb":  6.39,
-        "created":  "2026-04-29 01:02:18",
+        "created":  "2026-07-28 23:15:47",
         "modified":  "2026-05-05 17:55:28",
-        "epoch_created":  1777424538,
+        "epoch_created":  1785280548,
         "epoch_modified":  1778003728
        },
      "metadata":  {
@@ -11284,9 +11284,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  36543756,
         "size_mb":  34.85,
-        "created":  "2026-02-20 12:11:29",
+        "created":  "2026-07-28 23:15:48",
         "modified":  "2026-05-05 17:55:29",
-        "epoch_created":  1771589490,
+        "epoch_created":  1785280548,
         "epoch_modified":  1778003729
        },
      "metadata":  {
@@ -11407,9 +11407,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\155 151 163 163 040 165",
         "size_bytes":  6698681,
         "size_mb":  6.39,
-        "created":  "2026-04-29 01:02:58",
+        "created":  "2026-07-28 23:15:51",
         "modified":  "2026-05-05 17:55:31",
-        "epoch_created":  1777424579,
+        "epoch_created":  1785280551,
         "epoch_modified":  1778003731
        },
      "metadata":  {
@@ -11530,9 +11530,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\ExoBrum",
         "size_bytes":  1162386,
         "size_mb":  1.11,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:15:51",
         "modified":  "2026-05-05 17:53:42",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280552,
         "epoch_modified":  1778003622
        },
      "metadata":  {
@@ -11632,9 +11632,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\ExoBrum",
         "size_bytes":  4450819,
         "size_mb":  4.24,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:15:52",
         "modified":  "2026-05-05 17:53:50",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280552,
         "epoch_modified":  1778003631
        },
      "metadata":  {
@@ -11734,9 +11734,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Good morning",
         "size_bytes":  3689085,
         "size_mb":  3.52,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:15:52",
         "modified":  "2026-05-05 17:52:42",
-        "epoch_created":  1771589482,
+        "epoch_created":  1785280553,
         "epoch_modified":  1778003563
        },
      "metadata":  {
@@ -11836,9 +11836,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Good morning",
         "size_bytes":  3686593,
         "size_mb":  3.52,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:15:52",
         "modified":  "2026-05-05 17:52:43",
-        "epoch_created":  1771589482,
+        "epoch_created":  1785280553,
         "epoch_modified":  1778003564
        },
      "metadata":  {
@@ -11938,9 +11938,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Hypocritical world\u0027s Nostalgia",
         "size_bytes":  7214439,
         "size_mb":  6.88,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:15:53",
         "modified":  "2026-05-05 17:52:47",
-        "epoch_created":  1771589482,
+        "epoch_created":  1785280553,
         "epoch_modified":  1778003567
        },
      "metadata":  {
@@ -12040,9 +12040,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Introduction",
         "size_bytes":  12688081,
         "size_mb":  12.1,
-        "created":  "2026-02-20 12:11:20",
+        "created":  "2026-07-28 23:15:53",
         "modified":  "2026-05-05 17:52:55",
-        "epoch_created":  1771589480,
+        "epoch_created":  1785280554,
         "epoch_modified":  1778003575
        },
      "metadata":  {
@@ -12163,9 +12163,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Introduction",
         "size_bytes":  2440935,
         "size_mb":  2.33,
-        "created":  "2026-04-29 01:03:44",
+        "created":  "2026-07-28 23:15:54",
         "modified":  "2026-05-05 17:52:36",
-        "epoch_created":  1777424624,
+        "epoch_created":  1785280554,
         "epoch_modified":  1778003557
        },
      "metadata":  {
@@ -12286,9 +12286,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Maybe one day",
         "size_bytes":  4736183,
         "size_mb":  4.52,
-        "created":  "2026-02-20 12:11:20",
+        "created":  "2026-07-28 23:15:55",
         "modified":  "2026-05-05 17:53:21",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280555,
         "epoch_modified":  1778003601
        },
      "metadata":  {
@@ -12409,9 +12409,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Maybe one day",
         "size_bytes":  7511597,
         "size_mb":  7.16,
-        "created":  "2026-02-20 12:11:20",
+        "created":  "2026-07-28 23:15:55",
         "modified":  "2026-05-05 17:53:22",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280555,
         "epoch_modified":  1778003602
        },
      "metadata":  {
@@ -12532,9 +12532,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Oh okay…",
         "size_bytes":  5980131,
         "size_mb":  5.7,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:15:55",
         "modified":  "2026-05-05 17:54:46",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280556,
         "epoch_modified":  1778003686
        },
      "metadata":  {
@@ -12634,9 +12634,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Oh okay…",
         "size_bytes":  5988448,
         "size_mb":  5.71,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:15:56",
         "modified":  "2026-05-05 17:54:47",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280556,
         "epoch_modified":  1778003687
        },
      "metadata":  {
@@ -12736,9 +12736,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Oh okay…",
         "size_bytes":  5991272,
         "size_mb":  5.71,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:15:56",
         "modified":  "2026-05-05 17:54:47",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280556,
         "epoch_modified":  1778003688
        },
      "metadata":  {
@@ -12838,9 +12838,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Oh okay… [deluxe]",
         "size_bytes":  52040556,
         "size_mb":  49.63,
-        "created":  "2026-02-20 12:11:33",
+        "created":  "2026-07-28 23:15:56",
         "modified":  "2026-05-05 17:54:44",
-        "epoch_created":  1771589494,
+        "epoch_created":  1785280557,
         "epoch_modified":  1778003685
        },
      "metadata":  {
@@ -12940,9 +12940,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Oh okay… [deluxe]",
         "size_bytes":  10754418,
         "size_mb":  10.26,
-        "created":  "2026-04-29 01:04:00",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:45",
-        "epoch_created":  1777424641,
+        "epoch_created":  1785280559,
         "epoch_modified":  1778003685
        },
      "metadata":  {
@@ -13042,9 +13042,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8771923,
         "size_mb":  8.37,
-        "created":  "2026-02-20 12:11:23",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:57",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280559,
         "epoch_modified":  1778003698
        },
      "metadata":  {
@@ -13165,9 +13165,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8787515,
         "size_mb":  8.38,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:52",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280559,
         "epoch_modified":  1778003693
        },
      "metadata":  {
@@ -13288,9 +13288,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8788081,
         "size_mb":  8.38,
-        "created":  "2026-02-20 12:11:23",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:58",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280559,
         "epoch_modified":  1778003698
        },
      "metadata":  {
@@ -13411,9 +13411,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8788982,
         "size_mb":  8.38,
-        "created":  "2026-02-20 12:11:24",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:59",
-        "epoch_created":  1771589485,
+        "epoch_created":  1785280559,
         "epoch_modified":  1778003699
        },
      "metadata":  {
@@ -13534,9 +13534,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8765526,
         "size_mb":  8.36,
-        "created":  "2026-02-20 12:11:24",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:54:59",
-        "epoch_created":  1771589484,
+        "epoch_created":  1785280560,
         "epoch_modified":  1778003700
        },
      "metadata":  {
@@ -13657,9 +13657,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  50739786,
         "size_mb":  48.39,
-        "created":  "2026-02-20 12:11:23",
+        "created":  "2026-07-28 23:15:59",
         "modified":  "2026-05-05 17:55:00",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280560,
         "epoch_modified":  1778003700
        },
      "metadata":  {
@@ -13780,9 +13780,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  9088348,
         "size_mb":  8.67,
-        "created":  "2026-04-29 01:05:02",
+        "created":  "2026-07-28 23:16:00",
         "modified":  "2026-05-05 17:55:00",
-        "epoch_created":  1777424702,
+        "epoch_created":  1785280560,
         "epoch_modified":  1778003701
        },
      "metadata":  {
@@ -13903,9 +13903,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  72958596,
         "size_mb":  69.58,
-        "created":  "2026-02-20 12:11:24",
+        "created":  "2026-07-28 23:16:00",
         "modified":  "2026-05-05 17:55:01",
-        "epoch_created":  1771589485,
+        "epoch_created":  1785280560,
         "epoch_modified":  1778003702
        },
      "metadata":  {
@@ -14026,9 +14026,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Quing",
         "size_bytes":  8766067,
         "size_mb":  8.36,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:16:01",
         "modified":  "2026-05-05 17:55:03",
-        "epoch_created":  1771589483,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003703
        },
      "metadata":  {
@@ -14149,9 +14149,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Self-Fish",
         "size_bytes":  9965340,
         "size_mb":  9.5,
-        "created":  "2026-02-20 12:11:19",
+        "created":  "2026-07-28 23:16:01",
         "modified":  "2026-05-05 17:55:09",
-        "epoch_created":  1771589480,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003709
        },
      "metadata":  {
@@ -14272,9 +14272,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Self-Fish",
         "size_bytes":  9858450,
         "size_mb":  9.4,
-        "created":  "2026-02-20 12:11:20",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:52:58",
-        "epoch_created":  1771589480,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003579
        },
      "metadata":  {
@@ -14395,9 +14395,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Self-Fish",
         "size_bytes":  9859149,
         "size_mb":  9.4,
-        "created":  "2026-02-20 12:11:19",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:52:59",
-        "epoch_created":  1771589480,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003580
        },
      "metadata":  {
@@ -14518,9 +14518,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Small Void",
         "size_bytes":  3887488,
         "size_mb":  3.71,
-        "created":  "2026-02-20 12:11:21",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:54:33",
-        "epoch_created":  1771589482,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003673
        },
      "metadata":  {
@@ -14641,9 +14641,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Small Void [slowed+reverb]",
         "size_bytes":  4149713,
         "size_mb":  3.96,
-        "created":  "2026-02-20 13:21:43",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:54:05",
-        "epoch_created":  1771593704,
+        "epoch_created":  1785280562,
         "epoch_modified":  1778003646
        },
      "metadata":  {
@@ -14743,9 +14743,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\Some Lo-fi thing",
         "size_bytes":  8661793,
         "size_mb":  8.26,
-        "created":  "2026-02-20 12:11:20",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:53:55",
-        "epoch_created":  1771589481,
+        "epoch_created":  1785280563,
         "epoch_modified":  1778003635
        },
      "metadata":  {
@@ -14845,9 +14845,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\ǝɹɐɯʇɥƃᴉu ou ǝsɐǝןԀ",
         "size_bytes":  6451771,
         "size_mb":  6.15,
-        "created":  "2026-02-20 12:11:22",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:53:11",
-        "epoch_created":  1771589482,
+        "epoch_created":  1785280563,
         "epoch_modified":  1778003592
        },
      "metadata":  {
@@ -14947,9 +14947,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.1\\ǝɹɐɯʇɥƃᴉu ou ǝsɐǝןԀ [deluxe]",
         "size_bytes":  11218097,
         "size_mb":  10.7,
-        "created":  "2026-02-20 13:22:36",
+        "created":  "2026-07-28 23:16:02",
         "modified":  "2026-05-05 17:53:10",
-        "epoch_created":  1771593757,
+        "epoch_created":  1785280563,
         "epoch_modified":  1778003591
        },
      "metadata":  {
@@ -15049,9 +15049,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\21",
         "size_bytes":  4859567,
         "size_mb":  4.63,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:56:16",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280563,
         "epoch_modified":  1778003776
        },
      "metadata":  {
@@ -15109,19 +15109,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15151,9 +15151,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Amblid",
         "size_bytes":  6050157,
         "size_mb":  5.77,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:58:05",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003885
        },
      "metadata":  {
@@ -15254,19 +15254,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15296,9 +15296,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Cell",
         "size_bytes":  6089594,
         "size_mb":  5.81,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:58:08",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003889
        },
      "metadata":  {
@@ -15356,19 +15356,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15398,9 +15398,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Cell",
         "size_bytes":  6081351,
         "size_mb":  5.8,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:57:01",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003821
        },
      "metadata":  {
@@ -15458,19 +15458,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15500,9 +15500,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Cell",
         "size_bytes":  6088843,
         "size_mb":  5.81,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:57:02",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003822
        },
      "metadata":  {
@@ -15560,19 +15560,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15602,9 +15602,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\End of Chapter one",
         "size_bytes":  56338576,
         "size_mb":  53.73,
-        "created":  "2023-09-24 15:44:04",
+        "created":  "2026-07-28 23:16:03",
         "modified":  "2026-05-05 17:58:14",
-        "epoch_created":  1695570244,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003894
        },
      "metadata":  {
@@ -15659,22 +15659,22 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\End of Chapter one\\artwork.jpg",
-                "size_bytes":  42126,
-                "dimensions":  "500 x 500",
+                "size_bytes":  523124,
+                "dimensions":  "1788 x 1788",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#341E1D",
+                "average_color":  "#301F1D",
                 "vibrant_color":  "#402020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
-                     "#402020",
                      "#202020",
+                     "#402020",
                      "#604040",
-                     "#A06060",
                      "#806060",
                      "#404040",
-                     "#C08080"
+                     "#A06060",
+                     "#A08080"
                     ]
                },
                {
@@ -15705,19 +15705,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15747,9 +15747,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\g_",
         "size_bytes":  35893816,
         "size_mb":  34.23,
-        "created":  "2026-04-26 16:39:51",
+        "created":  "2026-07-28 23:16:04",
         "modified":  "2026-05-05 17:58:15",
-        "epoch_created":  1777221592,
+        "epoch_created":  1785280564,
         "epoch_modified":  1778003896
        },
      "metadata":  {
@@ -15807,19 +15807,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15849,9 +15849,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\g_",
         "size_bytes":  8042047,
         "size_mb":  7.67,
-        "created":  "2026-04-29 01:06:17",
+        "created":  "2026-07-28 23:16:04",
         "modified":  "2026-05-05 17:57:09",
-        "epoch_created":  1777424778,
+        "epoch_created":  1785280565,
         "epoch_modified":  1778003829
        },
      "metadata":  {
@@ -15909,19 +15909,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -15951,9 +15951,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Mon morceau 28",
         "size_bytes":  1144290,
         "size_mb":  1.09,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:58:10",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280565,
         "epoch_modified":  1778003890
        },
      "metadata":  {
@@ -16011,19 +16011,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16053,9 +16053,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\New Day",
         "size_bytes":  7441310,
         "size_mb":  7.1,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:58:12",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280565,
         "epoch_modified":  1778003892
        },
      "metadata":  {
@@ -16113,19 +16113,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16155,9 +16155,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Organ",
         "size_bytes":  3607819,
         "size_mb":  3.44,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:58:00",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280565,
         "epoch_modified":  1778003881
        },
      "metadata":  {
@@ -16215,19 +16215,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16257,9 +16257,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Organ",
         "size_bytes":  3621817,
         "size_mb":  3.45,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:56:23",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280565,
         "epoch_modified":  1778003783
        },
      "metadata":  {
@@ -16317,19 +16317,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16359,9 +16359,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Ozone",
         "size_bytes":  6101158,
         "size_mb":  5.82,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:57:16",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280566,
         "epoch_modified":  1778003837
        },
      "metadata":  {
@@ -16419,19 +16419,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16461,9 +16461,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Plane",
         "size_bytes":  7001802,
         "size_mb":  6.68,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:57:28",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280566,
         "epoch_modified":  1778003848
        },
      "metadata":  {
@@ -16521,19 +16521,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16563,9 +16563,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Plane",
         "size_bytes":  6913286,
         "size_mb":  6.59,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:05",
         "modified":  "2026-05-05 17:57:29",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280566,
         "epoch_modified":  1778003849
        },
      "metadata":  {
@@ -16623,19 +16623,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16665,9 +16665,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Plane",
         "size_bytes":  7016393,
         "size_mb":  6.69,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:06",
         "modified":  "2026-05-05 17:57:31",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280566,
         "epoch_modified":  1778003852
        },
      "metadata":  {
@@ -16725,19 +16725,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16767,9 +16767,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Plane",
         "size_bytes":  7048787,
         "size_mb":  6.72,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:06",
         "modified":  "2026-05-05 17:57:33",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280566,
         "epoch_modified":  1778003853
        },
      "metadata":  {
@@ -16827,19 +16827,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16869,9 +16869,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Sinking",
         "size_bytes":  11381933,
         "size_mb":  10.85,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:06",
         "modified":  "2026-05-05 17:57:42",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280567,
         "epoch_modified":  1778003862
        },
      "metadata":  {
@@ -16929,19 +16929,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -16971,9 +16971,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Sinking",
         "size_bytes":  11625501,
         "size_mb":  11.09,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:06",
         "modified":  "2026-05-05 17:56:09",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280567,
         "epoch_modified":  1778003769
        },
      "metadata":  {
@@ -17031,19 +17031,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17073,9 +17073,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Spes gratis",
         "size_bytes":  4713060,
         "size_mb":  4.49,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:07",
         "modified":  "2026-05-05 17:56:53",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280567,
         "epoch_modified":  1778003814
        },
      "metadata":  {
@@ -17133,19 +17133,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17175,9 +17175,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Spooky",
         "size_bytes":  4905131,
         "size_mb":  4.68,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:07",
         "modified":  "2026-05-05 17:56:58",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280568,
         "epoch_modified":  1778003819
        },
      "metadata":  {
@@ -17235,19 +17235,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17277,9 +17277,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Spooky",
         "size_bytes":  5002183,
         "size_mb":  4.77,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:07",
         "modified":  "2026-05-05 17:56:43",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280568,
         "epoch_modified":  1778003803
        },
      "metadata":  {
@@ -17337,19 +17337,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17379,9 +17379,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\The starless night sky",
         "size_bytes":  5698233,
         "size_mb":  5.43,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:08",
         "modified":  "2026-05-05 17:56:44",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280568,
         "epoch_modified":  1778003805
        },
      "metadata":  {
@@ -17439,19 +17439,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17481,9 +17481,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\The way I think",
         "size_bytes":  6626521,
         "size_mb":  6.32,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:08",
         "modified":  "2026-05-05 17:57:44",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280569,
         "epoch_modified":  1778003864
        },
      "metadata":  {
@@ -17541,19 +17541,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17583,9 +17583,9 @@
         "dir":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\Up \u0026 Down",
         "size_bytes":  5467167,
         "size_mb":  5.21,
-        "created":  "2023-08-26 14:10:32",
+        "created":  "2026-07-28 23:16:08",
         "modified":  "2026-05-05 17:57:48",
-        "epoch_created":  1693059032,
+        "epoch_created":  1785280569,
         "epoch_modified":  1778003868
        },
      "metadata":  {
@@ -17643,19 +17643,19 @@
                 "name":  "artwork.jpg",
                 "type":  "JPG",
                 "path":  "assets\\Album 4 (2021-2022-2023)\\Album 4.2\\artwork.jpg",
-                "size_bytes":  49074,
-                "dimensions":  "500 x 500",
+                "size_bytes":  429958,
+                "dimensions":  "1644 x 1644",
                 "aspect_ratio":  "Square",
                 "dominant_color":  "#000000",
-                "average_color":  "#29242D",
+                "average_color":  "#27232C",
                 "vibrant_color":  "#000020",
                 "muted_color":  "#000000",
                 "color_palette":  [
                      "#000000",
                      "#202020",
                      "#000020",
-                     "#402040",
                      "#404040",
+                     "#402040",
                      "#806060",
                      "#604060",
                      "#604040"
@@ -17685,9 +17685,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Byoode",
         "size_bytes":  45539920,
         "size_mb":  43.43,
-        "created":  "2024-03-17 10:33:14",
+        "created":  "2026-07-28 23:16:09",
         "modified":  "2026-05-05 17:58:50",
-        "epoch_created":  1710671594,
+        "epoch_created":  1785280569,
         "epoch_modified":  1778003931
        },
      "metadata":  {
@@ -17809,9 +17809,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Byoode",
         "size_bytes":  45540014,
         "size_mb":  43.43,
-        "created":  "2024-03-17 22:35:14",
+        "created":  "2026-07-28 23:16:09",
         "modified":  "2026-05-05 17:58:54",
-        "epoch_created":  1710714914,
+        "epoch_created":  1785280570,
         "epoch_modified":  1778003935
        },
      "metadata":  {
@@ -17933,9 +17933,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\dance",
         "size_bytes":  53728112,
         "size_mb":  51.24,
-        "created":  "2024-02-24 22:36:12",
+        "created":  "2026-07-28 23:16:10",
         "modified":  "2026-05-05 17:58:54",
-        "epoch_created":  1708814172,
+        "epoch_created":  1785280571,
         "epoch_modified":  1778003935
        },
      "metadata":  {
@@ -18057,9 +18057,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\dance",
         "size_bytes":  53728112,
         "size_mb":  51.24,
-        "created":  "2024-02-24 22:41:44",
+        "created":  "2026-07-28 23:16:10",
         "modified":  "2026-05-05 17:58:55",
-        "epoch_created":  1708814504,
+        "epoch_created":  1785280571,
         "epoch_modified":  1778003935
        },
      "metadata":  {
@@ -18181,9 +18181,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\My Song 31",
         "size_bytes":  48494736,
         "size_mb":  46.25,
-        "created":  "2026-05-05 18:14:31",
+        "created":  "2026-07-28 23:16:12",
         "modified":  "2026-07-26 16:29:59",
-        "epoch_created":  1778004871,
+        "epoch_created":  1785280572,
         "epoch_modified":  1785083400
        },
      "metadata":  {
@@ -18305,9 +18305,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 2",
         "size_bytes":  49184328,
         "size_mb":  46.91,
-        "created":  "2023-11-03 13:11:08",
+        "created":  "2026-07-28 23:16:12",
         "modified":  "2026-05-05 17:58:59",
-        "epoch_created":  1699017068,
+        "epoch_created":  1785280573,
         "epoch_modified":  1778003940
        },
      "metadata":  {
@@ -18429,9 +18429,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 2",
         "size_bytes":  6236967,
         "size_mb":  5.95,
-        "created":  "2023-12-08 00:43:32",
+        "created":  "2026-07-28 23:16:15",
         "modified":  "2026-05-05 18:22:35",
-        "epoch_created":  1701996212,
+        "epoch_created":  1785280576,
         "epoch_modified":  1778005356
        },
      "metadata":  {
@@ -18553,9 +18553,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 2",
         "size_bytes":  7787038,
         "size_mb":  7.43,
-        "created":  "2026-07-26 17:06:42",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-07-26 17:06:50",
-        "epoch_created":  1785085603,
+        "epoch_created":  1785280576,
         "epoch_modified":  1785085611
        },
      "metadata":  {
@@ -18677,9 +18677,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  4459669,
         "size_mb":  4.25,
-        "created":  "2025-02-10 01:24:04",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-05-05 18:22:39",
-        "epoch_created":  1739150644,
+        "epoch_created":  1785280576,
         "epoch_modified":  1778005359
        },
      "metadata":  {
@@ -18801,9 +18801,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  3628066,
         "size_mb":  3.46,
-        "created":  "2025-02-10 01:36:36",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-05-05 18:08:25",
-        "epoch_created":  1739151396,
+        "epoch_created":  1785280576,
         "epoch_modified":  1778004505
        },
      "metadata":  {
@@ -18925,9 +18925,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  4462281,
         "size_mb":  4.26,
-        "created":  "2025-02-10 01:36:34",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-05-05 18:08:25",
-        "epoch_created":  1739151394,
+        "epoch_created":  1785280576,
         "epoch_modified":  1778004506
        },
      "metadata":  {
@@ -19049,9 +19049,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  9231405,
         "size_mb":  8.8,
-        "created":  "2026-07-26 17:06:43",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-07-26 17:06:54",
-        "epoch_created":  1785085603,
+        "epoch_created":  1785280576,
         "epoch_modified":  1785085614
        },
      "metadata":  {
@@ -19173,9 +19173,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  39318020,
         "size_mb":  37.5,
-        "created":  "2025-02-10 01:43:34",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-05-05 18:08:25",
-        "epoch_created":  1739151814,
+        "epoch_created":  1785280576,
         "epoch_modified":  1778004506
        },
      "metadata":  {
@@ -19297,9 +19297,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  46732865,
         "size_mb":  44.57,
-        "created":  "2025-02-24 18:43:14",
+        "created":  "2026-07-28 23:16:16",
         "modified":  "2026-05-05 18:08:26",
-        "epoch_created":  1740422594,
+        "epoch_created":  1785280577,
         "epoch_modified":  1778004506
        },
      "metadata":  {
@@ -19421,9 +19421,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  10342761,
         "size_mb":  9.86,
-        "created":  "2026-07-26 17:06:43",
+        "created":  "2026-07-28 23:16:18",
         "modified":  "2026-07-26 17:06:55",
-        "epoch_created":  1785085604,
+        "epoch_created":  1785280579,
         "epoch_modified":  1785085616
        },
      "metadata":  {
@@ -19545,9 +19545,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  8409720,
         "size_mb":  8.02,
-        "created":  "2026-04-25 17:54:11",
+        "created":  "2026-07-28 23:16:19",
         "modified":  "2026-05-05 18:08:26",
-        "epoch_created":  1777139652,
+        "epoch_created":  1785280579,
         "epoch_modified":  1778004507
        },
      "metadata":  {
@@ -19669,9 +19669,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  10262240,
         "size_mb":  9.79,
-        "created":  "2026-07-26 17:06:45",
+        "created":  "2026-07-28 23:16:19",
         "modified":  "2026-07-26 17:06:56",
-        "epoch_created":  1785085605,
+        "epoch_created":  1785280579,
         "epoch_modified":  1785085616
        },
      "metadata":  {
@@ -19793,9 +19793,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  10074455,
         "size_mb":  9.61,
-        "created":  "2025-02-24 19:12:34",
+        "created":  "2026-07-28 23:16:19",
         "modified":  "2026-05-05 18:08:26",
-        "epoch_created":  1740424354,
+        "epoch_created":  1785280580,
         "epoch_modified":  1778004507
        },
      "metadata":  {
@@ -19917,9 +19917,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  10290591,
         "size_mb":  9.81,
-        "created":  "2026-07-26 17:06:47",
+        "created":  "2026-07-28 23:16:20",
         "modified":  "2026-07-26 17:06:57",
-        "epoch_created":  1785085607,
+        "epoch_created":  1785280580,
         "epoch_modified":  1785085617
        },
      "metadata":  {
@@ -20041,9 +20041,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  88318384,
         "size_mb":  84.23,
-        "created":  "2025-02-24 19:12:34",
+        "created":  "2026-07-28 23:16:20",
         "modified":  "2026-05-05 18:08:27",
-        "epoch_created":  1740424354,
+        "epoch_created":  1785280580,
         "epoch_modified":  1778004507
        },
      "metadata":  {
@@ -20165,9 +20165,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  44114630,
         "size_mb":  42.07,
-        "created":  "2025-02-24 19:14:40",
+        "created":  "2026-07-28 23:16:23",
         "modified":  "2026-05-05 18:08:27",
-        "epoch_created":  1740424480,
+        "epoch_created":  1785280584,
         "epoch_modified":  1778004507
        },
      "metadata":  {
@@ -20289,9 +20289,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  2770069,
         "size_mb":  2.64,
-        "created":  "2025-02-09 20:57:10",
+        "created":  "2026-07-28 23:16:24",
         "modified":  "2026-05-05 18:08:27",
-        "epoch_created":  1739134630,
+        "epoch_created":  1785280585,
         "epoch_modified":  1778004508
        },
      "metadata":  {
@@ -20413,9 +20413,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  44114662,
         "size_mb":  42.07,
-        "created":  "2025-02-24 19:00:52",
+        "created":  "2026-07-28 23:16:24",
         "modified":  "2026-05-05 18:08:27",
-        "epoch_created":  1740423652,
+        "epoch_created":  1785280585,
         "epoch_modified":  1778004508
        },
      "metadata":  {
@@ -20537,9 +20537,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Projet 8",
         "size_bytes":  44114630,
         "size_mb":  42.07,
-        "created":  "2025-02-24 19:03:18",
+        "created":  "2026-07-28 23:16:25",
         "modified":  "2026-05-05 18:08:29",
-        "epoch_created":  1740423798,
+        "epoch_created":  1785280585,
         "epoch_modified":  1778004509
        },
      "metadata":  {
@@ -20661,9 +20661,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Song 39",
         "size_bytes":  76213250,
         "size_mb":  72.68,
-        "created":  "2024-05-28 01:02:30",
+        "created":  "2026-07-28 23:16:26",
         "modified":  "2026-07-26 16:29:38",
-        "epoch_created":  1716858150,
+        "epoch_created":  1785280586,
         "epoch_modified":  1785083378
        },
      "metadata":  {
@@ -20785,9 +20785,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Song 39",
         "size_bytes":  82563780,
         "size_mb":  78.74,
-        "created":  "2024-06-10 01:18:26",
+        "created":  "2026-07-28 23:16:27",
         "modified":  "2026-05-05 17:59:14",
-        "epoch_created":  1717982306,
+        "epoch_created":  1785280588,
         "epoch_modified":  1778003954
        },
      "metadata":  {
@@ -20909,9 +20909,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Symphony",
         "size_bytes":  76742576,
         "size_mb":  73.19,
-        "created":  "2023-12-09 18:13:52",
+        "created":  "2026-07-28 23:16:29",
         "modified":  "2026-05-05 17:58:33",
-        "epoch_created":  1702145632,
+        "epoch_created":  1785280589,
         "epoch_modified":  1778003914
        },
      "metadata":  {
@@ -21033,9 +21033,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Symphony",
         "size_bytes":  76742484,
         "size_mb":  73.19,
-        "created":  "2023-12-09 18:14:20",
+        "created":  "2026-07-28 23:16:30",
         "modified":  "2026-05-05 17:58:34",
-        "epoch_created":  1702145660,
+        "epoch_created":  1785280591,
         "epoch_modified":  1778003914
        },
      "metadata":  {
@@ -21157,9 +21157,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Symphony",
         "size_bytes":  1494196,
         "size_mb":  1.42,
-        "created":  "2023-12-08 00:48:56",
+        "created":  "2026-07-28 23:16:34",
         "modified":  "2026-05-05 17:58:35",
-        "epoch_created":  1701996536,
+        "epoch_created":  1785280595,
         "epoch_modified":  1778003916
        },
      "metadata":  {
@@ -21281,9 +21281,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Symphony",
         "size_bytes":  7408162,
         "size_mb":  7.06,
-        "created":  "2026-07-26 17:06:48",
+        "created":  "2026-07-28 23:16:35",
         "modified":  "2026-07-26 17:06:56",
-        "epoch_created":  1785085608,
+        "epoch_created":  1785280595,
         "epoch_modified":  1785085616
        },
      "metadata":  {
@@ -21405,9 +21405,9 @@
         "dir":  "assets\\Album 5 (2023-2024)\\Album 5.1\\Symphony",
         "size_bytes":  65629338,
         "size_mb":  62.59,
-        "created":  "2023-12-08 00:44:42",
+        "created":  "2026-07-28 23:16:36",
         "modified":  "2026-05-05 17:58:36",
-        "epoch_created":  1701996282,
+        "epoch_created":  1785280596,
         "epoch_modified":  1778003917
        },
      "metadata":  {
@@ -21529,9 +21529,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet",
         "size_bytes":  529285,
         "size_mb":  0.5,
-        "created":  "2025-01-26 17:51:18",
+        "created":  "2026-07-28 23:16:39",
         "modified":  "2026-05-05 18:20:54",
-        "epoch_created":  1737913878,
+        "epoch_created":  1785280600,
         "epoch_modified":  1778005254
        },
      "metadata":  {
@@ -21610,9 +21610,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 1",
         "size_bytes":  1285269,
         "size_mb":  1.23,
-        "created":  "2025-01-27 00:21:22",
+        "created":  "2026-07-28 23:16:39",
         "modified":  "2026-05-05 18:20:57",
-        "epoch_created":  1737937282,
+        "epoch_created":  1785280600,
         "epoch_modified":  1778005257
        },
      "metadata":  {
@@ -21691,9 +21691,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 12",
         "size_bytes":  5302181,
         "size_mb":  5.06,
-        "created":  "2025-04-06 17:11:34",
+        "created":  "2026-07-28 23:16:40",
         "modified":  "2026-05-05 18:21:20",
-        "epoch_created":  1743959494,
+        "epoch_created":  1785280601,
         "epoch_modified":  1778005280
        },
      "metadata":  {
@@ -21772,9 +21772,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 12",
         "size_bytes":  5532703,
         "size_mb":  5.28,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:40",
         "modified":  "2026-07-26 17:06:39",
-        "epoch_created":  1785085592,
+        "epoch_created":  1785280601,
         "epoch_modified":  1785085599
        },
      "metadata":  {
@@ -21853,9 +21853,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 12",
         "size_bytes":  25144940,
         "size_mb":  23.98,
-        "created":  "2025-04-06 17:19:22",
+        "created":  "2026-07-28 23:16:41",
         "modified":  "2026-05-05 18:21:20",
-        "epoch_created":  1743959962,
+        "epoch_created":  1785280601,
         "epoch_modified":  1778005281
        },
      "metadata":  {
@@ -21934,9 +21934,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 12",
         "size_bytes":  1592738,
         "size_mb":  1.52,
-        "created":  "2025-04-06 17:28:18",
+        "created":  "2026-07-28 23:16:41",
         "modified":  "2026-05-05 18:21:20",
-        "epoch_created":  1743960498,
+        "epoch_created":  1785280601,
         "epoch_modified":  1778005281
        },
      "metadata":  {
@@ -22015,9 +22015,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 15",
         "size_bytes":  53292213,
         "size_mb":  50.82,
-        "created":  "2026-07-26 14:17:56",
+        "created":  "2026-07-28 23:16:41",
         "modified":  "2026-07-26 16:10:57",
-        "epoch_created":  1785075476,
+        "epoch_created":  1785280602,
         "epoch_modified":  1785082258
        },
      "metadata":  {
@@ -22096,9 +22096,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 15",
         "size_bytes":  8823041,
         "size_mb":  8.41,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:41",
         "modified":  "2026-07-26 17:06:43",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280602,
         "epoch_modified":  1785085603
        },
      "metadata":  {
@@ -22177,9 +22177,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  7784882,
         "size_mb":  7.42,
-        "created":  "2026-02-26 00:21:35",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-07-26 16:08:33",
-        "epoch_created":  1772065295,
+        "epoch_created":  1785280602,
         "epoch_modified":  1785082113
        },
      "metadata":  {
@@ -22258,9 +22258,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  9810293,
         "size_mb":  9.36,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-07-26 17:06:43",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280602,
         "epoch_modified":  1785085604
        },
      "metadata":  {
@@ -22339,9 +22339,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  23105215,
         "size_mb":  22.03,
-        "created":  "2025-05-31 15:52:38",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-05-05 18:21:25",
-        "epoch_created":  1748706758,
+        "epoch_created":  1785280602,
         "epoch_modified":  1778005285
        },
      "metadata":  {
@@ -22420,9 +22420,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  9811081,
         "size_mb":  9.36,
-        "created":  "2026-07-26 17:06:35",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-07-26 17:06:47",
-        "epoch_created":  1785085595,
+        "epoch_created":  1785280603,
         "epoch_modified":  1785085607
        },
      "metadata":  {
@@ -22501,9 +22501,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  7784882,
         "size_mb":  7.42,
-        "created":  "2026-04-25 17:52:12",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-05-05 18:21:25",
-        "epoch_created":  1777139533,
+        "epoch_created":  1785280603,
         "epoch_modified":  1778005286
        },
      "metadata":  {
@@ -22582,9 +22582,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 16",
         "size_bytes":  9810293,
         "size_mb":  9.36,
-        "created":  "2026-07-26 17:06:36",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-07-26 17:06:47",
-        "epoch_created":  1785085596,
+        "epoch_created":  1785280603,
         "epoch_modified":  1785085608
        },
      "metadata":  {
@@ -22663,9 +22663,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  39704455,
         "size_mb":  37.87,
-        "created":  "2025-06-30 18:08:26",
+        "created":  "2026-07-28 23:16:42",
         "modified":  "2026-05-05 18:21:28",
-        "epoch_created":  1751306906,
+        "epoch_created":  1785280603,
         "epoch_modified":  1778005289
        },
      "metadata":  {
@@ -22744,9 +22744,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  16711810,
         "size_mb":  15.94,
-        "created":  "2026-07-26 17:06:37",
+        "created":  "2026-07-28 23:16:43",
         "modified":  "2026-07-26 17:06:55",
-        "epoch_created":  1785085597,
+        "epoch_created":  1785280604,
         "epoch_modified":  1785085616
        },
      "metadata":  {
@@ -22825,9 +22825,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  13177919,
         "size_mb":  12.57,
-        "created":  "2026-02-26 00:25:08",
+        "created":  "2026-07-28 23:16:43",
         "modified":  "2026-05-05 18:21:28",
-        "epoch_created":  1772065508,
+        "epoch_created":  1785280604,
         "epoch_modified":  1778005289
        },
      "metadata":  {
@@ -22906,9 +22906,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  16529273,
         "size_mb":  15.76,
-        "created":  "2026-07-26 17:06:37",
+        "created":  "2026-07-28 23:16:44",
         "modified":  "2026-07-26 17:06:55",
-        "epoch_created":  1785085598,
+        "epoch_created":  1785280604,
         "epoch_modified":  1785085616
        },
      "metadata":  {
@@ -22987,9 +22987,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  104865871,
         "size_mb":  100.01,
-        "created":  "2026-07-26 14:03:26",
+        "created":  "2026-07-28 23:16:44",
         "modified":  "2026-07-26 16:08:23",
-        "epoch_created":  1785074606,
+        "epoch_created":  1785280604,
         "epoch_modified":  1785082104
        },
      "metadata":  {
@@ -23068,9 +23068,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  16714057,
         "size_mb":  15.94,
-        "created":  "2026-07-26 17:06:38",
+        "created":  "2026-07-28 23:16:45",
         "modified":  "2026-07-26 17:06:56",
-        "epoch_created":  1785085599,
+        "epoch_created":  1785280605,
         "epoch_modified":  1785085617
        },
      "metadata":  {
@@ -23149,9 +23149,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  29567017,
         "size_mb":  28.2,
-        "created":  "2025-06-28 20:25:56",
+        "created":  "2026-07-28 23:16:45",
         "modified":  "2026-07-26 16:08:19",
-        "epoch_created":  1751142356,
+        "epoch_created":  1785280605,
         "epoch_modified":  1785082100
        },
      "metadata":  {
@@ -23230,9 +23230,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  12561095,
         "size_mb":  11.98,
-        "created":  "2026-07-26 17:06:39",
+        "created":  "2026-07-28 23:16:46",
         "modified":  "2026-07-26 17:06:53",
-        "epoch_created":  1785085599,
+        "epoch_created":  1785280606,
         "epoch_modified":  1785085614
        },
      "metadata":  {
@@ -23311,9 +23311,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  9921025,
         "size_mb":  9.46,
-        "created":  "2026-02-26 00:24:02",
+        "created":  "2026-07-28 23:16:46",
         "modified":  "2026-05-05 18:21:29",
-        "epoch_created":  1772065442,
+        "epoch_created":  1785280606,
         "epoch_modified":  1778005290
        },
      "metadata":  {
@@ -23392,9 +23392,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 19",
         "size_bytes":  12431268,
         "size_mb":  11.86,
-        "created":  "2026-07-26 17:06:39",
+        "created":  "2026-07-28 23:16:46",
         "modified":  "2026-07-26 17:06:53",
-        "epoch_created":  1785085600,
+        "epoch_created":  1785280607,
         "epoch_modified":  1785085613
        },
      "metadata":  {
@@ -23473,9 +23473,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 2",
         "size_bytes":  25408366,
         "size_mb":  24.23,
-        "created":  "2026-07-26 15:10:10",
+        "created":  "2026-07-28 23:16:46",
         "modified":  "2026-07-26 16:11:02",
-        "epoch_created":  1785078611,
+        "epoch_created":  1785280607,
         "epoch_modified":  1785082263
        },
      "metadata":  {
@@ -23554,9 +23554,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 2",
         "size_bytes":  1965497,
         "size_mb":  1.87,
-        "created":  "2025-02-07 23:55:46",
+        "created":  "2026-07-28 23:16:47",
         "modified":  "2026-05-05 18:21:33",
-        "epoch_created":  1738972546,
+        "epoch_created":  1785280607,
         "epoch_modified":  1778005294
        },
      "metadata":  {
@@ -23635,9 +23635,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 2",
         "size_bytes":  3990108,
         "size_mb":  3.81,
-        "created":  "2026-07-26 17:06:39",
+        "created":  "2026-07-28 23:16:47",
         "modified":  "2026-07-26 17:06:44",
-        "epoch_created":  1785085600,
+        "epoch_created":  1785280607,
         "epoch_modified":  1785085605
        },
      "metadata":  {
@@ -23716,9 +23716,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 3",
         "size_bytes":  1285269,
         "size_mb":  1.23,
-        "created":  "2025-02-07 23:56:14",
+        "created":  "2026-07-28 23:16:47",
         "modified":  "2026-05-05 18:21:09",
-        "epoch_created":  1738972574,
+        "epoch_created":  1785280608,
         "epoch_modified":  1778005270
        },
      "metadata":  {
@@ -23797,9 +23797,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 4",
         "size_bytes":  2147310,
         "size_mb":  2.05,
-        "created":  "2025-02-06 00:24:44",
+        "created":  "2026-07-28 23:16:47",
         "modified":  "2026-05-05 18:21:10",
-        "epoch_created":  1738801484,
+        "epoch_created":  1785280608,
         "epoch_modified":  1778005271
        },
      "metadata":  {
@@ -23878,9 +23878,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 5",
         "size_bytes":  645269,
         "size_mb":  0.62,
-        "created":  "2025-02-07 23:55:10",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-05-05 18:21:11",
-        "epoch_created":  1738972510,
+        "epoch_created":  1785280608,
         "epoch_modified":  1778005272
        },
      "metadata":  {
@@ -23959,9 +23959,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 9",
         "size_bytes":  5530034,
         "size_mb":  5.27,
-        "created":  "2025-03-09 22:47:30",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-05-05 18:21:15",
-        "epoch_created":  1741560450,
+        "epoch_created":  1785280608,
         "epoch_modified":  1778005275
        },
      "metadata":  {
@@ -24040,9 +24040,9 @@
         "dir":  "assets\\Album 6 (2025)\\Album 6.1\\Projet 9",
         "size_bytes":  5534213,
         "size_mb":  5.28,
-        "created":  "2026-07-26 17:06:41",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-07-26 17:06:48",
-        "epoch_created":  1785085602,
+        "epoch_created":  1785280608,
         "epoch_modified":  1785085608
        },
      "metadata":  {
@@ -24103,6 +24103,168 @@
     {
      "id":  218,
      "logic":  {
+         "hash_sha256":  "A05BA8A48E1C92E8D7D2B46727B7D4DC0ADCB5027A92326752D3A051C5A2AE64",
+         "track_name":  "Projet 11",
+         "version_name":  "Projet 11",
+         "total_versions_in_folder":  1,
+         "is_single":  false,
+         "hierarchy":  {
+             "group":  "Album 7 (2026)",
+             "album":  "Album 7.1",
+             "folder":  "Projet 11"
+            }
+        },
+     "file":  {
+        "name":  "Projet 11.m4a",
+        "ext":  "M4A",
+        "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11\\Projet 11.m4a",
+        "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 11",
+        "size_bytes":  23521898,
+        "size_mb":  22.43,
+        "created":  "2026-09-16 13:01:54",
+        "modified":  "2026-09-16 13:01:54",
+        "epoch_created":  1789563715,
+        "epoch_modified":  1789563715
+       },
+     "metadata":  {
+         "title":  "Projet 11",
+         "file_title":  "Projet 11",
+         "file_name":  "Projet 11.m4a",
+         "artists":  [
+
+            ],
+         "album_artist":  "",
+         "composer":  "",
+         "album":  "Album 7.1",
+         "genre":  "",
+         "year":  "",
+         "track_number":  "",
+         "total_tracks":  10,
+         "disc_number":  "",
+         "total_discs":  "",
+         "bpm":  "",
+         "bpm_source":  "",
+         "lyrics":  "",
+         "comment":  "",
+         "description":  "",
+         "producer":  "",
+         "label":  "",
+         "publisher":  "",
+         "isrc":  "",
+         "upc":  "",
+         "mood":  "",
+         "language":  "eng",
+         "category":  "",
+         "tags":  [
+
+            ],
+         "remix_artist":  "",
+         "edition":  "",
+         "recording_year":  "",
+         "video_link":  "",
+         "streaming_link":  ""
+        },
+     "audio_specs":  {
+          "is_lossless":  false,
+          "duration":  "00:01:34",
+          "codec":  "ALAC",
+          "bitrate":  "‎1979 Kbits/s",
+          "sample_rate":  "44100 Hz",
+          "channels":  "2"
+         },
+     "artworks":  {
+         "track_artwork":  [
+
+              ],
+         "album_artwork":  [
+
+              ]
+        }
+    },
+    {
+     "id":  219,
+     "logic":  {
+         "hash_sha256":  "095D708524FCC4DBF9E6C1761B6FC65AAC6D9F204C5C0E8C038F6BE5B326DAF1",
+         "track_name":  "Projet 17",
+         "version_name":  "Projet 17",
+         "total_versions_in_folder":  1,
+         "is_single":  false,
+         "hierarchy":  {
+             "group":  "Album 7 (2026)",
+             "album":  "Album 7.1",
+             "folder":  "Projet 17"
+            }
+        },
+     "file":  {
+        "name":  "Projet 17.m4a",
+        "ext":  "M4A",
+        "path":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17\\Projet 17.m4a",
+        "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 17",
+        "size_bytes":  18980947,
+        "size_mb":  18.1,
+        "created":  "2026-09-16 13:01:55",
+        "modified":  "2026-09-16 13:01:55",
+        "epoch_created":  1789563716,
+        "epoch_modified":  1789563716
+       },
+     "metadata":  {
+         "title":  "Projet 17",
+         "file_title":  "Projet 17",
+         "file_name":  "Projet 17.m4a",
+         "artists":  [
+
+            ],
+         "album_artist":  "",
+         "composer":  "",
+         "album":  "Album 7.1",
+         "genre":  "",
+         "year":  "",
+         "track_number":  "",
+         "total_tracks":  10,
+         "disc_number":  "",
+         "total_discs":  "",
+         "bpm":  "",
+         "bpm_source":  "",
+         "lyrics":  "",
+         "comment":  "",
+         "description":  "",
+         "producer":  "",
+         "label":  "",
+         "publisher":  "",
+         "isrc":  "",
+         "upc":  "",
+         "mood":  "",
+         "language":  "eng",
+         "category":  "",
+         "tags":  [
+
+            ],
+         "remix_artist":  "",
+         "edition":  "",
+         "recording_year":  "",
+         "video_link":  "",
+         "streaming_link":  ""
+        },
+     "audio_specs":  {
+          "is_lossless":  false,
+          "duration":  "00:01:15",
+          "codec":  "ALAC",
+          "bitrate":  "‎2022 Kbits/s",
+          "sample_rate":  "44100 Hz",
+          "channels":  "2"
+         },
+     "artworks":  {
+         "track_artwork":  [
+
+              ],
+         "album_artwork":  [
+
+              ]
+        }
+    },
+    {
+     "id":  220,
+     "logic":  {
          "hash_sha256":  "4BC2C42D5CFF6EB01731A13A27FA52299EA075B4161E31B05234F2A3DE277B1C",
          "track_name":  "Projet 24",
          "version_name":  "Projet 24",
@@ -24121,9 +24283,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 24",
         "size_bytes":  10498052,
         "size_mb":  10.01,
-        "created":  "2026-07-26 15:13:39",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-07-26 16:10:37",
-        "epoch_created":  1785078820,
+        "epoch_created":  1785280608,
         "epoch_modified":  1785082238
        },
      "metadata":  {
@@ -24139,7 +24301,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "2",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24182,7 +24344,7 @@
         }
     },
     {
-     "id":  219,
+     "id":  221,
      "logic":  {
          "hash_sha256":  "66BB33D343344C4924DD1186A59F4CD64703B7CBCB19DB0B85E43D21F05A8225",
          "track_name":  "Projet 24",
@@ -24202,9 +24364,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 24",
         "size_bytes":  1627198,
         "size_mb":  1.55,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-07-26 17:06:34",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785085595
        },
      "metadata":  {
@@ -24220,7 +24382,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "2",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24263,7 +24425,7 @@
         }
     },
     {
-     "id":  220,
+     "id":  222,
      "logic":  {
          "hash_sha256":  "E215CC49438457DB44069249318C86E1291D008F2761EBC57DCAFE675A707F70",
          "track_name":  "Projet 27",
@@ -24283,9 +24445,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  3983130,
         "size_mb":  3.8,
-        "created":  "2026-02-26 00:26:33",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-05-05 18:21:35",
-        "epoch_created":  1772065594,
+        "epoch_created":  1785280609,
         "epoch_modified":  1778005295
        },
      "metadata":  {
@@ -24301,7 +24463,7 @@
          "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "1",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24344,7 +24506,7 @@
         }
     },
     {
-     "id":  221,
+     "id":  223,
      "logic":  {
          "hash_sha256":  "7463BF65C7D115C7FF897443EC42962DE66FE0B26910C921534F58EB93DF6736",
          "track_name":  "Projet 27",
@@ -24364,9 +24526,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  5146215,
         "size_mb":  4.91,
-        "created":  "2026-07-26 17:06:30",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-07-26 17:06:38",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785085599
        },
      "metadata":  {
@@ -24382,7 +24544,7 @@
          "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "1",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24425,7 +24587,7 @@
         }
     },
     {
-     "id":  222,
+     "id":  224,
      "logic":  {
          "hash_sha256":  "412149C61CBBB871B0DE913BC2E9D90E6DF39E92929AC56DB47DBB116FA1B51C",
          "track_name":  "Projet 27",
@@ -24445,9 +24607,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  30644572,
         "size_mb":  29.22,
-        "created":  "2026-07-26 19:54:14",
+        "created":  "2026-07-28 23:16:48",
         "modified":  "2026-07-26 15:19:17",
-        "epoch_created":  1785095654,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785079157
        },
      "metadata":  {
@@ -24463,7 +24625,7 @@
          "genre":  "",
          "year":  "",
          "track_number":  "",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24506,7 +24668,7 @@
         }
     },
     {
-     "id":  223,
+     "id":  225,
      "logic":  {
          "hash_sha256":  "BC7703E4A28D3C719270AB46B48D5CF137A01EA92329F0560866B86BEDA4115B",
          "track_name":  "Projet 27",
@@ -24526,9 +24688,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  5164460,
         "size_mb":  4.93,
-        "created":  "2026-07-26 19:54:48",
+        "created":  "2026-07-28 23:16:49",
         "modified":  "2026-07-26 19:54:56",
-        "epoch_created":  1785095689,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785095696
        },
      "metadata":  {
@@ -24544,7 +24706,7 @@
          "genre":  "",
          "year":  "",
          "track_number":  "",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24587,7 +24749,7 @@
         }
     },
     {
-     "id":  224,
+     "id":  226,
      "logic":  {
          "hash_sha256":  "E0274B90FD90EFE5DBCB622553764306E3528D74BF336A5AABDDE4D74C8DE358",
          "track_name":  "Projet 27",
@@ -24607,9 +24769,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  10498018,
         "size_mb":  10.01,
-        "created":  "2026-02-09 14:59:38",
+        "created":  "2026-07-28 23:16:49",
         "modified":  "2026-05-05 18:21:35",
-        "epoch_created":  1770649178,
+        "epoch_created":  1785280609,
         "epoch_modified":  1778005296
        },
      "metadata":  {
@@ -24625,7 +24787,7 @@
          "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "1",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24668,7 +24830,7 @@
         }
     },
     {
-     "id":  225,
+     "id":  227,
      "logic":  {
          "hash_sha256":  "0DFE030279F471372F0F1C793DDCB9911559794A80B8FFAE0185123A062B93C8",
          "track_name":  "Projet 27",
@@ -24688,9 +24850,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 27",
         "size_bytes":  5151850,
         "size_mb":  4.91,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:49",
         "modified":  "2026-07-26 17:06:39",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785085599
        },
      "metadata":  {
@@ -24706,7 +24868,7 @@
          "genre":  "Electronic / Ambient",
          "year":  "2026",
          "track_number":  "1",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24749,7 +24911,7 @@
         }
     },
     {
-     "id":  226,
+     "id":  228,
      "logic":  {
          "hash_sha256":  "75C0B29E83E1FB3F72F2525F44D0274572EA994B5926AC755F014931CBDC8A84",
          "track_name":  "Projet 31",
@@ -24769,9 +24931,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 31",
         "size_bytes":  31897713,
         "size_mb":  30.42,
-        "created":  "2026-07-26 15:09:19",
+        "created":  "2026-07-28 23:16:49",
         "modified":  "2026-07-26 16:29:40",
-        "epoch_created":  1785078560,
+        "epoch_created":  1785280609,
         "epoch_modified":  1785083381
        },
      "metadata":  {
@@ -24787,7 +24949,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "3",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24830,7 +24992,7 @@
         }
     },
     {
-     "id":  227,
+     "id":  229,
      "logic":  {
          "hash_sha256":  "AC8E0FB5DD3C148BFBA9D47A2FDDD62AE4BDE7DB326DD7CB9D2F0EA6F3AAC8A1",
          "track_name":  "Projet 31",
@@ -24850,9 +25012,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 31",
         "size_bytes":  5769974,
         "size_mb":  5.5,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:50",
         "modified":  "2026-07-26 17:06:39",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280610,
         "epoch_modified":  1785085599
        },
      "metadata":  {
@@ -24868,7 +25030,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "3",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24911,7 +25073,7 @@
         }
     },
     {
-     "id":  228,
+     "id":  230,
      "logic":  {
          "hash_sha256":  "2C86F8BBA5F9EA4F8F9D70B0A714D6EA7FA884521829AD70455EA931E81A3DC8",
          "track_name":  "Projet 34",
@@ -24931,9 +25093,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 34",
         "size_bytes":  53797489,
         "size_mb":  51.31,
-        "created":  "2026-07-26 15:09:19",
+        "created":  "2026-07-28 23:16:50",
         "modified":  "2026-07-26 16:10:37",
-        "epoch_created":  1785078560,
+        "epoch_created":  1785280610,
         "epoch_modified":  1785082238
        },
      "metadata":  {
@@ -24949,7 +25111,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "4",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -24992,7 +25154,7 @@
         }
     },
     {
-     "id":  229,
+     "id":  231,
      "logic":  {
          "hash_sha256":  "93327F69AEE3753085C2A6A4921A079E83A3612FC926CCFF713D76324B36A32C",
          "track_name":  "Projet 34",
@@ -25012,9 +25174,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 34",
         "size_bytes":  8211905,
         "size_mb":  7.83,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:50",
         "modified":  "2026-07-26 17:06:42",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280611,
         "epoch_modified":  1785085602
        },
      "metadata":  {
@@ -25030,7 +25192,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "4",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25073,7 +25235,7 @@
         }
     },
     {
-     "id":  230,
+     "id":  232,
      "logic":  {
          "hash_sha256":  "7592097966ED4EB4F5B4117F6A75418FD8F6E0A698CCD4E6890DBDADF02F668E",
          "track_name":  "Projet 37",
@@ -25093,9 +25255,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 37",
         "size_bytes":  53033020,
         "size_mb":  50.58,
-        "created":  "2026-07-26 15:09:20",
+        "created":  "2026-07-28 23:16:51",
         "modified":  "2026-07-26 16:10:37",
-        "epoch_created":  1785078560,
+        "epoch_created":  1785280611,
         "epoch_modified":  1785082238
        },
      "metadata":  {
@@ -25111,7 +25273,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "5",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25154,7 +25316,7 @@
         }
     },
     {
-     "id":  231,
+     "id":  233,
      "logic":  {
          "hash_sha256":  "D464B3819BAA889CC1AA672CC5938E584C3FF3E730DE94F1B9F5D77619F1F396",
          "track_name":  "Projet 37",
@@ -25174,9 +25336,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 37",
         "size_bytes":  8352965,
         "size_mb":  7.97,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:53",
         "modified":  "2026-07-26 17:06:41",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280614,
         "epoch_modified":  1785085602
        },
      "metadata":  {
@@ -25192,7 +25354,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "5",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25235,7 +25397,7 @@
         }
     },
     {
-     "id":  232,
+     "id":  234,
      "logic":  {
          "hash_sha256":  "4248BCF4CFEEF7614160D12253D1F54DCB377D520F898218FA861F7730869E3C",
          "track_name":  "Projet 41",
@@ -25255,9 +25417,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 41",
         "size_bytes":  25272906,
         "size_mb":  24.1,
-        "created":  "2026-07-26 15:09:20",
+        "created":  "2026-07-28 23:16:54",
         "modified":  "2026-07-26 16:10:37",
-        "epoch_created":  1785078560,
+        "epoch_created":  1785280614,
         "epoch_modified":  1785082238
        },
      "metadata":  {
@@ -25273,7 +25435,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "6",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25316,7 +25478,7 @@
         }
     },
     {
-     "id":  233,
+     "id":  235,
      "logic":  {
          "hash_sha256":  "832CB641A9AA279EF527E5AE8A21894745674434A039AC61BAEEAC2A65F1F949",
          "track_name":  "Projet 41",
@@ -25336,9 +25498,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 41",
         "size_bytes":  4136006,
         "size_mb":  3.94,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:56",
         "modified":  "2026-07-26 17:06:37",
-        "epoch_created":  1785085592,
+        "epoch_created":  1785280616,
         "epoch_modified":  1785085598
        },
      "metadata":  {
@@ -25354,7 +25516,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "6",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25397,7 +25559,7 @@
         }
     },
     {
-     "id":  234,
+     "id":  236,
      "logic":  {
          "hash_sha256":  "C43E6EDBE0C8F4BAC35A2CB7604DE869637AD9BEA002B1F4B836686C29AA8B81",
          "track_name":  "Projet 43",
@@ -25417,9 +25579,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
         "size_bytes":  30235611,
         "size_mb":  28.83,
-        "created":  "2026-07-26 19:54:06",
+        "created":  "2026-07-28 23:16:56",
         "modified":  "2026-07-26 19:29:49",
-        "epoch_created":  1785095646,
+        "epoch_created":  1785280617,
         "epoch_modified":  1785094189
        },
      "metadata":  {
@@ -25435,7 +25597,7 @@
          "genre":  "",
          "year":  "",
          "track_number":  "",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25478,7 +25640,7 @@
         }
     },
     {
-     "id":  235,
+     "id":  237,
      "logic":  {
          "hash_sha256":  "9B89C3D10F5C6BC82800D08EE75E24F2FF488B0B124FAA9AA6C4E0EB041F8084",
          "track_name":  "Projet 43",
@@ -25498,9 +25660,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
         "size_bytes":  4956747,
         "size_mb":  4.73,
-        "created":  "2026-07-26 19:54:48",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 19:54:56",
-        "epoch_created":  1785095689,
+        "epoch_created":  1785280618,
         "epoch_modified":  1785095696
        },
      "metadata":  {
@@ -25516,7 +25678,7 @@
          "genre":  "",
          "year":  "",
          "track_number":  "",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25559,7 +25721,7 @@
         }
     },
     {
-     "id":  236,
+     "id":  238,
      "logic":  {
          "hash_sha256":  "8AE5ABBF20EA81CA3BDA10081C9D80AD56D30F8CAE800005AE51A00A481D9C23",
          "track_name":  "Projet 43",
@@ -25579,9 +25741,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
         "size_bytes":  20284699,
         "size_mb":  19.34,
-        "created":  "2026-07-26 15:09:20",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 16:10:37",
-        "epoch_created":  1785078560,
+        "epoch_created":  1785280618,
         "epoch_modified":  1785082238
        },
      "metadata":  {
@@ -25597,7 +25759,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "7",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25640,7 +25802,7 @@
         }
     },
     {
-     "id":  237,
+     "id":  239,
      "logic":  {
          "hash_sha256":  "CBE22BDAC176C212A045DD44D4FB9C221EC0E1A62F96AAC98B3549F19FB66776",
          "track_name":  "Projet 43",
@@ -25660,9 +25822,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 43",
         "size_bytes":  3255074,
         "size_mb":  3.1,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 17:06:36",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280618,
         "epoch_modified":  1785085597
        },
      "metadata":  {
@@ -25678,7 +25840,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "7",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25721,7 +25883,7 @@
         }
     },
     {
-     "id":  238,
+     "id":  240,
      "logic":  {
          "hash_sha256":  "3579A86E3E66EFBD733EFDD5D1BF052E38136091A3DF885611B5832D69EDB873",
          "track_name":  "Projet 45",
@@ -25741,9 +25903,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 45",
         "size_bytes":  21982696,
         "size_mb":  20.96,
-        "created":  "2026-07-26 15:09:20",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 16:10:40",
-        "epoch_created":  1785078561,
+        "epoch_created":  1785280619,
         "epoch_modified":  1785082241
        },
      "metadata":  {
@@ -25759,7 +25921,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "8",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25802,7 +25964,7 @@
         }
     },
     {
-     "id":  239,
+     "id":  241,
      "logic":  {
          "hash_sha256":  "44BFCBB76D417596EAD3EE12C0708E427526BD00C63FB1B387514741652EBF77",
          "track_name":  "Projet 45",
@@ -25822,9 +25984,9 @@
         "dir":  "assets\\Album 7 (2026)\\Album 7.1\\Projet 45",
         "size_bytes":  3310241,
         "size_mb":  3.16,
-        "created":  "2026-07-26 17:06:31",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 17:06:36",
-        "epoch_created":  1785085591,
+        "epoch_created":  1785280619,
         "epoch_modified":  1785085596
        },
      "metadata":  {
@@ -25840,7 +26002,7 @@
          "genre":  "",
          "year":  "2026",
          "track_number":  "8",
-         "total_tracks":  8,
+         "total_tracks":  10,
          "disc_number":  "",
          "total_discs":  "",
          "bpm":  "",
@@ -25883,7 +26045,7 @@
         }
     },
     {
-     "id":  240,
+     "id":  242,
      "logic":  {
          "hash_sha256":  "BA6C7AD7F9058865C42F11F3062B8DBF9F5A89D31A21FC970757EF98569BAD77",
          "track_name":  "Ayrton farfadet malicieux",
@@ -25903,9 +26065,9 @@
         "dir":  "assets\\Single\\Ayrton farfadet malicieux",
         "size_bytes":  44607736,
         "size_mb":  42.54,
-        "created":  "2024-04-17 00:14:14",
+        "created":  "2026-07-28 23:16:58",
         "modified":  "2026-07-26 15:54:05",
-        "epoch_created":  1713312854,
+        "epoch_created":  1785280619,
         "epoch_modified":  1785081245
        },
      "metadata":  {
@@ -25985,7 +26147,7 @@
         }
     },
     {
-     "id":  241,
+     "id":  243,
      "logic":  {
          "hash_sha256":  "6206A6103BCB0A512DDE17A3C500194CDD3EE90A904B2B97D0E6E1561023E840",
          "track_name":  "Corazóni",
@@ -26005,9 +26167,9 @@
         "dir":  "assets\\Single\\Corazóni",
         "size_bytes":  22701754,
         "size_mb":  21.65,
-        "created":  "2026-02-24 21:40:48",
+        "created":  "2026-07-28 23:16:59",
         "modified":  "2026-07-26 15:51:21",
-        "epoch_created":  1771969248,
+        "epoch_created":  1785280619,
         "epoch_modified":  1785081081
        },
      "metadata":  {
@@ -26067,7 +26229,7 @@
         }
     },
     {
-     "id":  242,
+     "id":  244,
      "logic":  {
          "hash_sha256":  "AD8FEC6F478615661CE0ABD83A4AB0D257CBA6D36084F0E90CA94B3A8DD32858",
          "track_name":  "Corazóni",
@@ -26087,9 +26249,9 @@
         "dir":  "assets\\Single\\Corazóni",
         "size_bytes":  8900224,
         "size_mb":  8.49,
-        "created":  "2026-04-25 17:55:07",
+        "created":  "2026-07-28 23:16:59",
         "modified":  "2026-05-01 21:32:50",
-        "epoch_created":  1777139707,
+        "epoch_created":  1785280620,
         "epoch_modified":  1777671171
        },
      "metadata":  {
@@ -26148,7 +26310,7 @@
         }
     },
     {
-     "id":  243,
+     "id":  245,
      "logic":  {
          "hash_sha256":  "0F2736445F9F3072114126BEDCB7DC8C31C43A5D1D5283969881876B7BCAD1A8",
          "track_name":  "ouia",
@@ -26168,9 +26330,9 @@
         "dir":  "assets\\Single\\ouia",
         "size_bytes":  794167,
         "size_mb":  0.76,
-        "created":  "2025-01-26 02:29:38",
+        "created":  "2026-07-28 23:16:59",
         "modified":  "2026-05-01 21:33:06",
-        "epoch_created":  1737858578,
+        "epoch_created":  1785280620,
         "epoch_modified":  1777671186
        },
      "metadata":  {
@@ -26229,7 +26391,7 @@
         }
     },
     {
-     "id":  244,
+     "id":  246,
      "logic":  {
          "hash_sha256":  "E4A616B20CC87183E66C67E567A20F9C5754C2005CEA390A3B2C6BF9AC63F4CF",
          "track_name":  "Projet max",
@@ -26249,9 +26411,9 @@
         "dir":  "assets\\Single\\Projet max",
         "size_bytes":  2121114,
         "size_mb":  2.02,
-        "created":  "2026-07-26 16:11:50",
+        "created":  "2026-07-28 23:17:00",
         "modified":  "2026-07-26 16:11:50",
-        "epoch_created":  1785082311,
+        "epoch_created":  1785280620,
         "epoch_modified":  1785082311
        },
      "metadata":  {
@@ -26311,7 +26473,7 @@
         }
     },
     {
-     "id":  245,
+     "id":  247,
      "logic":  {
          "hash_sha256":  "C4F9ACB07426D1F7F3E62A3118007E871A1F98ABF9A4FBFD4372AECBCE600DBE",
          "track_name":  "quatro",
@@ -26331,9 +26493,9 @@
         "dir":  "assets\\Single\\quatro",
         "size_bytes":  2271634,
         "size_mb":  2.17,
-        "created":  "2026-05-03 15:17:07",
+        "created":  "2026-07-28 23:17:00",
         "modified":  "2026-05-03 15:17:07",
-        "epoch_created":  1777821427,
+        "epoch_created":  1785280620,
         "epoch_modified":  1777821427
        },
      "metadata":  {
@@ -26393,7 +26555,7 @@
         }
     },
     {
-     "id":  246,
+     "id":  248,
      "logic":  {
          "hash_sha256":  "A860938183AA3D187D6CF3B8C7BB784A9CF121EFF49F83AAC5E50DBECC1AE2BF",
          "track_name":  "quatro",
@@ -26413,9 +26575,9 @@
         "dir":  "assets\\Single\\quatro",
         "size_bytes":  2271631,
         "size_mb":  2.17,
-        "created":  "2026-05-03 15:17:06",
+        "created":  "2026-07-28 23:17:00",
         "modified":  "2026-05-03 15:17:06",
-        "epoch_created":  1777821426,
+        "epoch_created":  1785280620,
         "epoch_modified":  1777821426
        },
      "metadata":  {
@@ -26476,4 +26638,3 @@
     }
    ]
 }
-
