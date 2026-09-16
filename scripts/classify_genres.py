@@ -26,11 +26,11 @@ Models (place in scripts/models/):
     - genre_discogs400-discogs-effnet-1.json
 
 Usage (WSL on Windows):
-    wsl python3 /mnt/c/.../scripts/classify_genres.py --test 10
-    wsl python3 /mnt/c/.../scripts/classify_genres.py --test 10 --seed 42
-    wsl python3 /mnt/c/.../scripts/classify_genres.py --dry-run
-    wsl python3 /mnt/c/.../scripts/classify_genres.py              # full run
-    wsl python3 /mnt/c/.../scripts/classify_genres.py --skip-existing
+    wsl python3 scripts/classify_genres.py --test 10
+    wsl python3 scripts/classify_genres.py --test 10 --seed 42
+    wsl python3 scripts/classify_genres.py --dry-run
+    wsl python3 scripts/classify_genres.py                      # full run
+    wsl python3 scripts/classify_genres.py --skip-existing
 """
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -39,12 +39,15 @@ Usage (WSL on Windows):
 
 import argparse
 import json
+import os
 import random
 import sys
 import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
+
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 import numpy as np
 
@@ -230,7 +233,17 @@ def load_genre_labels():
 
 def load_models():
     """Load Essentia TensorFlow models. Call once, reuse for all tracks."""
-    import essentia.standard as es
+    try:
+        import essentia
+        # Désactive les logs d'avertissement répétitifs émis par le moteur C++ d'Essentia
+        essentia.log.infoActive = False
+        essentia.log.warningActive = False
+
+        import essentia.standard as es
+    except ImportError:
+        log.error("Module 'essentia' not found in the active Python environment!")
+        log.info(f"  Interpreter used: {sys.executable}")
+        sys.exit(1)
 
     t0 = time.time()
     embedding_model = es.TensorflowPredictEffnetDiscogs(
