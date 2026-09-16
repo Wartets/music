@@ -521,6 +521,7 @@ def write_genre_tag(audio_path, genre_result):
     """
     Write genre metadata to audio file using mutagen.
     Overwrites the genre tag with the primary predicted genre.
+    Ensures ID3v2.3 compatibility for Windows Explorer.
 
     Returns True on success, False on failure.
     """
@@ -532,8 +533,8 @@ def write_genre_tag(audio_path, genre_result):
         log.warning("mutagen not installed — skipping tag writing")
         return False
 
-    genre_str = genre_result["primary_genre"] or "Unknown"
-    if genre_result["primary_sub_genre"]:
+    genre_str = genre_result.get("primary_genre") or "Unknown"
+    if genre_result.get("primary_sub_genre"):
         genre_str += f" / {genre_result['primary_sub_genre']}"
 
     ext = audio_path.suffix.lower()
@@ -544,25 +545,26 @@ def write_genre_tag(audio_path, genre_result):
             if audio.tags is None:
                 audio.add_tags()
             audio.tags.delall("TCON")
-            audio.tags.add(TCON(encoding=3, text=[genre_str]))
-            audio.save()
+            # encoding=1 (UTF-16) et v2_version=3 sont indispensables pour Windows Explorer
+            audio.tags.add(TCON(encoding=1, text=[genre_str]))
+            audio.save(v2_version=3)
             return True
 
         elif ext == ".flac":
             from mutagen.flac import FLAC
             audio = FLAC(str(audio_path))
-            audio["genre"] = genre_str
+            audio["genre"] = [genre_str]
             audio.save()
             return True
 
-        elif ext in (".m4a", ".mp4", ".aac"):
+        elif ext in (".m4a", ".mp4"):
             from mutagen.mp4 import MP4
             audio = MP4(str(audio_path))
             audio["\xa9gen"] = [genre_str]
             audio.save()
             return True
 
-        elif ext == ".ogg":
+        elif ext in (".ogg", ".oga"):
             from mutagen.oggvorbis import OggVorbis
             audio = OggVorbis(str(audio_path))
             audio["genre"] = [genre_str]
@@ -570,24 +572,28 @@ def write_genre_tag(audio_path, genre_result):
             return True
 
         elif ext in (".wav", ".aiff"):
-            audio = MutagenFile(str(audio_path))
-            if audio is not None and audio.tags is not None:
-                if hasattr(audio.tags, "delall"):
-                    audio.tags.delall("TCON")
-                    audio.tags.add(TCON(encoding=3, text=[genre_str]))
-                    audio.save()
-                    return True
-            log.warning(f"Cannot write tags to {ext} file: {audio_path.name}")
-            return False
+            from mutagen.wave import WAVE
+            from mutagen.aiff import AIFF
+            audio = WAVE(str(audio_path)) if ext == ".wav" else AIFF(str(audio_path))
+            if audio.tags is None:
+                audio.add_tags()
+            audio.tags.delall("TCON")
+            audio.tags.add(TCON(encoding=1, text=[genre_str]))
+            audio.save(v2_version=3)
+            return True
 
         else:
+            audio = MutagenFile(str(audio_path), easy=True)
+            if audio is not None and getattr(audio, "tags", None) is not None:
+                audio["genre"] = [genre_str]
+                audio.save()
+                return True
             log.warning(f"Unsupported format for tag writing: {ext}")
             return False
 
     except Exception as e:
         log.warning(f"Tag write failed for {audio_path.name}: {e}")
         return False
-
 
 INVALID_GENRE_STRINGS = {
     "", "unknown", "none", "undefined", "null", "n/a", "inconnu",
@@ -870,17 +876,25 @@ def main():
                 if fn:
                     group_files.add(str(fn).strip().lower())
 
-            # 1. Présence dans genreClassification.json
-            in_existing_json = bool(
-                (group_hashes & existing_hashes)
-                or (group_names & existing_names)
-                or (group_files & existing_files)
-            )
+            # Recherche d'une classification déjà existante dans genreClassification.json
+            matched_entry = None
+            if existing_data and isinstance(existing_data, dict) and "tracks" in existing_data:
+                for h in group_hashes:
+                    if h in existing_data["tracks"]:
+                        matched_entry = existing_data["tracks"][h]
+                        break
+            if not matched_entry:
+                for n in group_names:
+                    if n in existing_entries_by_name:
+                        matched_entry = existing_entries_by_name[n]
+                        break
+            if not matched_entry:
+                for f in group_files:
+                    if f in existing_entries_by_name:
+                        matched_entry = existing_entries_by_name[f]
+                        break
 
-            # 2. Présence dans musicBib.json
-            in_bib = any(get_track_bib_genre(t) is not None for t in all_group_tracks)
-
-            # 3. Présence dans les tags audio sur disque d'au moins une version du morceau
+            # Vérification de la présence physique d'un tag de genre valide dans le fichier audio
             in_audio_tag = False
             for t in all_group_tracks:
                 p = resolve_audio_path(t)
@@ -888,19 +902,43 @@ def main():
                     in_audio_tag = True
                     break
 
-            if in_existing_json or in_bib or in_audio_tag:
+            # 1. Si le tag existe déjà physiquement dans le fichier audio : on passe
+            if in_audio_tag:
                 skipped_existing += 1
-                matched_entry = None
-                for n in group_names:
-                    if n in existing_entries_by_name:
-                        matched_entry = existing_entries_by_name[n]
-                        break
-                if not matched_entry:
-                    for f in group_files:
-                        if f in existing_entries_by_name:
-                            matched_entry = existing_entries_by_name[f]
-                            break
                 if matched_entry and canonical_hash:
+                    relinked_existing[canonical_hash] = matched_entry
+                continue
+
+            # 2. Si le tag est absent du fichier mais déjà calculé dans genreClassification.json :
+            # on écrit directement le tag sur le disque sans recalculer toute l'inférence
+            if matched_entry and not args.no_embed_tags:
+                analysis_dict = matched_entry.get("analysis", {}) if isinstance(matched_entry, dict) else {}
+                primary_g = (
+                    clean_genre_candidate(analysis_dict.get("primary_genre"))
+                    or clean_genre_candidate(matched_entry.get("primary_genre"))
+                )
+                if primary_g:
+                    genre_res = {
+                        "primary_genre": primary_g,
+                        "primary_sub_genre": analysis_dict.get("primary_sub_genre") or matched_entry.get("primary_sub_genre"),
+                    }
+                    tag_ok = write_genre_tag(audio_path, genre_res)
+                    for alt_track in group["propagate_to"]:
+                        alt_p = resolve_audio_path(alt_track)
+                        if alt_p:
+                            write_genre_tag(alt_p, genre_res)
+
+                    if tag_ok:
+                        matched_entry["metadata_written"] = True
+                        if canonical_hash:
+                            relinked_existing[canonical_hash] = matched_entry
+                        skipped_existing += 1
+                        continue
+
+            # 3. Si l'écriture de tags est désactivée (--no-embed-tags) et que le JSON a déjà l'analyse
+            if args.no_embed_tags and matched_entry:
+                skipped_existing += 1
+                if canonical_hash:
                     relinked_existing[canonical_hash] = matched_entry
                 continue
 
