@@ -13,7 +13,6 @@ const EXTENSION_QUALITY_SCORE: Record<string, number> = {
 };
 
 const LIKELY_UNSUPPORTED_CODEC_REGEX = /(alac|ape|wvpack|tta|tak)/i;
-const COMPATIBLE_LABEL_REGEX = /(compatible|browser|web|aac)/i;
 
 const parseNumberLike = (value?: string | null): number => {
     if (!value) return 0;
@@ -101,11 +100,9 @@ const getTrackQualityScore = (track: TrackItem): number => {
     const losslessScore = track.audio_specs?.is_lossless ? 1000 : 0;
     const sampleRateScore = parseNumberLike(track.audio_specs?.sample_rate);
     const bitrateScore = parseNumberLike(track.audio_specs?.bitrate);
-    const label = `${track.logic?.version_name || ''} ${track.file?.name || ''}`.toLowerCase();
     const codec = String(track.audio_specs?.codec || '').toLowerCase();
-    const compatibilityBonus = COMPATIBLE_LABEL_REGEX.test(label) ? 50_000 : 0;
     const unsupportedPenalty = LIKELY_UNSUPPORTED_CODEC_REGEX.test(codec) ? 200_000 : 0;
-    return (extScore * 10_000) + losslessScore + sampleRateScore + bitrateScore + compatibilityBonus - unsupportedPenalty;
+    return (extScore * 10_000) + losslessScore + sampleRateScore + bitrateScore - unsupportedPenalty;
 };
 
 export const compareTrackVersions = (a: TrackItem, b: TrackItem): number => {

@@ -11,6 +11,8 @@ import { rankTrackVersions } from '../utils/versionUtils';
 import { RepeatMode } from '../types/playback';
 import { getTrackDisplayName } from '../utils/trackUtils';
 
+const MAX_RECOVERY_ATTEMPTS = 4;
+
 interface PlayTrackOptions {
     skipHistoryPush?: boolean;
     suppressHistoryLog?: boolean;
@@ -80,7 +82,10 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         return Number.isFinite(value) ? value : 0;
     }, []);
     const playTrackLogicRef = useRef<(track: TrackItem, queue?: TrackItem[], options?: PlayTrackOptions) => void>(() => { });
-    const handlePlaybackFailureRef = useRef<(error: Error, failedTrack?: TrackItem | null) => void>(() => { });
+    const handlePlaybackFailureRef = useRef<(error: Error, failedTrack?: TrackItem | null, requestId?: number) => void>(() => { });
+    const playRequestIdRef = useRef(0);
+    const beginPlaybackRequest = useCallback(() => ++playRequestIdRef.current, []);
+    const isPlaybackRequestStale = useCallback((requestId: number) => requestId !== playRequestIdRef.current, []);
 
     const recoveryRef = useRef<{
         attempted: Set<string>;
@@ -88,12 +93,16 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         notified: Set<string>;
         lastErrorAt: number;
         lastErrorKey: string;
+        attempts: number;
+        chainNotified: boolean;
     }>({
         attempted: new Set(),
         attemptedPrimary: new Set(),
         notified: new Set(),
         lastErrorAt: 0,
-        lastErrorKey: ''
+        lastErrorKey: '',
+        attempts: 0,
+        chainNotified: false
     });
 
     // Handle initial state restoration from persistence
@@ -108,6 +117,8 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         recoveryRef.current.notified.clear();
         recoveryRef.current.lastErrorAt = 0;
         recoveryRef.current.lastErrorKey = '';
+        recoveryRef.current.attempts = 0;
+        recoveryRef.current.chainNotified = false;
     }, []);
 
     const toPrimaryHash = useCallback((trackOrHash: TrackItem | string | null | undefined): string => {
@@ -232,6 +243,7 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             resetRecoveryState();
         }
 
+        const requestId = beginPlaybackRequest();
         progressRef.current = 0;
 
         const nextState = {
@@ -244,6 +256,8 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setState(nextState);
 
         audioEngine.play(track, isEndOfTrackTransition).then(() => {
+            if (isPlaybackRequestStale(requestId)) return;
+
             if (!suppressHistoryLog) {
                 persistenceService.addToHistory(track.logic.hash_sha256);
             }
@@ -256,9 +270,10 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 audioEngine.prepareGapless(nextTrack);
             }
         }).catch((err) => {
-            handlePlaybackFailureRef.current(err as Error, track);
+            if (isPlaybackRequestStale(requestId)) return;
+            handlePlaybackFailureRef.current(err as Error, track, requestId);
         });
-    }, [resetRecoveryState]);
+    }, [resetRecoveryState, beginPlaybackRequest, isPlaybackRequestStale]);
 
     useEffect(() => {
         playTrackLogicRef.current = playTrackLogic;
@@ -314,10 +329,16 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         return { title: t('player.errors.playbackError'), message: error.message || t('player.errors.unexpectedFailure') };
     }, [t]);
 
-    const handlePlaybackFailure = useCallback((error: Error, failedTrack?: TrackItem | null) => {
+    const handlePlaybackFailure = useCallback((error: Error, failedTrack?: TrackItem | null, requestId?: number) => {
         if (error instanceof AudioPlaybackError && error.code === 'superseded') {
             return;
         }
+
+        if (typeof requestId === 'number' && isPlaybackRequestStale(requestId)) {
+            return;
+        }
+
+        recoveryRef.current.attempts += 1;
 
         const cur = stateRef.current;
         const failed = failedTrack || cur.currentTrack;
@@ -331,6 +352,8 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             recoveryRef.current.notified.add(key);
             showToast(message, type, options);
         };
+
+        const canKeepRecovering = recoveryRef.current.attempts <= MAX_RECOVERY_ATTEMPTS;
 
         if (!failed) {
             const fallback = describePlaybackError(error);
@@ -356,19 +379,22 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
 
         const versions = resolveVersionGroup(failed);
-        const nextVersion = versions.find(version => {
+        const nextVersion = canKeepRecovering ? versions.find(version => {
             const hash = version.logic.hash_sha256;
             return hash !== failedHash && !recoveryRef.current.attempted.has(hash);
-        });
+        }) : undefined;
 
         if (nextVersion) {
             recoveryRef.current.attempted.add(nextVersion.logic.hash_sha256);
-            showOnce(
-                `version-fallback-${failedPrimaryHash || failedHash}`,
-                t('player.recovery.versionFallback', { name: getTrackDisplayName(failed, t('player.unknownTrack')) }),
-                'warning',
-                { title: t('player.recovery.recoveringPlayback'), subtle: true, dedupeKey: `version-fallback-${failedPrimaryHash || failedHash}`, durationMs: 2200 }
-            );
+            if (!recoveryRef.current.chainNotified) {
+                recoveryRef.current.chainNotified = true;
+                showOnce(
+                    `version-fallback-${failedPrimaryHash || failedHash}`,
+                    t('player.recovery.versionFallback', { name: getTrackDisplayName(failed, t('player.unknownTrack')) }),
+                    'warning',
+                    { title: t('player.recovery.recoveringPlayback'), subtle: true, dedupeKey: 'recovery-chain-active', durationMs: 2200 }
+                );
+            }
             playTrackLogicRef.current(nextVersion, cur.queue, {
                 skipHistoryPush: true,
                 suppressHistoryLog: true,
@@ -408,7 +434,7 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             }
         }
 
-        const nextQueueTrack = scanOrder
+        const nextQueueTrack = canKeepRecovering ? scanOrder
             .map(index => queue[index])
             .find(track => {
                 const hash = track.logic.hash_sha256;
@@ -416,7 +442,7 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 if (!hash) return false;
                 if (primaryHash && recoveryRef.current.attemptedPrimary.has(primaryHash)) return false;
                 return !recoveryRef.current.attempted.has(hash);
-            });
+            }) : undefined;
 
         if (nextQueueTrack) {
             recoveryRef.current.attempted.add(nextQueueTrack.logic.hash_sha256);
@@ -424,12 +450,15 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             if (nextPrimaryHash) {
                 recoveryRef.current.attemptedPrimary.add(nextPrimaryHash);
             }
-            showOnce(
-                `queue-skip-${failedPrimaryHash || failedHash}`,
-                t('player.recovery.queueSkipped', { name: failed.metadata?.title || failed.logic.track_name || t('player.unknownTrack') }),
-                'warning',
-                { title: t('player.recovery.trackSkipped'), subtle: true, dedupeKey: `queue-skip-${failedPrimaryHash || failedHash}`, durationMs: 2600 }
-            );
+            if (!recoveryRef.current.chainNotified) {
+                recoveryRef.current.chainNotified = true;
+                showOnce(
+                    `queue-skip-${failedPrimaryHash || failedHash}`,
+                    t('player.recovery.queueSkipped', { name: failed.metadata?.title || failed.logic.track_name || t('player.unknownTrack') }),
+                    'warning',
+                    { title: t('player.recovery.trackSkipped'), subtle: true, dedupeKey: 'recovery-chain-active', durationMs: 2600 }
+                );
+            }
             playTrackLogicRef.current(nextQueueTrack, cur.queue, {
                 skipHistoryPush: true,
                 suppressHistoryLog: true,
@@ -455,7 +484,7 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
         audioEngine.pause();
         setState(prev => ({ ...prev, isPlaying: false }));
-    }, [describePlaybackError, resolveVersionGroup, showToast, toPrimaryHash]);
+    }, [describePlaybackError, isPlaybackRequestStale, resolveVersionGroup, showToast, toPrimaryHash]);
 
     useEffect(() => {
         handlePlaybackFailureRef.current = handlePlaybackFailure;
@@ -652,19 +681,23 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         if (cur.isPlaying) {
             audioEngine.pause();
         } else if (cur.currentTrack) {
+            const requestId = beginPlaybackRequest();
             audioEngine.play().catch(err => {
-                handlePlaybackFailureRef.current(err as Error, cur.currentTrack);
+                if (isPlaybackRequestStale(requestId)) return;
+                handlePlaybackFailureRef.current(err as Error, cur.currentTrack, requestId);
             });
         }
-    }, []);
+    }, [beginPlaybackRequest, isPlaybackRequestStale]);
 
     const advanceToNextTrack = useCallback((respectAutoplay: boolean) => {
         const cur = stateRef.current;
 
         if (cur.repeat === RepeatMode.One && cur.currentTrack) {
             audioEngine.seek(0);
+            const requestId = beginPlaybackRequest();
             audioEngine.play().catch(err => {
-                handlePlaybackFailureRef.current(err as Error, cur.currentTrack);
+                if (isPlaybackRequestStale(requestId)) return;
+                handlePlaybackFailureRef.current(err as Error, cur.currentTrack, requestId);
             });
             return true;
         }
@@ -730,7 +763,7 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         audioEngine.pause();
         setState(prev => ({ ...prev, isPlaying: false }));
         return false;
-    }, [playTrackLogic, toPrimaryHash]);
+    }, [beginPlaybackRequest, isPlaybackRequestStale, playTrackLogic, toPrimaryHash]);
 
     const playNext = useCallback(() => {
         advanceToNextTrack(false);
@@ -788,6 +821,8 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             const newHistory = [...cur.history];
             const prevTrack = newHistory.pop()!;
 
+            resetRecoveryState();
+            const requestId = beginPlaybackRequest();
             progressRef.current = 0;
             const queue = cur.queue;
             setState(prev => ({
@@ -797,10 +832,11 @@ export const PlayerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 history: newHistory
             }));
             audioEngine.play(prevTrack).catch(err => {
-                handlePlaybackFailureRef.current(err as Error, prevTrack);
+                if (isPlaybackRequestStale(requestId)) return;
+                handlePlaybackFailureRef.current(err as Error, prevTrack, requestId);
             });
         }
-    }, []);
+    }, [beginPlaybackRequest, isPlaybackRequestStale, resetRecoveryState]);
 
     const setVolume = useCallback((level: number) => {
         audioEngine.setVolume(level);
