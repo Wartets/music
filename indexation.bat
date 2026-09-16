@@ -22,6 +22,290 @@ $assetsPath = Join-Path $root $assetsFolder
 # Loading image library to analyze color and ratio
 Add-Type -AssemblyName System.Drawing
 
+# Native acoustic BPM detector using multi-band onset flux and autocorrelation analysis
+if (-not ([System.Management.Automation.PSTypeName]'AudioBpmDetector').Type) {
+    Add-Type -TypeDefinition @"
+    using System;
+    using System.IO;
+
+    public class AudioBpmDetector {
+        public static int DetectBpmFromPcmFile(string filePath, int sampleRate) {
+            if (!File.Exists(filePath)) return 0;
+            try {
+                byte[] pcmData = File.ReadAllBytes(filePath);
+                return DetectBpmFromBytes(pcmData, sampleRate);
+            } catch {
+                return 0;
+            }
+        }
+
+        private static float[] RunLowPass(float[] input, float cutoffHz, int sampleRate) {
+            int n = input.Length;
+            float[] output = new float[n];
+            float rc = 1.0f / (2.0f * (float)Math.PI * cutoffHz);
+            float dt = 1.0f / sampleRate;
+            float alpha = dt / (rc + dt);
+
+            float last = 0f;
+            for (int i = 0; i < n; i++) {
+                last += alpha * (input[i] - last);
+                output[i] = last;
+            }
+            last = 0f;
+            for (int i = n - 1; i >= 0; i--) {
+                last += alpha * (output[i] - last);
+                output[i] = last;
+            }
+            return output;
+        }
+
+        private static double SampleAcf(double[] acf, int totalLags, double lag) {
+            if (lag < 1.0 || lag >= totalLags - 2) return 0.0;
+            int i = (int)lag;
+            double frac = lag - i;
+            double y0 = (i > 0) ? acf[i - 1] : acf[i];
+            double y1 = acf[i];
+            double y2 = acf[i + 1];
+            double y3 = (i + 2 < totalLags) ? acf[i + 2] : y2;
+            double a = -0.5 * y0 + 1.5 * y1 - 1.5 * y2 + 0.5 * y3;
+            double b = y0 - 2.5 * y1 + 2.0 * y2 - 0.5 * y3;
+            double c = -0.5 * y0 + 0.5 * y2;
+            double d = y1;
+            return a * frac * frac * frac + b * frac * frac + c * frac + d;
+        }
+
+        private static double GetCombScore(double bpm, double[] acf, int totalLags, double frameRate) {
+            double lagD = (frameRate * 60.0) / bpm;
+            if (lagD < 2.0 || lagD >= totalLags - 2) return -1000.0;
+
+            double c1 = SampleAcf(acf, totalLags, lagD);
+            double c2 = SampleAcf(acf, totalLags, lagD * 2.0);
+            double c3 = SampleAcf(acf, totalLags, lagD * 3.0);
+            double c4 = SampleAcf(acf, totalLags, lagD * 4.0);
+
+            double cSync1 = SampleAcf(acf, totalLags, lagD * 1.5);
+            double cSync2 = SampleAcf(acf, totalLags, lagD * 0.75);
+
+            double comb = (c1 * 1.0) + (c2 * 0.55) + (c3 * 0.30) + (c4 * 0.15)
+                          - (cSync1 * 0.45) - (cSync2 * 0.25);
+
+            double prior = Math.Exp(-0.5 * Math.Pow((bpm - 120.0) / 65.0, 2));
+            return comb * (0.80 + 0.20 * prior);
+        }
+
+        private static double ResolveOctave(double bestBpm, double[] acf, int totalLags, double frameRate) {
+            if (bestBpm <= 0) return 0;
+            double lagD = (frameRate * 60.0) / bestBpm;
+            double currentPeak = SampleAcf(acf, totalLags, lagD);
+
+            // 1. Half-time check: is the true tempo double this value?
+            double doubleBpm = bestBpm * 2.0;
+            if (doubleBpm <= 195.0) {
+                double lagHalf = lagD * 0.5;
+                if (lagHalf >= 2.0 && lagHalf < totalLags - 2) {
+                    double halfPeak = SampleAcf(acf, totalLags, lagHalf);
+                    double left = SampleAcf(acf, totalLags, lagHalf - 1.2);
+                    double right = SampleAcf(acf, totalLags, lagHalf + 1.2);
+                    bool isPeak = (halfPeak > left && halfPeak > right);
+
+                    double scoreCurrent = GetCombScore(bestBpm, acf, totalLags, frameRate);
+                    double scoreDouble = GetCombScore(doubleBpm, acf, totalLags, frameRate);
+
+                    if (isPeak && halfPeak > 0.0) {
+                        if (bestBpm < 85.0 && scoreDouble >= scoreCurrent * 0.78) {
+                            bestBpm = doubleBpm;
+                            lagD = lagHalf;
+                            currentPeak = halfPeak;
+                        } else if (scoreDouble > scoreCurrent * 1.05) {
+                            bestBpm = doubleBpm;
+                            lagD = lagHalf;
+                            currentPeak = halfPeak;
+                        }
+                    }
+                }
+            }
+
+            // 2. Double-time check: is the true tempo half this value?
+            double halfBpm = bestBpm / 2.0;
+            if (bestBpm >= 130.0 && halfBpm >= 60.0) {
+                double lagDouble = lagD * 2.0;
+                if (lagDouble < totalLags - 2) {
+                    double doublePeak = SampleAcf(acf, totalLags, lagDouble);
+                    double scoreCurrent = GetCombScore(bestBpm, acf, totalLags, frameRate);
+                    double scoreHalf = GetCombScore(halfBpm, acf, totalLags, frameRate);
+
+                    double left = SampleAcf(acf, totalLags, lagD - 1.2);
+                    double right = SampleAcf(acf, totalLags, lagD + 1.2);
+                    double prominence = currentPeak - Math.Min(left, right);
+
+                    if (prominence <= 0.015 || (scoreHalf > scoreCurrent * 1.10 && doublePeak > currentPeak * 1.15)) {
+                        bestBpm = halfBpm;
+                    } else if (bestBpm > 175.0 && scoreHalf >= scoreCurrent * 0.85) {
+                        bestBpm = halfBpm;
+                    }
+                }
+            }
+
+            return bestBpm;
+        }
+
+        public static int DetectBpmFromBytes(byte[] pcmData, int sampleRate) {
+            if (pcmData == null || pcmData.Length < sampleRate * 8) return 0;
+
+            int bytesPerSample = 2;
+            int totalSamples = pcmData.Length / bytesPerSample;
+            if (totalSamples < sampleRate * 8) return 0;
+
+            float[] x = new float[totalSamples];
+            for (int i = 0; i < totalSamples; i++) {
+                int offset = i * bytesPerSample;
+                short s16 = (short)(pcmData[offset] | (pcmData[offset + 1] << 8));
+                x[i] = s16 / 32768.0f;
+            }
+
+            // 1. Multi-band Crossover Filterbank (4 sub-bands for rich rhythmic resolution):
+            // Band 0: Sub & Kick (0 - 200 Hz)
+            // Band 1: Low-Mid / Snare body & Bass (200 - 900 Hz)
+            // Band 2: Mid-High / Melodic onsets & Vocals (900 - 3500 Hz)
+            // Band 3: Highs / Hi-hats & Cymbals (3500 Hz+)
+            float[] lp200 = RunLowPass(x, 200f, sampleRate);
+            float[] lp900 = RunLowPass(x, 900f, sampleRate);
+            float[] lp3500 = RunLowPass(x, 3500f, sampleRate);
+
+            float[][] bands = new float[4][];
+            bands[0] = lp200;
+            bands[1] = new float[totalSamples];
+            bands[2] = new float[totalSamples];
+            bands[3] = new float[totalSamples];
+
+            for (int i = 0; i < totalSamples; i++) {
+                bands[1][i] = lp900[i] - lp200[i];
+                bands[2][i] = lp3500[i] - lp900[i];
+                bands[3][i] = x[i] - lp3500[i];
+            }
+
+            // 2. Downsample with RMS energy envelope to 250 Hz (4ms precision frames)
+            int hop = sampleRate / 250;
+            if (hop < 1) hop = 1;
+            int numFrames = totalSamples / hop;
+            if (numFrames < 500) return 0;
+            double frameRate = (double)sampleRate / hop;
+
+            float[] combinedNovelty = new float[numFrames];
+            float[] bandWeights = new float[] { 1.3f, 1.0f, 0.8f, 0.6f };
+
+            for (int b = 0; b < 4; b++) {
+                float[] bandEnergy = new float[numFrames];
+                float[] bandSamples = bands[b];
+
+                for (int f = 0; f < numFrames; f++) {
+                    int start = f * hop;
+                    int end = Math.Min(start + hop, totalSamples);
+                    float sumSq = 0f;
+                    int count = end - start;
+                    for (int s = start; s < end; s++) {
+                        float v = bandSamples[s];
+                        sumSq += v * v;
+                    }
+                    bandEnergy[f] = (count > 0) ? (float)Math.Sqrt(sumSq / count) : 0f;
+                }
+
+                // Positive onset flux (half-wave rectified difference)
+                float[] onset = new float[numFrames];
+                for (int f = 1; f < numFrames; f++) {
+                    float diff = bandEnergy[f] - bandEnergy[f - 1];
+                    onset[f] = (diff > 0f) ? diff : 0f;
+                }
+
+                // Adaptive local mean subtraction (1-second moving average window)
+                int avgWin = (int)(frameRate * 1.0);
+                if (avgWin < 10) avgWin = 10;
+                float runningSum = 0f;
+                for (int f = 0; f < numFrames; f++) {
+                    runningSum += onset[f];
+                    if (f >= avgWin) {
+                        runningSum -= onset[f - avgWin];
+                        float localMean = runningSum / avgWin;
+                        int targetIdx = f - avgWin / 2;
+                        onset[targetIdx] = Math.Max(0f, onset[targetIdx] - localMean);
+                    }
+                }
+
+                // Variance normalization per band
+                float sumVal = 0f, sumValSq = 0f;
+                for (int f = 0; f < numFrames; f++) {
+                    sumVal += onset[f];
+                    sumValSq += onset[f] * onset[f];
+                }
+                float mean = sumVal / numFrames;
+                float variance = (sumValSq / numFrames) - (mean * mean);
+                float stdDev = variance > 0.000001f ? (float)Math.Sqrt(variance) : 1f;
+
+                float bw = bandWeights[b];
+                for (int f = 0; f < numFrames; f++) {
+                    combinedNovelty[f] += bw * (onset[f] / stdDev);
+                }
+            }
+
+            // Zero-mean centering of novelty curve to eliminate DC slope drift in autocorrelation
+            double sumNov = 0.0;
+            for (int f = 0; f < numFrames; f++) sumNov += combinedNovelty[f];
+            double meanNov = sumNov / numFrames;
+            for (int f = 0; f < numFrames; f++) combinedNovelty[f] -= (float)meanNov;
+
+            // 3. Autocorrelation calculation over lag intervals corresponding to 50 - 220 BPM
+            int minLag = (int)Math.Floor(frameRate * 60.0 / 220.0);
+            int maxLag = (int)Math.Ceiling(frameRate * 60.0 / 50.0);
+            if (maxLag >= numFrames / 2) maxLag = (numFrames / 2) - 1;
+            if (minLag < 2 || minLag >= maxLag) return 0;
+
+            int totalLags = Math.Min(maxLag * 2 + 10, numFrames / 2);
+            double[] autocorr = new double[totalLags + 1];
+
+            for (int lag = minLag / 2; lag <= totalLags; lag++) {
+                double sum = 0;
+                int count = numFrames - lag;
+                for (int i = 0; i < count; i++) {
+                    sum += combinedNovelty[i] * combinedNovelty[i + lag];
+                }
+                autocorr[lag] = sum / count;
+            }
+
+            // 4. High-resolution continuous comb filter scan with Catmull-Rom interpolation (0.1 BPM step)
+            double bestScore = -1000.0;
+            double bestBpm = 0.0;
+
+            for (double bpm = 58.0; bpm <= 205.0; bpm += 0.1) {
+                double score = GetCombScore(bpm, autocorr, totalLags, frameRate);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestBpm = bpm;
+                }
+            }
+
+            if (bestBpm <= 0) return 0;
+
+            // Fine local refinement (0.01 BPM step around top candidate) to eliminate quantization drift
+            double refinedBpm = bestBpm;
+            double localBestScore = bestScore;
+            for (double bpm = bestBpm - 0.4; bpm <= bestBpm + 0.4; bpm += 0.01) {
+                double score = GetCombScore(bpm, autocorr, totalLags, frameRate);
+                if (score > localBestScore) {
+                    localBestScore = score;
+                    refinedBpm = bpm;
+                }
+            }
+            bestBpm = refinedBpm;
+
+            // 5. Metrical pulse & octave disambiguation (half-time vs double-time resolution)
+            bestBpm = ResolveOctave(bestBpm, autocorr, totalLags, frameRate);
+
+            return (int)Math.Round(bestBpm);
+        }
+    }
+"@
+}
+
 # Supported extensions
 $audioExt = @('.mp3','.wav','.flac','.m4a','.aif','.aiff','.ogg','.wma','.opus')
 $losslessExt = @('.wav','.flac','.aif','.aiff')
@@ -206,7 +490,7 @@ function Get-TagValue {
     return ""
 }
 
-# Optional BPM analysis fallback when metadata tags are missing.
+# Optional BPM analysis fallback via acoustic detection (High-Accuracy Native C# + FFmpeg, with Librosa fallback).
 function Get-AnalyzedBpm {
     param([string]$FilePath)
 
@@ -218,30 +502,86 @@ function Get-AnalyzedBpm {
         return [string]$global:bpmAnalysisCache[$FilePath]
     }
 
-    if (-not $global:ffmpegAvailable) {
-        $global:bpmAnalysisCache[$FilePath] = ""
-        return ""
-    }
-
     $detectedBpm = ""
 
-    try {
-        $analysisOutput = & ffmpeg -hide_banner -nostats -t 180 -i "$FilePath" -vn -af "bpm" -f null NUL 2>&1
-        if ($analysisOutput) {
-            foreach ($line in $analysisOutput) {
-                if ($line -match '(?i)\bbpm\b[^0-9]*([0-9]+(?:[\.,][0-9]+)?)') {
-                    $raw = $matches[1] -replace ',', '.'
-                    $parsed = 0.0
-                    if ([double]::TryParse($raw, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
-                        if ($parsed -gt 0 -and $parsed -lt 300) {
-                            $detectedBpm = ([int][math]::Round($parsed)).ToString()
-                        }
-                    }
+    # Priority 1: Multi-band FFmpeg extraction (22050 Hz, 40s window offset at 25s) + Sub-band Novelty Engine
+    if ($global:ffmpegAvailable) {
+        $tempPcm = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.Guid]::NewGuid().ToString('N') + '.raw')
+        try {
+            $pinfo = New-Object System.Diagnostics.ProcessStartInfo
+            $pinfo.FileName = "ffmpeg"
+            $pinfo.Arguments = "-nostdin -v error -y -ss 25 -t 40 -i `"$FilePath`" -vn -ac 1 -ar 22050 -f s16le `"$tempPcm`""
+            $pinfo.UseShellExecute = $false
+            $pinfo.CreateNoWindow = $true
+
+            $proc = [System.Diagnostics.Process]::Start($pinfo)
+            if (-not $proc.WaitForExit(8000)) {
+                $proc.Kill()
+            }
+
+            if (-not (Test-Path -LiteralPath $tempPcm) -or (Get-Item -LiteralPath $tempPcm).Length -lt 441000) {
+                $pinfo.Arguments = "-nostdin -v error -y -ss 0 -t 40 -i `"$FilePath`" -vn -ac 1 -ar 22050 -f s16le `"$tempPcm`""
+                $proc = [System.Diagnostics.Process]::Start($pinfo)
+                if (-not $proc.WaitForExit(8000)) {
+                    $proc.Kill()
                 }
             }
+
+            if ((Test-Path -LiteralPath $tempPcm) -and (Get-Item -LiteralPath $tempPcm).Length -ge 441000) {
+                $calcBpm = [AudioBpmDetector]::DetectBpmFromPcmFile($tempPcm, 22050)
+                if ($calcBpm -ge 50 -and $calcBpm -le 220) {
+                    $detectedBpm = [string]$calcBpm
+                }
+            }
+        } catch {
+            $detectedBpm = ""
+        } finally {
+            if (Test-Path -LiteralPath $tempPcm) {
+                Remove-Item -LiteralPath $tempPcm -Force -ErrorAction SilentlyContinue
+            }
         }
-    } catch {
-        $detectedBpm = ""
+    }
+
+    # Priority 2: Python Librosa fallback with timeout guard
+    if (-not $detectedBpm) {
+        $pythonCmd = Get-Command python3 -ErrorAction SilentlyContinue
+        if (-not $pythonCmd) {
+            $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+        }
+
+        if ($pythonCmd) {
+            $baseDir = if ($PSScriptRoot) { $PSScriptRoot } elseif ($root) { $root } else { (Get-Location).Path }
+            $librosaScript = Join-Path $baseDir "scripts\bpm-detect-librosa.py"
+
+            try {
+                $pyPsi = New-Object System.Diagnostics.ProcessStartInfo
+                $pyPsi.FileName = $pythonCmd.Source
+                $pyPsi.UseShellExecute = $false
+                $pyPsi.RedirectStandardOutput = $true
+                $pyPsi.CreateNoWindow = $true
+
+                if (Test-Path -LiteralPath $librosaScript) {
+                    $pyPsi.Arguments = "`"$librosaScript`" `"$FilePath`""
+                } else {
+                    $inlinePy = "import sys, warnings; warnings.filterwarnings('ignore'); import numpy as np, librosa; y, sr = librosa.load(sys.argv[1], sr=11025, duration=25.0, offset=20.0); t, _ = librosa.beat.beat_track(y=y, sr=sr, start_bpm=120.0); b = float(np.atleast_1d(t)[0]); print(int(round(b))) if 40 <= b <= 240 else None"
+                    $pyPsi.Arguments = "-c `"$inlinePy`" `"$FilePath`""
+                }
+
+                $pyProc = [System.Diagnostics.Process]::Start($pyPsi)
+                $outTask = $pyProc.StandardOutput.ReadToEndAsync()
+                if ($pyProc.WaitForExit(6000)) {
+                    $pyOut = $outTask.Result
+                    if ($pyOut -and ($pyOut.Trim() -match '^\d+$')) {
+                        $parsed = [int]$pyOut.Trim()
+                        if ($parsed -ge 40 -and $parsed -le 240) {
+                            $detectedBpm = [string]$parsed
+                        }
+                    }
+                } else {
+                    $pyProc.Kill()
+                }
+            } catch { }
+        }
     }
 
     $global:bpmAnalysisCache[$FilePath] = $detectedBpm
@@ -754,17 +1094,665 @@ function Get-ImageDetails($imgPath) {
     }
 }
 
-# audio files
-$files = Get-ChildItem -Path $assetsPath -Recurse -File | Where-Object { $audioExt -contains $_.Extension.ToLower() }
+# --- METADATA AUDIT & QUALITY ANALYSIS ENGINE -------------------------------
+function Test-IsFieldEmpty($val) {
+    if ($null -eq $val) { return $true }
+    if ($val -is [string]) { return [string]::IsNullOrWhiteSpace($val) }
+    if ($val -is [System.Collections.IEnumerable]) {
+        $elemCount = 0
+        foreach ($elem in $val) {
+            if (-not (Test-IsFieldEmpty $elem)) {
+                $elemCount++
+            }
+        }
+        return ($elemCount -eq 0)
+    }
+    return $false
+}
+
+function Show-MetadataAudit {
+    param(
+        [System.Collections.Generic.List[object]]$Items,
+        [string]$OutputRoot
+    )
+
+    if ($null -eq $Items -or $Items.Count -eq 0) {
+        Write-Host "`n[WARNING] No items available to analyze in the database." -ForegroundColor Yellow
+        return
+    }
+
+    $auditFields = @(
+        [pscustomobject]@{ Id = 1;  Category = "Basic Info";   Key = "title";          Name = "Title";           Getter = { param($t) $t.metadata.title } }
+        [pscustomobject]@{ Id = 2;  Category = "Basic Info";   Key = "artists";        Name = "Artists";         Getter = { param($t) $t.metadata.artists } }
+        [pscustomobject]@{ Id = 3;  Category = "Basic Info";   Key = "album";          Name = "Album";           Getter = { param($t) $t.metadata.album } }
+        [pscustomobject]@{ Id = 4;  Category = "Basic Info";   Key = "album_artist";   Name = "Album Artist";    Getter = { param($t) $t.metadata.album_artist } }
+        [pscustomobject]@{ Id = 5;  Category = "Basic Info";   Key = "genre";          Name = "Genre";           Getter = { param($t) $t.metadata.genre } }
+        [pscustomobject]@{ Id = 6;  Category = "Basic Info";   Key = "year";           Name = "Year / Date";     Getter = { param($t) $t.metadata.year } }
+        [pscustomobject]@{ Id = 7;  Category = "Basic Info";   Key = "composer";       Name = "Composer";        Getter = { param($t) $t.metadata.composer } }
+        [pscustomobject]@{ Id = 8;  Category = "Track / Disc"; Key = "track_number";   Name = "Track Number";    Getter = { param($t) $t.metadata.track_number } }
+        [pscustomobject]@{ Id = 9;  Category = "Track / Disc"; Key = "total_tracks";   Name = "Total Tracks";    Getter = { param($t) $t.metadata.total_tracks } }
+        [pscustomobject]@{ Id = 10; Category = "Track / Disc"; Key = "disc_number";    Name = "Disc Number";     Getter = { param($t) $t.metadata.disc_number } }
+        [pscustomobject]@{ Id = 11; Category = "Track / Disc"; Key = "total_discs";    Name = "Total Discs";     Getter = { param($t) $t.metadata.total_discs } }
+        [pscustomobject]@{ Id = 12; Category = "Musical";      Key = "bpm";            Name = "BPM / Tempo";     Getter = { param($t) $t.metadata.bpm } }
+        [pscustomobject]@{ Id = 13; Category = "Musical";      Key = "mood";           Name = "Mood";            Getter = { param($t) $t.metadata.mood } }
+        [pscustomobject]@{ Id = 14; Category = "Editorial";    Key = "lyrics";         Name = "Lyrics";          Getter = { param($t) $t.metadata.lyrics } }
+        [pscustomobject]@{ Id = 15; Category = "Editorial";    Key = "comment";        Name = "Comment";         Getter = { param($t) $t.metadata.comment } }
+        [pscustomobject]@{ Id = 16; Category = "Editorial";    Key = "description";    Name = "Description";     Getter = { param($t) $t.metadata.description } }
+        [pscustomobject]@{ Id = 17; Category = "Credits";      Key = "producer";       Name = "Producer";        Getter = { param($t) $t.metadata.producer } }
+        [pscustomobject]@{ Id = 18; Category = "Credits";      Key = "remix_artist";   Name = "Remix Artist";    Getter = { param($t) $t.metadata.remix_artist } }
+        [pscustomobject]@{ Id = 19; Category = "Publishing";   Key = "label";          Name = "Record Label";    Getter = { param($t) $t.metadata.label } }
+        [pscustomobject]@{ Id = 20; Category = "Publishing";   Key = "publisher";      Name = "Publisher";       Getter = { param($t) $t.metadata.publisher } }
+        [pscustomobject]@{ Id = 21; Category = "Publishing";   Key = "edition";        Name = "Edition / Ver.";  Getter = { param($t) $t.metadata.edition } }
+        [pscustomobject]@{ Id = 22; Category = "Publishing";   Key = "recording_year"; Name = "Recording Year"; Getter = { param($t) $t.metadata.recording_year } }
+        [pscustomobject]@{ Id = 23; Category = "Identifiers";  Key = "isrc";           Name = "ISRC Code";       Getter = { param($t) $t.metadata.isrc } }
+        [pscustomobject]@{ Id = 24; Category = "Identifiers";  Key = "upc";            Name = "UPC / Barcode";   Getter = { param($t) $t.metadata.upc } }
+        [pscustomobject]@{ Id = 25; Category = "Additional";   Key = "language";       Name = "Language";        Getter = { param($t) $t.metadata.language } }
+        [pscustomobject]@{ Id = 26; Category = "Additional";   Key = "category";       Name = "Category / Group";Getter = { param($t) $t.metadata.category } }
+        [pscustomobject]@{ Id = 27; Category = "Additional";   Key = "tags";           Name = "Tags / Keywords"; Getter = { param($t) $t.metadata.tags } }
+        [pscustomobject]@{ Id = 28; Category = "Links";        Key = "video_link";     Name = "Video Link";      Getter = { param($t) $t.metadata.video_link } }
+        [pscustomobject]@{ Id = 29; Category = "Links";        Key = "streaming_link"; Name = "Streaming Link";  Getter = { param($t) $t.metadata.streaming_link } }
+        [pscustomobject]@{ Id = 30; Category = "Audio Specs";  Key = "duration";       Name = "Duration";        Getter = { param($t) $t.audio_specs.duration } }
+        [pscustomobject]@{ Id = 31; Category = "Audio Specs";  Key = "bitrate";        Name = "Bitrate";         Getter = { param($t) $t.audio_specs.bitrate } }
+        [pscustomobject]@{ Id = 32; Category = "Audio Specs";  Key = "sample_rate";    Name = "Sample Rate";     Getter = { param($t) $t.audio_specs.sample_rate } }
+        [pscustomobject]@{ Id = 33; Category = "Audio Specs";  Key = "channels";       Name = "Channels";        Getter = { param($t) $t.audio_specs.channels } }
+        [pscustomobject]@{ Id = 34; Category = "Audio Specs";  Key = "codec";          Name = "Audio Codec";     Getter = { param($t) $t.audio_specs.codec } }
+        [pscustomobject]@{ Id = 35; Category = "Visuals";      Key = "track_artwork";  Name = "Track Artwork";   Getter = { param($t) $t.artworks.track_artwork } }
+        [pscustomobject]@{ Id = 36; Category = "Visuals";      Key = "album_artwork";  Name = "Album Artwork";   Getter = { param($t) $t.artworks.album_artwork } }
+    )
+
+    $currentFilterExt = ""
+
+    while ($true) {
+        $activeItems = if ([string]::IsNullOrWhiteSpace($currentFilterExt)) {
+            @($Items)
+        } else {
+            @($Items | Where-Object {
+                $ext = if ($_.file -and $_.file.ext) { $_.file.ext.ToString().ToUpperInvariant().TrimStart('.') } else { "" }
+                $ext -eq $currentFilterExt.ToUpperInvariant().TrimStart('.')
+            })
+        }
+
+        $totalActive = $activeItems.Count
+
+        Clear-Host
+        Write-Host "=========================================================================================" -ForegroundColor Cyan
+        Write-Host "                          METADATA QUALITY & COMPLETENESS AUDIT                          " -ForegroundColor Cyan
+        Write-Host "=========================================================================================" -ForegroundColor Cyan
+        $filterStatus = if ($currentFilterExt) { "Filtered by extension: .$($currentFilterExt.ToUpper())" } else { "All file formats" }
+        Write-Host " Auditing: $totalActive track version(s) ($filterStatus)" -ForegroundColor Gray
+        Write-Host ""
+
+        if ($totalActive -eq 0) {
+            Write-Host "No tracks match the active format filter." -ForegroundColor Yellow
+            Write-Host "Press any key to reset filter..."
+            $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            $currentFilterExt = ""
+            continue
+        }
+
+        $statsList = @()
+        $totalFieldsSlots = $totalActive * $auditFields.Count
+        $totalPopulatedSlots = 0
+
+        foreach ($field in $auditFields) {
+            $missingItems = @($activeItems | Where-Object { Test-IsFieldEmpty (& $field.Getter $_) })
+            $missingCount = $missingItems.Count
+            $filledCount = $totalActive - $missingCount
+            $totalPopulatedSlots += $filledCount
+
+            $missPct = if ($totalActive -gt 0) { [Math]::Round(($missingCount / $totalActive) * 100, 1) } else { 0.0 }
+            $fillPct = if ($totalActive -gt 0) { [Math]::Round(($filledCount / $totalActive) * 100, 1) } else { 0.0 }
+
+            $statsList += [pscustomobject]@{
+                Id           = $field.Id
+                Category     = $field.Category
+                Key          = $field.Key
+                Name         = $field.Name
+                Filled       = $filledCount
+                Missing      = $missingCount
+                MissingPct   = $missPct
+                FilledPct    = $fillPct
+                MissingItems = $missingItems
+                Getter       = $field.Getter
+            }
+        }
+
+        $overallCompletenessPct = [Math]::Round(($totalPopulatedSlots / $totalFieldsSlots) * 100, 1)
+
+        Write-Host (" {0,-4} | {1,-14} | {2,-17} | {3,6} | {4,7} | {5,7} | {6,-12}" -f "ID", "Category", "Metadata Field", "Filled", "Missing", "Miss %", "Health Bar") -ForegroundColor Yellow
+        Write-Host (" " + ("-" * 80)) -ForegroundColor DarkGray
+
+        foreach ($row in $statsList) {
+            $filledBlocks = [int][Math]::Round(($row.FilledPct / 100.0) * 10)
+            if ($filledBlocks -gt 10) { $filledBlocks = 10 }
+            if ($filledBlocks -lt 0) { $filledBlocks = 0 }
+            $emptyBlocks = 10 - $filledBlocks
+            $healthBar = ("#" * $filledBlocks) + ("-" * $emptyBlocks)
+
+            $rowColor = if ($row.MissingCount -eq 0) {
+                "Green"
+            } elseif ($row.MissingPct -lt 25.0) {
+                "Cyan"
+            } elseif ($row.MissingPct -lt 70.0) {
+                "Yellow"
+            } else {
+                "Red"
+            }
+
+            Write-Host (" {0,4} | {1,-14} | {2,-17} | {3,6} | {4,7} | {5,6:N1}% | [{6}]" -f `
+                $row.Id, $row.Category, $row.Name, $row.Filled, $row.Missing, $row.MissingPct, $healthBar) -ForegroundColor $rowColor
+        }
+
+        Write-Host (" " + ("-" * 80)) -ForegroundColor DarkGray
+        $globalScoreColor = if ($overallCompletenessPct -ge 80) { "Green" } elseif ($overallCompletenessPct -ge 50) { "Yellow" } else { "Red" }
+        Write-Host (" Overall Library Metadata Health Score: {0}% ({1}/{2} total slots populated)" -f $overallCompletenessPct, $totalPopulatedSlots, $totalFieldsSlots) -ForegroundColor $globalScoreColor
+        Write-Host ""
+        Write-Host " Available Actions:" -ForegroundColor Yellow
+        Write-Host "  [1] List tracks missing a specific metadata category / field"
+        Write-Host "  [2] View tracks with lowest metadata completeness (Top uncompleted)"
+        Write-Host "  [3] View category summary breakdown (Basic, Audio, Visuals, etc.)"
+        Write-Host "  [4] Filter audit by audio format / file extension"
+        Write-Host "  [5] Export complete metadata audit report to file (JSON & TXT)"
+        Write-Host "  [0] Exit audit mode"
+        Write-Host ""
+
+        $choice = Read-Host "Select an action [0-5]"
+        switch ($choice) {
+            "1" {
+                Write-Host ""
+                $inputField = Read-Host "Enter Field ID [1-36] or Field Name (or 'b' to go back)"
+                if ($inputField -ieq 'b' -or [string]::IsNullOrWhiteSpace($inputField)) {
+                    continue
+                }
+
+                $selectedStat = $null
+                $parsedId = 0
+                if ([int]::TryParse($inputField, [ref]$parsedId)) {
+                    $selectedStat = $statsList | Where-Object { $_.Id -eq $parsedId } | Select-Object -First 1
+                } else {
+                    $selectedStat = $statsList | Where-Object { $_.Name -like "*$inputField*" -or $_.Key -like "*$inputField*" } | Select-Object -First 1
+                }
+
+                if (-not $selectedStat) {
+                    Write-Host "`n[ERROR] No metadata field matching '$inputField' was found." -ForegroundColor Red
+                    Start-Sleep -Seconds 2
+                    continue
+                }
+
+                $missingTrackList = $selectedStat.MissingItems
+                Write-Host ""
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+                Write-Host (" MISSING DATA REPORT: [{0}] - {1}" -f $selectedStat.Category, $selectedStat.Name) -ForegroundColor Cyan
+                Write-Host (" Found {0} track(s) missing this field out of {1} total ({2}% missing)" -f $missingTrackList.Count, $totalActive, $selectedStat.MissingPct) -ForegroundColor Yellow
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+
+                if ($missingTrackList.Count -eq 0) {
+                    Write-Host "`n[EXCELLENT] All tracks have this metadata field populated!" -ForegroundColor Green
+                    Write-Host "`nPress any key to return..."
+                    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+                    continue
+                }
+
+                $pageSize = 25
+                $offset = 0
+                $stayInList = $true
+
+                while ($stayInList) {
+                    $end = [Math]::Min($offset + $pageSize, $missingTrackList.Count)
+                    Write-Host ""
+                    Write-Host (" Showing tracks {0} to {1} of {2}:" -f ($offset + 1), $end, $missingTrackList.Count) -ForegroundColor Gray
+                    Write-Host ""
+
+                    for ($idx = $offset; $idx -lt $end; $idx++) {
+                        $track = $missingTrackList[$idx]
+                        $tTitle = if ($track.metadata -and $track.metadata.title) { $track.metadata.title } else { "(No Title)" }
+                        $tExt = if ($track.file -and $track.file.ext) { $track.file.ext } else { "" }
+                        $tPath = if ($track.file -and $track.file.path) { $track.file.path } else { "" }
+                        Write-Host ("  [{0,4}] {1,-32} [.{2}]  Path: {3}" -f ($idx + 1), $tTitle, $tExt, $tPath) -ForegroundColor Yellow
+                    }
+
+                    Write-Host ""
+                    Write-Host " Navigation: [N] Next page | [P] Previous page | [E] Export this list | [B] Back to audit" -ForegroundColor Cyan
+                    $navChoice = Read-Host "Choose option"
+
+                    if ($navChoice -ieq 'n') {
+                        if ($offset + $pageSize -lt $missingTrackList.Count) {
+                            $offset += $pageSize
+                        } else {
+                            Write-Host "Already on the last page." -ForegroundColor Gray
+                        }
+                    } elseif ($navChoice -ieq 'p') {
+                        if ($offset -ge $pageSize) {
+                            $offset -= $pageSize
+                        } else {
+                            Write-Host "Already on the first page." -ForegroundColor Gray
+                        }
+                    } elseif ($navChoice -ieq 'e') {
+                        $exportName = "missing_" + ($selectedStat.Key -replace '[^a-zA-Z0-9_]', '_') + ".txt"
+                        $exportPath = Join-Path $OutputRoot $exportName
+                        $exportLines = @(
+                            "========================================================="
+                            "Tracks missing: $($selectedStat.Name) ($($selectedStat.Category))"
+                            "Total missing: $($missingTrackList.Count) / $totalActive"
+                            "Exported on: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+                            "========================================================="
+                            ""
+                        )
+                        foreach ($t in $missingTrackList) {
+                            $tTitle = if ($t.metadata -and $t.metadata.title) { $t.metadata.title } else { "(No Title)" }
+                            $tPath = if ($t.file -and $t.file.path) { $t.file.path } else { "" }
+                            $exportLines += "$tTitle`t$tPath"
+                        }
+                        [System.IO.File]::WriteAllLines($exportPath, $exportLines, [System.Text.Encoding]::UTF8)
+                        Write-Host "`n[SUCCESS] Exported missing list to: $exportPath" -ForegroundColor Green
+                        Start-Sleep -Seconds 2
+                    } else {
+                        $stayInList = $false
+                    }
+                }
+            }
+            "2" {
+                Write-Host ""
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+                Write-Host "                    TRACKS WITH LOWEST COMPLETENESS (TOP UNCOMPLETED)                    " -ForegroundColor Cyan
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+
+                $scoredTracks = foreach ($t in $activeItems) {
+                    $missingCountForTrack = 0
+                    $missingFieldNames = @()
+                    foreach ($f in $auditFields) {
+                        if (Test-IsFieldEmpty (& $f.Getter $t)) {
+                            $missingCountForTrack++
+                            $missingFieldNames += $f.Name
+                        }
+                    }
+                    $fillPercent = [Math]::Round((($auditFields.Count - $missingCountForTrack) / $auditFields.Count) * 100, 1)
+                    [pscustomobject]@{
+                        Track = $t
+                        MissingCount = $missingCountForTrack
+                        FillPercent = $fillPercent
+                        MissingFields = $missingFieldNames
+                    }
+                }
+
+                $worstTracks = @($scoredTracks | Sort-Object -Property MissingCount -Descending | Select-Object -First 20)
+
+                Write-Host (" {0,-4} | {1,8} | {2,8} | {3,-30} | {4}" -f "Rank", "Missing", "Filled %", "Track Title / File", "Path") -ForegroundColor Yellow
+                Write-Host (" " + ("-" * 80)) -ForegroundColor DarkGray
+
+                $rank = 1
+                foreach ($item in $worstTracks) {
+                    $t = $item.Track
+                    $tName = if ($t.metadata -and $t.metadata.title) { $t.metadata.title } elseif ($t.file -and $t.file.name) { $t.file.name } else { "Unknown" }
+                    if ($tName.Length -gt 28) { $tName = $tName.Substring(0, 25) + "..." }
+                    $tPath = if ($t.file -and $t.file.path) { $t.file.path } else { "" }
+                    $color = if ($item.FillPercent -lt 40.0) { "Red" } elseif ($item.FillPercent -lt 65.0) { "Yellow" } else { "Cyan" }
+
+                    Write-Host (" {0,4} | {1,8} | {2,7:N1}% | {3,-30} | {4}" -f $rank, $item.MissingCount, $item.FillPercent, $tName, $tPath) -ForegroundColor $color
+                    $rank++
+                }
+
+                Write-Host "`nPress any key to return..."
+                $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            }
+            "3" {
+                Write-Host ""
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+                Write-Host "                               METADATA CATEGORY BREAKDOWN                               " -ForegroundColor Cyan
+                Write-Host "=========================================================================================" -ForegroundColor Cyan
+
+                $categories = $auditFields | Select-Object -ExpandProperty Category -Unique
+
+                Write-Host (" {0,-16} | {1,6} | {2,11} | {3,11} | {4,8} | {5,-12}" -f "Category", "Fields", "Total Slots", "Filled Slots", "Filled %", "Status") -ForegroundColor Yellow
+                Write-Host (" " + ("-" * 75)) -ForegroundColor DarkGray
+
+                foreach ($cat in $categories) {
+                    $catFields = @($auditFields | Where-Object { $_.Category -eq $cat })
+                    $catTotalSlots = $catFields.Count * $totalActive
+                    $catFilledSlots = 0
+
+                    foreach ($f in $catFields) {
+                        $miss = @($activeItems | Where-Object { Test-IsFieldEmpty (& $f.Getter $_) }).Count
+                        $catFilledSlots += ($totalActive - $miss)
+                    }
+
+                    $catFillPct = if ($catTotalSlots -gt 0) { [Math]::Round(($catFilledSlots / $catTotalSlots) * 100, 1) } else { 0.0 }
+                    $filledBlocks = [int][Math]::Round(($catFillPct / 100.0) * 10)
+                    $bar = ("#" * $filledBlocks) + ("-" * (10 - $filledBlocks))
+
+                    $catColor = if ($catFillPct -ge 80.0) { "Green" } elseif ($catFillPct -ge 50.0) { "Yellow" } else { "Red" }
+                    Write-Host (" {0,-16} | {1,6} | {2,11} | {3,11} | {4,7:N1}% | [{5}]" -f $cat, $catFields.Count, $catTotalSlots, $catFilledSlots, $catFillPct, $bar) -ForegroundColor $catColor
+                }
+
+                Write-Host "`nPress any key to return..."
+                $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            }
+            "4" {
+                Write-Host ""
+                $availableExts = @($Items | ForEach-Object { if ($_.file -and $_.file.ext) { $_.file.ext.ToString().ToUpperInvariant().TrimStart('.') } } | Where-Object { $_ } | Select-Object -Unique | Sort-Object)
+                Write-Host "Available audio extensions in dataset:" -ForegroundColor Cyan
+                Write-Host " [0] Clear filter (Analyze all formats)"
+                for ($i = 0; $i -lt $availableExts.Count; $i++) {
+                    $extCount = @($Items | Where-Object { $_.file -and $_.file.ext -and ($_.file.ext.ToString().ToUpperInvariant().TrimStart('.') -eq $availableExts[$i]) }).Count
+                    Write-Host (" [{0}] .{1} ({2} tracks)" -f ($i + 1), $availableExts[$i], $extCount)
+                }
+
+                Write-Host ""
+                $filterChoice = Read-Host "Select an option"
+                $filterChoiceInt = 0
+                if ([int]::TryParse($filterChoice, [ref]$filterChoiceInt)) {
+                    if ($filterChoiceInt -eq 0) {
+                        $currentFilterExt = ""
+                    } elseif ($filterChoiceInt -ge 1 -and $filterChoiceInt -le $availableExts.Count) {
+                        $currentFilterExt = $availableExts[$filterChoiceInt - 1]
+                    }
+                }
+            }
+            "5" {
+                Write-Host ""
+                Write-Host "Exporting comprehensive audit reports..." -ForegroundColor Cyan
+
+                $reportDate = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+                $jsonExportPath = Join-Path $OutputRoot "metadata_audit_$reportDate.json"
+                $txtExportPath = Join-Path $OutputRoot "metadata_audit_$reportDate.txt"
+
+                $exportPayload = [ordered]@{
+                    audit_date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+                    total_tracks_analyzed = $totalActive
+                    active_filter = if ($currentFilterExt) { ".$currentFilterExt" } else { "ALL" }
+                    overall_completeness_percent = $overallCompletenessPct
+                    fields_summary = @()
+                }
+
+                $txtLines = @(
+                    "========================================================================================="
+                    "                               MUSIC METADATA AUDIT REPORT                               "
+                    "========================================================================================="
+                    "Date: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+                    "Total tracks analyzed: $totalActive"
+                    "Filter: $filterStatus"
+                    "Overall Completeness Score: $overallCompletenessPct%"
+                    "========================================================================================="
+                    ""
+                    ("{0,-4} | {1,-14} | {2,-18} | {3,6} | {4,7} | {5,8}" -f "ID", "Category", "Field Name", "Filled", "Missing", "Miss %")
+                    ("-" * 75)
+                )
+
+                foreach ($row in $statsList) {
+                    $exportPayload.fields_summary += [ordered]@{
+                        id = $row.Id
+                        category = $row.Category
+                        name = $row.Name
+                        key = $row.Key
+                        filled_count = $row.Filled
+                        missing_count = $row.Missing
+                        missing_percent = $row.MissingPct
+                        filled_percent = $row.FilledPct
+                        missing_paths = @($row.MissingItems | ForEach-Object { if ($_.file -and $_.file.path) { $_.file.path } })
+                    }
+
+                    $txtLines += ("{0,4} | {1,-14} | {2,-18} | {3,6} | {4,7} | {5,7:N1}%" -f $row.Id, $row.Category, $row.Name, $row.Filled, $row.Missing, $row.MissingPct)
+                }
+
+                $jsonText = $exportPayload | ConvertTo-Json -Depth 10
+                [System.IO.File]::WriteAllText($jsonExportPath, $jsonText, [System.Text.Encoding]::UTF8)
+                [System.IO.File]::WriteAllLines($txtExportPath, $txtLines, [System.Text.Encoding]::UTF8)
+
+                Write-Host "[SUCCESS] JSON audit saved to: $jsonExportPath" -ForegroundColor Green
+                Write-Host "[SUCCESS] TXT audit saved to:  $txtExportPath" -ForegroundColor Green
+                Write-Host "`nPress any key to return..."
+                $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            }
+            "0" {
+                return
+            }
+            Default {
+                continue
+            }
+        }
+    }
+}
+
+# Load existing database if present for incremental mode or partial merges
+$existingDbItems = [System.Collections.Generic.List[object]]::new()
+$existingPaths = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+if (Test-Path -LiteralPath $output) {
+    try {
+        $jsonContent = Get-Content -LiteralPath $output -Raw -Encoding UTF8
+        $parsedDb = $jsonContent | ConvertFrom-Json
+        if ($parsedDb -and $parsedDb.items) {
+            foreach ($dbItem in $parsedDb.items) {
+                $existingDbItems.Add($dbItem)
+                if ($dbItem.file -and $dbItem.file.path) {
+                    [void]$existingPaths.Add($dbItem.file.path)
+                }
+            }
+        }
+    } catch {
+        Write-Warning "Could not load existing database: $_"
+    }
+}
+
+# Scan all audio files in the assets directory
+$allAudioFiles = @(Get-ChildItem -Path $assetsPath -Recurse -File | Where-Object { $audioExt -contains $_.Extension.ToLower() })
+
+# Display interactive indexing menu
+Write-Host ""
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host "             MUSIC DATABASE INDEXER             " -ForegroundColor Cyan
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host "Found $($allAudioFiles.Count) total audio file(s) in assets." -ForegroundColor Gray
+Write-Host "Currently $($existingDbItems.Count) track(s) registered in database." -ForegroundColor Gray
+Write-Host ""
+Write-Host "Choose an indexing option:" -ForegroundColor Yellow
+Write-Host " [1] All tracks (Full re-indexing)"
+Write-Host " [2] Only unindexed tracks (Incremental)"
+Write-Host " [3] Specific folder / directory"
+Write-Host " [4] Specific album"
+Write-Host " [5] Specific track / file keyword"
+Write-Host " [6] Metadata analysis & audit mode (Inspect missing data)"
+Write-Host " [7] Dedicated BPM audio detector (Acoustic analysis only)"
+Write-Host ""
+
+$selectedMode = Read-Host "Select option [1-7] (default: 1)"
+if ([string]::IsNullOrWhiteSpace($selectedMode)) { $selectedMode = "1" }
+
+$runAuditAfter = $false
+$enableBpmAnalysis = $false
+
+# Dedicated BPM acoustic detection mode
+if ($selectedMode -eq "7") {
+    if ($existingDbItems.Count -eq 0) {
+        Write-Host "`n[ERROR] No database found at $output." -ForegroundColor Red
+        Write-Host "Please run indexation first before performing BPM detection." -ForegroundColor Yellow
+        return
+    }
+
+    Write-Host ""
+    Write-Host "================================================" -ForegroundColor Cyan
+    Write-Host "          ACOUSTIC BPM DETECTION MODE           " -ForegroundColor Cyan
+    Write-Host "================================================" -ForegroundColor Cyan
+    Write-Host " [1] Analyze only tracks with missing BPM (Recommended)"
+    Write-Host " [2] Force acoustic BPM detection on all tracks (Overwrite)"
+    Write-Host " [3] Analyze specific track keyword or filter"
+    Write-Host ""
+
+    $bpmTargetMode = Read-Host "Select target [1-3] (default: 1)"
+    if ([string]::IsNullOrWhiteSpace($bpmTargetMode)) { $bpmTargetMode = "1" }
+
+    $targetItems = switch ($bpmTargetMode) {
+        "2" {
+            @($existingDbItems)
+        }
+        "3" {
+            $kw = Read-Host "Enter track filename or keyword to match"
+            @($existingDbItems | Where-Object {
+                $name = if ($_.metadata -and $_.metadata.title) { $_.metadata.title } elseif ($_.file -and $_.file.name) { $_.file.name } else { "" }
+                $name -like "*$kw*"
+            })
+        }
+        Default {
+            @($existingDbItems | Where-Object {
+                Test-IsFieldEmpty $_.metadata.bpm
+            })
+        }
+    }
+
+    if ($targetItems.Count -eq 0) {
+        Write-Host "`n[INFO] No tracks found matching the criteria." -ForegroundColor Yellow
+        return
+    }
+
+    Write-Host "`nStarting acoustic BPM analysis on $($targetItems.Count) track(s)..." -ForegroundColor Cyan
+    $bpmTimer = [System.Diagnostics.Stopwatch]::StartNew()
+    $detectedCount = 0
+    $processedCount = 0
+
+    for ($i = 0; $i -lt $targetItems.Count; $i++) {
+        $trackItem = $targetItems[$i]
+        $processedCount++
+        $trackRelPath = if ($trackItem.file -and $trackItem.file.path) { $trackItem.file.path } else { "" }
+        $fullPath = Join-Path $root $trackRelPath
+        $tTitle = if ($trackItem.metadata -and $trackItem.metadata.title) { $trackItem.metadata.title } else { $trackItem.file.name }
+
+        $pct = ($processedCount / $targetItems.Count) * 100
+        Write-Progress -Activity "Acoustic BPM Detection" -Status "[$processedCount/$($targetItems.Count)] $tTitle" -PercentComplete $pct
+
+        if (Test-Path -LiteralPath $fullPath) {
+            $detected = Get-AnalyzedBpm -FilePath $fullPath
+            if (-not [string]::IsNullOrWhiteSpace($detected)) {
+                $trackItem.metadata.bpm = $detected
+                $trackItem.metadata.bpm_source = "analysis"
+                $detectedCount++
+                Write-Host (" [{0}/{1}] DETECTED: {2} BPM -> {3}" -f $processedCount, $targetItems.Count, $detected, $tTitle) -ForegroundColor Green
+            } else {
+                Write-Host (" [{0}/{1}] FAILED: No BPM detected -> {2}" -f $processedCount, $targetItems.Count, $tTitle) -ForegroundColor DarkGray
+            }
+        } else {
+            Write-Host (" [{0}/{1}] SKIPPED: File not found -> {2}" -f $processedCount, $targetItems.Count, $trackRelPath) -ForegroundColor Yellow
+        }
+    }
+
+    Write-Progress -Activity "Acoustic BPM Detection" -Completed
+    $bpmTimer.Stop()
+
+    Write-Host "`nBPM analysis finished in $($bpmTimer.Elapsed.TotalSeconds.ToString('F1'))s. Detected: $detectedCount / $($targetItems.Count)" -ForegroundColor Cyan
+    Write-Host "Saving updated database to $output..." -ForegroundColor Cyan
+
+    $finalData = [ordered]@{
+        info = [ordered]@{
+            date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+            total_tracks_versions = $existingDbItems.Count
+            execution_time_ms = $bpmTimer.ElapsedMilliseconds
+        }
+        items = $existingDbItems
+    }
+
+    $rawJsonLines = ($finalData | ConvertTo-Json -Depth 20) -split "`r?`n"
+    $optimizedJson = foreach ($line in $rawJsonLines) {
+        if ($line -match '^(\s+)(.*)$') {
+            $currentSpaces = $matches[1].Length
+            $newIndentLevel = [math]::Floor($currentSpaces / 4)
+            if ($newIndentLevel -le 0) { $newIndentLevel = 1 }
+            $newIndent = " " * $newIndentLevel
+            $newIndent + $matches[2]
+        } else {
+            $line
+        }
+    }
+
+    [System.IO.File]::WriteAllLines($output, $optimizedJson, (New-Object System.Text.UTF8Encoding($false)))
+    Write-Host "[SUCCESS] Database updated with newly analyzed BPM values!`n" -ForegroundColor Green
+    return
+}
+
+# Ask user whether acoustic BPM detection should be enabled as a fallback (Default: No)
+if ($selectedMode -in @("1", "2", "3", "4", "5")) {
+    $bpmPrompt = Read-Host "Enable audio acoustic BPM analysis fallback? (Can be slow) [y/N] (default: N)"
+    if ($bpmPrompt -ieq 'y') {
+        $enableBpmAnalysis = $true
+        Write-Host "Acoustic BPM analysis fallback: ENABLED" -ForegroundColor Green
+    } else {
+        $enableBpmAnalysis = $false
+        Write-Host "Acoustic BPM analysis fallback: DISABLED (Using tags/heuristics only)" -ForegroundColor Gray
+    }
+}
+
+if ($selectedMode -eq "6") {
+    if ($existingDbItems.Count -eq 0) {
+        Write-Host "`n[WARNING] No existing database found at $output." -ForegroundColor Yellow
+        Write-Host "An index must be created first before performing metadata analysis." -ForegroundColor Yellow
+        $promptRunIndex = Read-Host "Would you like to index all tracks now and then audit? [Y/n]"
+        if ($promptRunIndex -ne 'n' -and $promptRunIndex -ne 'N') {
+            $selectedMode = "1"
+            $runAuditAfter = $true
+        } else {
+            Write-Host "Audit cancelled. Exiting..." -ForegroundColor Gray
+            return
+        }
+    } else {
+        Show-MetadataAudit -Items $existingDbItems -OutputRoot $root
+        return
+    }
+}
+
+$files = switch ($selectedMode) {
+    "2" {
+        @( $allAudioFiles | Where-Object {
+            $rel = Get-Rel $_.FullName $root
+            -not $existingPaths.Contains($rel)
+        })
+    }
+    "3" {
+        $targetFolder = Read-Host "Enter folder name or partial path"
+        if ([string]::IsNullOrWhiteSpace($targetFolder)) {
+            Write-Host "No folder specified. Falling back to all tracks." -ForegroundColor Yellow
+            $allAudioFiles
+        } else {
+            @( $allAudioFiles | Where-Object { $_.DirectoryName -like "*$targetFolder*" } )
+        }
+    }
+    "4" {
+        $targetAlbum = Read-Host "Enter album name"
+        if ([string]::IsNullOrWhiteSpace($targetAlbum)) {
+            Write-Host "No album specified. Falling back to all tracks." -ForegroundColor Yellow
+            $allAudioFiles
+        } else {
+            @( $allAudioFiles | Where-Object {
+                $rel = Get-Rel $_.DirectoryName $assetsPath
+                $parts = $rel -split '\\'
+                ($parts -contains $targetAlbum) -or ($_.DirectoryName -like "*$targetAlbum*")
+            })
+        }
+    }
+    "5" {
+        $targetTrack = Read-Host "Enter track filename or keyword"
+        if ([string]::IsNullOrWhiteSpace($targetTrack)) {
+            Write-Host "No keyword specified. Falling back to all tracks." -ForegroundColor Yellow
+            $allAudioFiles
+        } else {
+            @( $allAudioFiles | Where-Object { $_.BaseName -like "*$targetTrack*" -or $_.Name -like "*$targetTrack*" } )
+        }
+    }
+    Default {
+        $allAudioFiles
+    }
+}
+
 $total = $files.Count
 $results = [System.Collections.Generic.List[PSCustomObject]]::new()
 $timer = [System.Diagnostics.Stopwatch]::StartNew()
 
 if ($total -eq 0) {
-    Write-Progress -Activity "Creating music database" -Status "No audio files found" -Completed
+    Write-Host "`n[INFO] No audio files matched the selected criteria." -ForegroundColor Yellow
+    if ($selectedMode -ne "1" -and $existingDbItems.Count -gt 0) {
+        Write-Host "Existing database was kept intact." -ForegroundColor Green
+        return
+    }
 } else {
     $workerScript = {
-        param($FileData, $Root, $AudioExt, $LosslessExt, $ImgExt)
+        param($FileData, $Root, $AudioExt, $LosslessExt, $ImgExt, $EnableBpmAnalysis = $false)
 
         Add-Type -AssemblyName System.Drawing -ErrorAction SilentlyContinue | Out-Null
         $shell = New-Object -ComObject Shell.Application
@@ -1084,55 +2072,83 @@ if ($total -eq 0) {
 
             $detectedBpm = ""
 
-            # Try librosa Python library first (most reliable when available)
-            $librosaScript = Join-Path $PSScriptRoot "scripts\bpm-detect-librosa.py"
-            if (Test-Path $librosaScript) {
+            # Priority 1: Multi-band FFmpeg extraction (22050 Hz, 40s window offset at 25s) + Sub-band Novelty Engine
+            if ($ffmpegAvailable) {
+                $tempPcm = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), [System.Guid]::NewGuid().ToString('N') + '.raw')
                 try {
-                    $pythonCmd = Get-Command python3 -ErrorAction SilentlyContinue
-                    if (-not $pythonCmd) {
-                        $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+                    $pinfo = New-Object System.Diagnostics.ProcessStartInfo
+                    $pinfo.FileName = "ffmpeg"
+                    $pinfo.Arguments = "-nostdin -v error -y -ss 25 -t 40 -i `"$FilePath`" -vn -ac 1 -ar 22050 -f s16le `"$tempPcm`""
+                    $pinfo.UseShellExecute = $false
+                    $pinfo.CreateNoWindow = $true
+
+                    $proc = [System.Diagnostics.Process]::Start($pinfo)
+                    if (-not $proc.WaitForExit(8000)) {
+                        $proc.Kill()
                     }
-                    
-                    if ($pythonCmd) {
-                        $result = & $pythonCmd.Source "$librosaScript" "$FilePath" 2>$null
-                        if ($result -and $result -match '^\d+(?:[\.,]\d+)?$') {
-                            $raw = ($result.Trim()) -replace ',', '.'
-                            $parsed = 0.0
-                            if ([double]::TryParse($raw, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
-                                if ($parsed -ge 30 -and $parsed -le 300) {
-                                    $detectedBpm = ([int][math]::Round($parsed)).ToString()
-                                    $bpmAnalysisCache[$FilePath] = $detectedBpm
-                                    return $detectedBpm
-                                }
-                            }
+
+                    if (-not (Test-Path -LiteralPath $tempPcm) -or (Get-Item -LiteralPath $tempPcm).Length -lt 441000) {
+                        $pinfo.Arguments = "-nostdin -v error -y -ss 0 -t 40 -i `"$FilePath`" -vn -ac 1 -ar 22050 -f s16le `"$tempPcm`""
+                        $proc = [System.Diagnostics.Process]::Start($pinfo)
+                        if (-not $proc.WaitForExit(8000)) {
+                            $proc.Kill()
+                        }
+                    }
+
+                    if ((Test-Path -LiteralPath $tempPcm) -and (Get-Item -LiteralPath $tempPcm).Length -ge 441000) {
+                        $calcBpm = [AudioBpmDetector]::DetectBpmFromPcmFile($tempPcm, 22050)
+                        if ($calcBpm -ge 50 -and $calcBpm -le 220) {
+                            $detectedBpm = [string]$calcBpm
                         }
                     }
                 } catch {
-                    # librosa attempt failed, continue to next method
+                    $detectedBpm = ""
+                } finally {
+                    if (Test-Path -LiteralPath $tempPcm) {
+                        Remove-Item -LiteralPath $tempPcm -Force -ErrorAction SilentlyContinue
+                    }
                 }
             }
 
-            # Fallback: Try ffmpeg bpm filter (requires aubio/librosa integration in ffmpeg)
-            if (-not $detectedBpm -and $ffmpegAvailable) {
-                try {
-                    $analysisOutput = & ffmpeg -hide_banner -nostats -t 180 -i "$FilePath" -vn -af "bpm" -f null NUL 2>&1
-                    
-                    if ($analysisOutput) {
-                        foreach ($line in $analysisOutput) {
-                            if ($line -match '(?i)\bbpm\b[^0-9]*([0-9]+(?:[\.,][0-9]+)?)') {
-                                $raw = $matches[1] -replace ',', '.'
-                                $parsed = 0.0
-                                if ([double]::TryParse($raw, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
-                                    if ($parsed -gt 0 -and $parsed -lt 300) {
-                                        $detectedBpm = ([int][math]::Round($parsed)).ToString()
-                                    }
+            # Priority 2: Python Librosa fallback with timeout guard
+            if (-not $detectedBpm) {
+                $pythonCmd = Get-Command python3 -ErrorAction SilentlyContinue
+                if (-not $pythonCmd) {
+                    $pythonCmd = Get-Command python -ErrorAction SilentlyContinue
+                }
+
+                if ($pythonCmd) {
+                    $baseDir = if ($Root) { $Root } elseif ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path }
+                    $librosaScript = Join-Path $baseDir "scripts\bpm-detect-librosa.py"
+
+                    try {
+                        $pyPsi = New-Object System.Diagnostics.ProcessStartInfo
+                        $pyPsi.FileName = $pythonCmd.Source
+                        $pyPsi.UseShellExecute = $false
+                        $pyPsi.RedirectStandardOutput = $true
+                        $pyPsi.CreateNoWindow = $true
+
+                        if (Test-Path -LiteralPath $librosaScript) {
+                            $pyPsi.Arguments = "`"$librosaScript`" `"$FilePath`""
+                        } else {
+                            $inlinePy = "import sys, warnings; warnings.filterwarnings('ignore'); import numpy as np, librosa; y, sr = librosa.load(sys.argv[1], sr=11025, duration=25.0, offset=20.0); t, _ = librosa.beat.beat_track(y=y, sr=sr, start_bpm=120.0); b = float(np.atleast_1d(t)[0]); print(int(round(b))) if 40 <= b <= 240 else None"
+                            $pyPsi.Arguments = "-c `"$inlinePy`" `"$FilePath`""
+                        }
+
+                        $pyProc = [System.Diagnostics.Process]::Start($pyPsi)
+                        $outTask = $pyProc.StandardOutput.ReadToEndAsync()
+                        if ($pyProc.WaitForExit(6000)) {
+                            $pyOut = $outTask.Result
+                            if ($pyOut -and ($pyOut.Trim() -match '^\d+$')) {
+                                $parsed = [int]$pyOut.Trim()
+                                if ($parsed -ge 40 -and $parsed -le 240) {
+                                    $detectedBpm = [string]$parsed
                                 }
                             }
+                        } else {
+                            $pyProc.Kill()
                         }
-                    }
-                } catch {
-                    # ffmpeg bpm filter likely not available; this is expected on most systems
-                    $detectedBpm = ""
+                    } catch { }
                 }
             }
 
@@ -1406,6 +2422,9 @@ if ($total -eq 0) {
         }
 
         $f = Get-Item -LiteralPath $FileData.FullName
+        # Cache original timestamps to prevent metadata/COM readers from modifying them
+        $origCreationTime = $f.CreationTime
+        $origLastWriteTime = $f.LastWriteTime
         $fObj = $shell.NameSpace($f.DirectoryName)
         $item = $fObj.ParseName($f.Name)
 
@@ -1583,8 +2602,8 @@ if ($total -eq 0) {
             $metaBpm = $metaBpmShell
             $metaBpmSource = "shell"
         }
-        # Third priority: audio analysis (may not work if ffmpeg lacks bpm filter)
-        elseif (-not $metaBpm) {
+        # Third priority: audio analysis (only if explicitly enabled by user)
+        elseif (-not $metaBpm -and $EnableBpmAnalysis) {
             $analyzedbpm = Get-AnalyzedBpm -FilePath $f.FullName
             if ($analyzedbpm) {
                 $metaBpm = $analyzedbpm
@@ -1680,8 +2699,19 @@ if ($total -eq 0) {
         $metaChannels = if ($channelsShell) { $channelsShell } elseif ($ffAudio.channels) { $ffAudio.channels } else { "" }
         $metaCodec = if ($ffAudio.codec) { $ffAudio.codec } else { $f.Extension.Replace('.','').ToUpper() }
 
-        $epochCreated = [int][double]::Parse((Get-Date $f.CreationTime -UFormat %s))
-        $epochModified = [int][double]::Parse((Get-Date $f.LastWriteTime -UFormat %s))
+        # Restore on-disk creation/write timestamps if any inspection tool altered them
+        try {
+            $fileCheck = [System.IO.FileInfo]::new($f.FullName)
+            if ($fileCheck.CreationTime -ne $origCreationTime) {
+                $fileCheck.CreationTime = $origCreationTime
+            }
+            if ($fileCheck.LastWriteTime -ne $origLastWriteTime) {
+                $fileCheck.LastWriteTime = $origLastWriteTime
+            }
+        } catch { }
+
+        $epochCreated = [int][double]::Parse((Get-Date $origCreationTime -UFormat %s))
+        $epochModified = [int][double]::Parse((Get-Date $origLastWriteTime -UFormat %s))
 
         $indexedItem = [ordered]@{
             id = $FileData.Index + 1
@@ -1704,8 +2734,8 @@ if ($total -eq 0) {
                 dir = $relDir
                 size_bytes = $f.Length
                 size_mb = [math]::Round($f.Length / 1MB, 2)
-                created = $f.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")
-                modified = $f.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
+                created = $origCreationTime.ToString("yyyy-MM-dd HH:mm:ss")
+                modified = $origLastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
                 epoch_created = $epochCreated
                 epoch_modified = $epochModified
             }
@@ -1783,7 +2813,7 @@ if ($total -eq 0) {
     foreach ($workItem in $fileWorkItems) {
         $ps = [PowerShell]::Create()
         $ps.RunspacePool = $runspacePool
-        $null = $ps.AddScript($workerScript).AddArgument($workItem).AddArgument($root).AddArgument($audioExt).AddArgument($losslessExt).AddArgument($imgExt)
+        $null = $ps.AddScript($workerScript).AddArgument($workItem).AddArgument($root).AddArgument($audioExt).AddArgument($losslessExt).AddArgument($imgExt).AddArgument($enableBpmAnalysis)
 
         $handle = $ps.BeginInvoke()
         $tasks.Add([pscustomobject]@{
@@ -1842,11 +2872,42 @@ if ($total -eq 0) {
 
 $timer.Stop()
 
+# Merge with existing database items if partial or incremental indexing was selected
+if ($selectedMode -ne "1" -and $existingDbItems.Count -gt 0) {
+    $updatedItemsMap = @{}
+    foreach ($res in $results) {
+        if ($res.file -and $res.file.path) {
+            $updatedItemsMap[$res.file.path.ToLowerInvariant()] = $res
+        }
+    }
+
+    $mergedItems = [System.Collections.Generic.List[object]]::new()
+    foreach ($existingEntry in $existingDbItems) {
+        $entryPath = if ($existingEntry.file -and $existingEntry.file.path) { $existingEntry.file.path.ToLowerInvariant() } else { "" }
+        if ($entryPath -and $updatedItemsMap.ContainsKey($entryPath)) {
+            $mergedItems.Add($updatedItemsMap[$entryPath])
+            $updatedItemsMap.Remove($entryPath)
+        } else {
+            $mergedItems.Add($existingEntry)
+        }
+    }
+
+    foreach ($newEntry in $updatedItemsMap.Values) {
+        $mergedItems.Add($newEntry)
+    }
+
+    # Normalize sequential IDs
+    for ($k = 0; $k -lt $mergedItems.Count; $k++) {
+        $mergedItems[$k].id = $k + 1
+    }
+    $results = $mergedItems
+}
+
 # Creation of the root global object
 $finalData = [ordered]@{
     info = [ordered]@{
         date = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-        total_tracks_versions = $total
+        total_tracks_versions = $results.Count
         execution_time_ms = $timer.ElapsedMilliseconds
     }
     items = $results
@@ -1859,7 +2920,7 @@ $rawJsonLines = ($finalData | ConvertTo-Json -Depth 20) -split "`r?`n"
 Write-Host "`nOptimizing JSON formatting (Strict 1 space indentation)..." -ForegroundColor Cyan
 $optimizedJson = foreach ($line in $rawJsonLines) {
     if ($line -match '^(\s+)(.*)$') {
-        # Recupere le nombre d'espaces actuels, le divise par 4 (standard PowerShell), ou met 1
+        # Get current spaces count, divide by 4 (PowerShell standard), or set 1
         $currentSpaces = $matches[1].Length
         $newIndentLevel = [math]::Floor($currentSpaces / 4)
         if ($newIndentLevel -le 0) { $newIndentLevel = 1 }
@@ -1874,5 +2935,15 @@ $optimizedJson = foreach ($line in $rawJsonLines) {
 # Final save in clean UTF-8
 [System.IO.File]::WriteAllLines($output, $optimizedJson, (New-Object System.Text.UTF8Encoding($false)))
 
-Write-Host "`n[SUCCESS] Database $output generated successfully!" -ForegroundColor Green
-Write-Host "$total versions indexed in $($timer.Elapsed.TotalSeconds) seconds." -ForegroundColor Green
+Write-Host "`n[SUCCESS] Database $output updated successfully!" -ForegroundColor Green
+Write-Host "$($results.Count) total track versions in database ($total processed this run) in $($timer.Elapsed.TotalSeconds) seconds." -ForegroundColor Green
+
+if ($runAuditAfter) {
+    Show-MetadataAudit -Items $results -OutputRoot $root
+} else {
+    Write-Host ""
+    $openAuditPrompt = Read-Host "Would you like to launch the Metadata Analysis & Audit now? [y/N]"
+    if ($openAuditPrompt -ieq 'y') {
+        Show-MetadataAudit -Items $results -OutputRoot $root
+    }
+}
