@@ -20,16 +20,8 @@ export const slugify = (value: string): string => {
 };
 
 export const getBasePath = (): string => {
-    if (typeof window !== 'undefined') {
-        const path = window.location.pathname.toLowerCase();
-        if (path === '/music-library' || path.startsWith('/music-library/')) {
-            return window.location.pathname.slice(0, 14); // Preserves original casing
-        }
-        if (path === '/music' || path.startsWith('/music/')) {
-            return window.location.pathname.slice(0, 6);
-        }
-    }
-    return '';
+    const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+    return base;
 };
 
 const VIEW_PATH_MAP: Partial<Record<ViewType, string>> = {
@@ -69,13 +61,14 @@ export const routeForAlbum = (albumName: string): string => {
 
 export const parseAppRoute = (pathname: string, search: string): ParsedAppRoute => {
     let path = (pathname || '/').trim();
-    const lowerPath = path.toLowerCase();
+    const base = getBasePath();
 
-    // Strip the subpath before parsing
-    if (lowerPath === '/music-library' || lowerPath.startsWith('/music-library/')) {
-        path = path.slice(14) || '/';
-    } else if (lowerPath === '/music' || lowerPath.startsWith('/music/')) {
-        path = path.slice(6) || '/';
+    if (base) {
+        const lowerPath = path.toLowerCase();
+        const lowerBase = base.toLowerCase();
+        if (lowerPath === lowerBase || lowerPath.startsWith(`${lowerBase}/`)) {
+            path = path.slice(base.length) || '/';
+        }
     }
 
     const clean = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
