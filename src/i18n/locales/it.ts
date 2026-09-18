@@ -56,6 +56,8 @@ const it: any = {
             nowPlayingNotificationsDesc: 'Mostra notifiche di brano mentre l\'app è in background.',
             keyboardShortcuts: 'Scorciatoie da tastiera',
             keyboardShortcutsDesc: 'Personalizza i tasti di scelta rapida globali per il controllo della riproduzione.',
+            showUnknownAlbumTracks: 'Mostra singoli e brani senza album',
+            showUnknownAlbumTracksDesc: 'Includi i brani senza metadati album in libreria, home e nelle viste di navigazione.',
         },
         audio: {
             parametricEq: 'EQ parametrico',

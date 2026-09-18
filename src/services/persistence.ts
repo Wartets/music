@@ -54,6 +54,7 @@ export interface UserPreferences {
     normalizationEnabled: boolean;
     normalizationStrength: number;
     metadataWriteTarget: MetadataWriteTarget;
+    showUnknownAlbumTracks: boolean;
     keyboardShortcuts?: KeyboardShortcuts;
 }
 
@@ -128,6 +129,7 @@ const DEFAULT_DATA: UserDataStore = {
         normalizationEnabled: false,
         normalizationStrength: 45,
         metadataWriteTarget: 'musicbib',
+        showUnknownAlbumTracks: false,
         keyboardShortcuts: DEFAULT_KEYBOARD_SHORTCUTS
     },
     playCounts: {},
@@ -301,6 +303,7 @@ class PersistenceService {
         if (typeof value.normalizationEnabled === 'boolean') prefs.normalizationEnabled = value.normalizationEnabled;
         if (typeof value.normalizationStrength === 'number' && Number.isFinite(value.normalizationStrength)) prefs.normalizationStrength = value.normalizationStrength;
         if (value.metadataWriteTarget === 'musicbib' || value.metadataWriteTarget === 'file' || value.metadataWriteTarget === 'both') prefs.metadataWriteTarget = value.metadataWriteTarget;
+        if (typeof value.showUnknownAlbumTracks === 'boolean') prefs.showUnknownAlbumTracks = value.showUnknownAlbumTracks;
         if (isKeyboardShortcuts(value.keyboardShortcuts)) prefs.keyboardShortcuts = value.keyboardShortcuts;
 
         return Object.keys(prefs).length > 0 ? prefs : undefined;

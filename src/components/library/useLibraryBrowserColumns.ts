@@ -1,25 +1,80 @@
 import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
-import { ColumnConfig } from '../../types/music';
+import { ColumnConfig, TrackItem } from '../../types/music';
+import { getTrackCollectionLabel } from '../../utils/collectionLabels';
+import { parseGenres } from '../../utils/genreUtils';
+import { formatSizeMb } from '../../utils/formatters';
+import { measureTextWidth } from '../../utils/textMeasurement';
 
 interface ColumnSpec {
     minWidth: number;
+    maxWidth: number;
     priority: number;
 }
 
 const COLUMN_SPECS: Record<string, ColumnSpec> = {
-    number:   { minWidth: 36,  priority: 3 },
-    artwork:  { minWidth: 52,  priority: 2 },
-    title:    { minWidth: 160, priority: 1 },
-    album:    { minWidth: 100, priority: 4 },
-    genre:    { minWidth: 80,  priority: 7 },
-    year:     { minWidth: 68,  priority: 5 },
-    bpm:      { minWidth: 58,  priority: 8 },
-    duration: { minWidth: 76,  priority: 3 },
-    bitrate:  { minWidth: 68,  priority: 9 },
-    size:     { minWidth: 72,  priority: 10 },
+    number:   { minWidth: 34,  maxWidth: 52,  priority: 3 },
+    artwork:  { minWidth: 52,  maxWidth: 52,  priority: 2 },
+    title:    { minWidth: 160, maxWidth: 720, priority: 1 },
+    album:    { minWidth: 90,  maxWidth: 280, priority: 4 },
+    genre:    { minWidth: 70,  maxWidth: 220, priority: 7 },
+    year:     { minWidth: 56,  maxWidth: 88,  priority: 5 },
+    bpm:      { minWidth: 48,  maxWidth: 76,  priority: 8 },
+    duration: { minWidth: 60,  maxWidth: 92,  priority: 3 },
+    bitrate:  { minWidth: 56,  maxWidth: 100, priority: 9 },
+    size:     { minWidth: 64,  maxWidth: 108, priority: 10 },
 };
 
-export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[]) => {
+const COLUMN_HEADER_LABELS: Record<string, string> = {
+    number: '#',
+    title: 'Title',
+    album: 'Album',
+    genre: 'Genre',
+    year: 'Year',
+    bpm: 'BPM',
+    duration: 'Time',
+    bitrate: 'kbps',
+    size: 'Size',
+};
+
+const CELL_HORIZONTAL_PADDING = 28;
+const HEADER_FONT = '700 10px Inter, system-ui, sans-serif';
+const CELL_FONT = '600 12px Inter, system-ui, sans-serif';
+const SAMPLE_SIZE = 300;
+
+const getColumnCellText = (columnId: string, track: TrackItem): string => {
+    switch (columnId) {
+        case 'album':
+            return getTrackCollectionLabel(track);
+        case 'genre': {
+            const genres = parseGenres(track.metadata?.genre);
+            return genres.length > 0 ? genres.join(' / ') : '-';
+        }
+        case 'year':
+            return track.metadata?.year || '-';
+        case 'bpm':
+            return track.metadata?.bpm || '-';
+        case 'duration':
+            return track.audio_specs?.duration || '0:00';
+        case 'bitrate':
+            return track.audio_specs?.bitrate?.replace(' Kbits/s', '') || '-';
+        case 'size':
+            return formatSizeMb(track.file?.size_bytes);
+        default:
+            return '';
+    }
+};
+
+const sampleTracks = (tracks: TrackItem[]): TrackItem[] => {
+    if (tracks.length <= SAMPLE_SIZE) return tracks;
+    const step = Math.ceil(tracks.length / SAMPLE_SIZE);
+    const sample: TrackItem[] = [];
+    for (let i = 0; i < tracks.length; i += step) {
+        sample.push(tracks[i]);
+    }
+    return sample;
+};
+
+export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[], tracks: TrackItem[]) => {
     const [availableWidth, setAvailableWidth] = useState(() => {
         if (typeof window !== 'undefined') return window.innerWidth - 280;
         return 1000;
@@ -48,6 +103,35 @@ export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[]) => {
         return () => ro.disconnect();
     }, []);
 
+    const sampledTracks = useMemo(() => sampleTracks(tracks), [tracks]);
+
+    const naturalWidths = useMemo(() => {
+        const widths: Record<string, number> = {};
+
+        columnConfig.forEach(col => {
+            const spec = COLUMN_SPECS[col.id];
+            if (!spec || col.id === 'title' || col.id === 'artwork') return;
+
+            let maxContentWidth = measureTextWidth(COLUMN_HEADER_LABELS[col.id] || col.id, HEADER_FONT);
+
+            for (const track of sampledTracks) {
+                const text = getColumnCellText(col.id, track);
+                if (!text) continue;
+                const width = measureTextWidth(text, CELL_FONT);
+                if (width > maxContentWidth) maxContentWidth = width;
+            }
+
+            widths[col.id] = Math.round(Math.min(spec.maxWidth, Math.max(spec.minWidth, maxContentWidth + CELL_HORIZONTAL_PADDING)));
+        });
+
+        return widths;
+    }, [columnConfig, sampledTracks]);
+
+    const getColumnWidth = useCallback((columnId: string): number => {
+        if (columnId === 'artwork') return COLUMN_SPECS.artwork.minWidth;
+        return naturalWidths[columnId] ?? COLUMN_SPECS[columnId]?.minWidth ?? 72;
+    }, [naturalWidths]);
+
     const visibleColumns = useMemo(() => {
         const userVisible = columnConfig.filter(col => col.visible);
 
@@ -67,9 +151,7 @@ export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[]) => {
                 continue;
             }
 
-            const spec = COLUMN_SPECS[col.id];
-            const width = spec ? Math.max(spec.minWidth, col.width || 0) : (col.width || 80);
-            const needed = width + GAP_PER_COL;
+            const needed = getColumnWidth(col.id) + GAP_PER_COL;
 
             if (usedWidth + needed <= availableWidth - 160) {
                 usedWidth += needed;
@@ -79,25 +161,17 @@ export const useLibraryBrowserColumns = (columnConfig: ColumnConfig[]) => {
 
         const acceptedIds = new Set(accepted.map(c => c.id));
         return userVisible.filter(col => acceptedIds.has(col.id));
-    }, [columnConfig, availableWidth]);
+    }, [columnConfig, availableWidth, getColumnWidth]);
 
     const colWidths = useMemo(() => {
         const fixedTotal = visibleColumns.reduce((sum, col) => {
             if (col.id === 'title') return sum;
-            const spec = COLUMN_SPECS[col.id];
-            const min = spec?.minWidth ?? 60;
-            return sum + Math.max(min, col.width || 0);
+            return sum + getColumnWidth(col.id);
         }, 0);
-        const titleWidth = Math.max(160, Math.min(availableWidth * 0.35, availableWidth - fixedTotal - 40));
+        const titleWidth = Math.max(160, Math.min(availableWidth * 0.4, availableWidth - fixedTotal - 40));
 
-        return visibleColumns.map(col => {
-            if (col.id === 'title') return Math.round(titleWidth);
-            const spec = COLUMN_SPECS[col.id];
-            const min = spec?.minWidth ?? 60;
-            return Math.max(min, col.width || 0);
-        });
-    }, [visibleColumns, availableWidth]);
+        return visibleColumns.map(col => (col.id === 'title' ? Math.round(titleWidth) : getColumnWidth(col.id)));
+    }, [visibleColumns, availableWidth, getColumnWidth]);
 
     return { visibleColumns, colWidths, measureRef };
 };
-

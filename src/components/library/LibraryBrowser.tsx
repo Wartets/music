@@ -220,9 +220,7 @@ export const LibraryBrowser: React.FC<LibraryBrowserProps> = ({
     const [columnConfigMenuPosition, setColumnConfigMenuPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
     const isMobile = useIsMobile();
     const columnConfigButtonRef = useRef<HTMLButtonElement>(null);
-    const { visibleColumns, colWidths, measureRef } = useLibraryBrowserColumns(libraryState.columnConfig);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [headerCompact, setHeaderCompact] = useState(false);
+    const { visibleColumns, colWidths, measureRef } = useLibraryBrowserColumns(libraryState.columnConfig, tracks);
     const { handleSortColumn, isColumnSorted, getSortDirection } = useLibraryBrowserSort(
         libraryState.sortBy,
         libraryState.sortOrder,
@@ -244,26 +242,6 @@ export const LibraryBrowser: React.FC<LibraryBrowserProps> = ({
             default: return col.label || col.id;
         }
     }, [t]);
-
-    const combinedRef = useCallback((el: HTMLDivElement | null) => {
-        scrollContainerRef.current = el;
-        measureRef(el);
-    }, [measureRef]);
-
-    useEffect(() => {
-        const el = scrollContainerRef.current;
-        if (!el) return;
-        const onScroll = () => {
-            const top = el.scrollTop;
-            setHeaderCompact(prev => {
-                if (!prev && top > 80) return true;
-                if (prev && top < 10) return false;
-                return prev;
-            });
-        };
-        el.addEventListener('scroll', onScroll, { passive: true });
-        return () => el.removeEventListener('scroll', onScroll);
-    }, []);
 
     const moveColumn = useCallback((index: number, direction: number) => {
         const newIndex = index + direction;
@@ -474,66 +452,47 @@ export const LibraryBrowser: React.FC<LibraryBrowserProps> = ({
     return (
         <div className="h-full flex flex-col pt-0 md:pt-20 px-3 md:px-6 pb-0 bg-surface-primary">
             {/* Page Header */}
-            <div className={`transition-all duration-300 ease-out overflow-hidden ${headerCompact ? 'mb-2 max-h-16' : `mb-4 md:mb-8 max-h-[500px] ${artworkPath ? 'md:mb-10' : 'md:mb-6'}`}`}>
-                <div className={`flex items-center gap-4 ${headerCompact ? '' : 'flex-col sm:flex-row sm:items-end md:gap-8'}`}>
-                    {!headerCompact && (
-                        artworkPath ? (
-                            <div className="w-20 h-20 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 border border-white/10 group relative">
-                                <ArtworkImage src={artworkPath} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                            </div>
-                        ) : headerIcon ? (
-                            <div className="w-12 h-12 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center text-dominant border border-white/5 shadow-xl">
-                                {headerIcon}
-                            </div>
-                        ) : (
-                            <div className="w-12 h-12 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center text-dominant border border-white/5 shadow-xl">
-                                <Folder size={32} />
-                            </div>
-                        )
+            <div className={`flex-shrink-0 mb-4 md:mb-8 ${artworkPath ? 'md:mb-10' : 'md:mb-6'}`}>
+                <div className="flex items-center gap-4 flex-col sm:flex-row sm:items-end md:gap-8">
+                    {artworkPath ? (
+                        <div className="w-20 h-20 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 border border-white/10 group relative">
+                            <ArtworkImage src={artworkPath} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                    ) : headerIcon ? (
+                        <div className="w-12 h-12 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center text-dominant border border-white/5 shadow-xl">
+                            {headerIcon}
+                        </div>
+                    ) : (
+                        <div className="w-12 h-12 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center text-dominant border border-white/5 shadow-xl">
+                            <Folder size={32} />
+                        </div>
                     )}
-                    <div className={`flex-1 flex items-center ${headerCompact ? 'gap-4' : 'flex-col items-center sm:items-start text-center sm:text-left'}`}>
-                        {headerCompact ? (
-                            <>
-                                <h1 className="text-lg font-black tracking-tight text-white truncate">{title}</h1>
-                                <button
-                                    onClick={onShufflePlay || (() => playTrack(tracks[0], tracks))}
-                                    className="flex items-center gap-2 px-4 py-2 bg-dominant text-on-dominant rounded-lg text-[10px] font-black uppercase tracking-[0.16em] hover:bg-dominant-light transition-all shadow-lg shadow-dominant/10 active:scale-95 flex-shrink-0"
-                                >
-                                    <Play size={12} fill="currentColor" /> {t('libraryBrowser.playAll')}
-                                </button>
-                                <span className="text-gray-600 font-mono text-[10px] uppercase tracking-widest flex-shrink-0">
-                                    {tracks.length} tracks
-                                </span>
-                            </>
-                        ) : (
-                            <>
-                                <span className="text-xs font-black uppercase tracking-[0.3em] text-dominant mb-3 opacity-60">
-                                    {subtitle || t('libraryBrowser.collection')}
-                                </span>
-                                <h1 className="text-2xl md:text-5xl font-black tracking-tighter text-white mb-2 md:mb-3">{title}</h1>
-                                {description && (
-                                    <p className="text-gray-400 text-xs md:text-base max-w-2xl mb-3 md:mb-5 font-medium leading-relaxed">{description}</p>
-                                )}
-                                <div className="flex items-center gap-2 md:gap-4">
-                                    <button
-                                        onClick={onShufflePlay || (() => playTrack(tracks[0], tracks))}
-                                        className="flex items-center gap-2 md:gap-3 px-5 md:px-8 py-3 md:py-3 bg-dominant text-on-dominant rounded-xl text-sm md:text-xs font-black uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-dominant-light transition-all shadow-xl shadow-dominant/10 active:scale-95 min-h-12 md:min-h-11"
-                                    >
-                                        <Play size={16} fill="currentColor" /> {t('libraryBrowser.playAll')}
-                                    </button>
-                                    <span className="hidden sm:block text-gray-600 font-mono text-xs uppercase tracking-widest pl-2">
-                                        {tracks.length} tracks • {formatTotalDuration(tracks)}
-                                    </span>
-                                </div>
-                            </>
+                    <div className="flex-1 flex items-center flex-col items-center sm:items-start text-center sm:text-left">
+                        <span className="text-xs font-black uppercase tracking-[0.3em] text-dominant mb-3 opacity-60">
+                            {subtitle || t('libraryBrowser.collection')}
+                        </span>
+                        <h1 className="text-2xl md:text-5xl font-black tracking-tighter text-white mb-2 md:mb-3">{title}</h1>
+                        {description && (
+                            <p className="text-gray-400 text-xs md:text-base max-w-2xl mb-3 md:mb-5 font-medium leading-relaxed">{description}</p>
                         )}
+                        <div className="flex items-center gap-2 md:gap-4">
+                            <button
+                                onClick={onShufflePlay || (() => playTrack(tracks[0], tracks))}
+                                className="flex items-center gap-2 md:gap-3 px-5 md:px-8 py-3 md:py-3 bg-dominant text-on-dominant rounded-xl text-sm md:text-xs font-black uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-dominant-light transition-all shadow-xl shadow-dominant/10 active:scale-95 min-h-12 md:min-h-11"
+                            >
+                                <Play size={16} fill="currentColor" /> {t('libraryBrowser.playAll')}
+                            </button>
+                            <span className="hidden sm:block text-gray-600 font-mono text-xs uppercase tracking-widest pl-2">
+                                {tracks.length} tracks • {formatTotalDuration(tracks)}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* Scrollable table area */}
-            <div ref={combinedRef} className="flex-1 overflow-y-auto min-h-0">
+            <div ref={measureRef} className="flex-1 overflow-y-auto min-h-0">
                 <table className="w-full" style={{ tableLayout: 'fixed', borderSpacing: 0 }}>
                     <colgroup>
                         {visibleColumns.map((col, i) => (

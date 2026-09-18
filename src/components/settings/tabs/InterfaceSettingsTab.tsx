@@ -2,6 +2,7 @@ import React from 'react';
 import { Keyboard, Monitor, Sparkles } from 'lucide-react';
 import { useTheme } from '../../../contexts/ThemeContext';
 import type { ThemeMode } from '../../../contexts/ThemeContext';
+import { useLibrary } from '../../../contexts/LibraryContext';
 import { useSettingsView } from '../SettingsViewContext';
 import { useTranslation } from '../../../i18n/I18nContext';
 import { ShortcutEditor } from '../ShortcutEditor';
@@ -9,6 +10,7 @@ import { ShortcutEditor } from '../ShortcutEditor';
 export const InterfaceSettingsTab: React.FC = () => {
     const { t } = useTranslation();
     const { settings: themeSettings, updateSettings, currentPalette, reportBadPalette } = useTheme();
+    const { showUnknownAlbumTracks, setShowUnknownAlbumTracks } = useLibrary();
     const {
         setInterfacePreference,
         requestNowPlayingNotifications,
@@ -167,6 +169,19 @@ export const InterfaceSettingsTab: React.FC = () => {
                                 className={`w-12 h-6 rounded-full transition-all relative ${uiNowPlayingNotificationsEnabled ? 'bg-dominant' : 'bg-white/10'}`}
                             >
                                 <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${uiNowPlayingNotificationsEnabled ? 'left-7 bg-black' : 'left-1'}`} />
+                            </button>
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 bg-black/20 rounded-2xl border border-white/5">
+                            <div>
+                                <div className="font-bold text-sm text-white">{t('settings.interface.showUnknownAlbumTracks')}</div>
+                                <div className="text-[10px] text-gray-500">{t('settings.interface.showUnknownAlbumTracksDesc')}</div>
+                            </div>
+                            <button
+                                onClick={() => setShowUnknownAlbumTracks(!showUnknownAlbumTracks)}
+                                className={`w-12 h-6 rounded-full transition-all relative ${showUnknownAlbumTracks ? 'bg-dominant' : 'bg-white/10'}`}
+                            >
+                                <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${showUnknownAlbumTracks ? 'left-7 bg-black' : 'left-1'}`} />
                             </button>
                         </div>
                     </div>

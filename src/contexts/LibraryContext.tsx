@@ -8,6 +8,7 @@ import { MetadataWriteTarget } from '../services/persistence';
 import { rankTrackVersions } from '../utils/versionUtils';
 import { parseDuration } from '../utils/formatters';
 import { parseGenres } from '../utils/genreUtils';
+import { filterTracksByAlbumVisibility } from '../utils/albumVisibility';
 
 interface LibraryContextProps {
     state: LibraryState;
@@ -19,6 +20,8 @@ interface LibraryContextProps {
     editingTracks: TrackItem[] | null;
     setEditingTracks: (tracks: TrackItem[] | null) => void;
     refresh: () => void;
+    showUnknownAlbumTracks: boolean;
+    setShowUnknownAlbumTracks: (value: boolean) => void;
 }
 
 const LibraryContext = createContext<LibraryContextProps | undefined>(undefined);
@@ -52,6 +55,53 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
             stats: { totalDuration: 0, totalTracks: 0, totalSizeMb: 0 }
         };
     });
+
+    const [showUnknownAlbumTracks, setShowUnknownAlbumTracksState] = useState<boolean>(
+        () => persistenceService.getPreferences().showUnknownAlbumTracks ?? false
+    );
+    const rawTracksRef = useRef<TrackItem[]>([]);
+
+    const buildDerivedTrackState = useCallback((allTracks: TrackItem[], showUnknown: boolean) => {
+        const visibleTracks = filterTracksByAlbumVisibility(allTracks, showUnknown);
+
+        let totalSizeMb = 0;
+        let totalDuration = 0;
+        visibleTracks.forEach(t => {
+            totalSizeMb += t.file?.size_mb || 0;
+            totalDuration += parseDuration(t.audio_specs?.duration || '0:00');
+        });
+
+        const versionToPrimaryMap: Record<string, string> = {};
+        visibleTracks.forEach(primary => {
+            primary.versions?.forEach(v => {
+                versionToPrimaryMap[v.logic.hash_sha256] = primary.logic.hash_sha256;
+            });
+        });
+
+        return {
+            tracks: visibleTracks,
+            versionToPrimaryMap,
+            stats: { totalTracks: visibleTracks.length, totalSizeMb, totalDuration }
+        };
+    }, []);
+
+    const setShowUnknownAlbumTracks = useCallback((value: boolean) => {
+        setShowUnknownAlbumTracksState(value);
+        persistenceService.updatePreferences({ showUnknownAlbumTracks: value });
+    }, []);
+
+    useEffect(() => {
+        if (rawTracksRef.current.length === 0) return;
+        const derived = buildDerivedTrackState(rawTracksRef.current, showUnknownAlbumTracks);
+        searchService.buildIndex(derived.tracks);
+        setState(prev => ({
+            ...prev,
+            tracks: derived.tracks,
+            filteredTracks: derived.tracks,
+            versionToPrimaryMap: derived.versionToPrimaryMap,
+            stats: derived.stats
+        }));
+    }, [showUnknownAlbumTracks, buildDerivedTrackState]);
 
     useEffect(() => {
         const loadDb = async () => {
@@ -89,7 +139,7 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
                     groupedMap.get(key)!.push(t);
                 });
 
-                const tracks: TrackItem[] = Array.from(groupedMap.values()).map(versions => {
+                const allTracks: TrackItem[] = Array.from(groupedMap.values()).map(versions => {
                     // Use multi-factor ranking (semantic-like version, version-name date, file dates, quality).
                     const sorted = rankTrackVersions(versions);
                     const primary = { ...sorted[0] };
@@ -115,33 +165,17 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
                     return primary;
                 });
 
-                searchService.buildIndex(tracks);
-
-                // Calculate stats
-                const totalTracks = tracks.length;
-                let totalSizeMb = 0;
-                let totalDuration = 0;
-
-                tracks.forEach(t => {
-                    totalSizeMb += t.file?.size_mb || 0;
-                    totalDuration += parseDuration(t.audio_specs?.duration || '0:00');
-                });
-
-                // Calculate version to primary mapping
-                const versionToPrimaryMap: Record<string, string> = {};
-                tracks.forEach(primary => {
-                    primary.versions?.forEach(v => {
-                        versionToPrimaryMap[v.logic.hash_sha256] = primary.logic.hash_sha256;
-                    });
-                });
+                rawTracksRef.current = allTracks;
+                const derived = buildDerivedTrackState(allTracks, showUnknownAlbumTracks);
+                searchService.buildIndex(derived.tracks);
 
                 setState(prev => ({
                     ...prev,
-                    tracks,
-                    filteredTracks: tracks,
+                    tracks: derived.tracks,
+                    filteredTracks: derived.tracks,
                     isLoading: false,
-                    versionToPrimaryMap,
-                    stats: { totalTracks, totalSizeMb, totalDuration }
+                    versionToPrimaryMap: derived.versionToPrimaryMap,
+                    stats: derived.stats
                 }));
             } else {
                 setState(prev => ({ ...prev, isLoading: false }));
@@ -275,31 +309,26 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
             persistenceService.setMetadataOverride(hash_sha256, override);
         }
 
-        // Compute updated tracks synchronously and update state, then rebuild search index
-        let updatedTracks: TrackItem[] = [];
-        setState(prev => {
-            const updateTracksArray = (tracks: TrackItem[]) => tracks.map(t => {
-                if (t.logic?.hash_sha256 === hash_sha256) {
-                    return { ...t, metadata: { ...t.metadata, ...override } as TrackMetadata };
-                }
-                return t;
-            });
-
-            const newTracks = updateTracksArray(prev.tracks);
-            const newFiltered = updateTracksArray(prev.filteredTracks);
-
-            updatedTracks = newTracks;
-
-            return {
-                ...prev,
-                tracks: newTracks,
-                filteredTracks: newFiltered
-            };
+        // Compute updated tracks synchronously, keep the full catalogue and visible state in sync, then rebuild search index
+        const updateTracksArray = (tracks: TrackItem[]) => tracks.map(t => {
+            if (t.logic?.hash_sha256 === hash_sha256) {
+                return { ...t, metadata: { ...t.metadata, ...override } as TrackMetadata };
+            }
+            return t;
         });
+
+        rawTracksRef.current = updateTracksArray(rawTracksRef.current);
+        const updatedTracks = filterTracksByAlbumVisibility(rawTracksRef.current, showUnknownAlbumTracks);
+
+        setState(prev => ({
+            ...prev,
+            tracks: updatedTracks,
+            filteredTracks: filterTracksByAlbumVisibility(updateTracksArray(prev.filteredTracks), showUnknownAlbumTracks)
+        }));
 
         // Rebuild search index so in-memory search reflects metadata changes immediately.
         try {
-            if (updatedTracks && updatedTracks.length > 0) {
+            if (updatedTracks.length > 0) {
                 searchService.buildIndex(updatedTracks);
             }
         } catch (e) {
@@ -324,24 +353,24 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
                 URL.revokeObjectURL(url);
             }, 250);
         }
-    }, []);
+    }, [showUnknownAlbumTracks]);
 
     const updateArtworkOverride = useCallback((hash_sha256: string, artwork: import('../types/music').ImageDetails[]) => {
         persistenceService.setArtworkOverride(hash_sha256, artwork);
-        setState(prev => {
-            const updateTracksArray = (tracks: TrackItem[]) => tracks.map(t => {
-                if (t.logic?.hash_sha256 === hash_sha256) {
-                    return { ...t, artworks: { ...t.artworks, track_artwork: artwork } };
-                }
-                return t;
-            });
-
-            return {
-                ...prev,
-                tracks: updateTracksArray(prev.tracks),
-                filteredTracks: updateTracksArray(prev.filteredTracks)
-            };
+        const updateTracksArray = (tracks: TrackItem[]) => tracks.map(t => {
+            if (t.logic?.hash_sha256 === hash_sha256) {
+                return { ...t, artworks: { ...t.artworks, track_artwork: artwork } };
+            }
+            return t;
         });
+
+        rawTracksRef.current = updateTracksArray(rawTracksRef.current);
+
+        setState(prev => ({
+            ...prev,
+            tracks: updateTracksArray(prev.tracks),
+            filteredTracks: updateTracksArray(prev.filteredTracks)
+        }));
     }, []);
 
     const [editingTracks, setEditingTracks] = useState<TrackItem[] | null>(null);
@@ -365,7 +394,9 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
             updateColumnConfig,
             editingTracks,
             setEditingTracks,
-            refresh
+            refresh,
+            showUnknownAlbumTracks,
+            setShowUnknownAlbumTracks
         }}>
             {children}
         </LibraryContext.Provider>

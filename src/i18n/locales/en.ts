@@ -56,6 +56,8 @@ const en = {
             nowPlayingNotificationsDesc: 'Show track notifications while the app is in background.',
             keyboardShortcuts: 'Keyboard Shortcuts',
             keyboardShortcutsDesc: 'Customize global hotkeys for playback control.',
+            showUnknownAlbumTracks: 'Show Singles & Unknown Album Tracks',
+            showUnknownAlbumTracksDesc: 'Include tracks without album metadata across the library, dashboard, and browsing views.',
         },
         audio: {
             parametricEq: 'Parametric EQ',

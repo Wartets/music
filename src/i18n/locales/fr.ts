@@ -56,6 +56,8 @@ const fr: any = {
             nowPlayingNotificationsDesc: 'Affiche des notifications de titre quand l\'app est en arrière-plan.',
             keyboardShortcuts: 'Raccourcis clavier',
             keyboardShortcutsDesc: 'Personnalisez les raccourcis globaux de contrôle de lecture.',
+            showUnknownAlbumTracks: 'Afficher les singles et titres sans album',
+            showUnknownAlbumTracksDesc: 'Inclure les titres sans métadonnées d\'album dans la bibliothèque, l\'accueil et les vues de navigation.',
         },
         audio: {
             parametricEq: 'Égaliseur paramétrique',
