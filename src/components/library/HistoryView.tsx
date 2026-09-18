@@ -1,6 +1,6 @@
 import React from 'react';
 import { ViewType } from '../layout/AppLayout';
-import { Clock, Play, ArrowUpDown } from 'lucide-react';
+import { Clock, Play, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react';
 import { useLibrary } from '../../contexts/LibraryContext';
 import { usePlayer } from '../../contexts/PlayerContext';
 import { TrackItem } from '../../types/music';
@@ -30,6 +30,21 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
     const isMobile = useIsMobile();
     const { t } = useTranslation();
     const visibleColumns = React.useMemo(() => libState.columnConfig.filter(column => column.visible), [libState.columnConfig]);
+    const [historySortBy, setHistorySortBy] = React.useState<string | null>(null);
+    const [historySortOrder, setHistorySortOrder] = React.useState<'asc' | 'desc'>('asc');
+    const sortableHistoryColumns = React.useMemo(() => new Set(['title', 'album', 'genre', 'year', 'bpm', 'duration', 'bitrate', 'size']), []);
+
+    const handleHistorySortColumn = React.useCallback((columnId: string) => {
+        if (!sortableHistoryColumns.has(columnId)) return;
+        setHistorySortBy(previous => {
+            if (previous !== columnId) {
+                setHistorySortOrder('asc');
+                return columnId;
+            }
+            setHistorySortOrder(order => order === 'asc' ? 'desc' : 'asc');
+            return columnId;
+        });
+    }, [sortableHistoryColumns]);
 
     const getColumnLabel = React.useCallback((id: string) => {
         switch (id) {
@@ -52,21 +67,63 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
         resolveHistoryTracks(libState.tracks, libState.versionToPrimaryMap)
     ), [libState.tracks, libState.versionToPrimaryMap, playerState.history]);
 
+    const sortedHistoryTracks = React.useMemo(() => {
+        if (!historySortBy) return historyTracks;
+
+        const compare = (a: TrackItem, b: TrackItem): number => {
+            switch (historySortBy) {
+                case 'title':
+                    return getTrackDisplayName(a).localeCompare(getTrackDisplayName(b));
+                case 'album':
+                    return (a.metadata?.album || '').localeCompare(b.metadata?.album || '');
+                case 'genre':
+                    return (parseGenres(a.metadata?.genre)[0] || '').localeCompare(parseGenres(b.metadata?.genre)[0] || '');
+                case 'year':
+                    return (Number(a.metadata?.year) || 0) - (Number(b.metadata?.year) || 0);
+                case 'bpm':
+                    return (Number(a.metadata?.bpm) || 0) - (Number(b.metadata?.bpm) || 0);
+                case 'duration': {
+                    const parse = (value: string | null | undefined) => {
+                        if (!value) return 0;
+                        const parts = value.split(':').map(Number);
+                        return parts.reduce((total, part) => total * 60 + (Number.isFinite(part) ? part : 0), 0);
+                    };
+                    return parse(a.audio_specs?.duration) - parse(b.audio_specs?.duration);
+                }
+                case 'bitrate':
+                    return (parseInt(a.audio_specs?.bitrate || '0', 10) || 0) - (parseInt(b.audio_specs?.bitrate || '0', 10) || 0);
+                case 'size':
+                    return (a.file?.size_bytes || 0) - (b.file?.size_bytes || 0);
+                default:
+                    return 0;
+            }
+        };
+
+        const sorted = [...historyTracks].sort(compare);
+        return historySortOrder === 'desc' ? sorted.reverse() : sorted;
+    }, [historyTracks, historySortBy, historySortOrder]);
+
     const handlePlay = (track: TrackItem) => {
-        playTrack(track, historyTracks);
+        playTrack(track, sortedHistoryTracks);
     };
 
     const renderHeader = () => (
         <div className="flex items-center px-4 py-2 border-b border-white/5 bg-white/5 backdrop-blur-md rounded-t-xl">
-            {visibleColumns.map(col => (
-                <div
-                    key={col.id}
-                    className={`text-[10px] font-black uppercase tracking-widest text-gray-500 ${col.width === 0 ? 'flex-1 min-w-0' : ''} ${['album', 'genre', 'year', 'bpm', 'bitrate', 'size'].includes(col.id) ? 'hidden md:block' : ''}`}
-                    style={col.width !== 0 ? { width: col.width } : undefined}
-                >
-                    {getColumnLabel(col.id)}
-                </div>
-            ))}
+            {visibleColumns.map(col => {
+                const isSortable = sortableHistoryColumns.has(col.id);
+                const isActive = historySortBy === col.id;
+                return (
+                    <div
+                        key={col.id}
+                        onClick={() => handleHistorySortColumn(col.id)}
+                        className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-widest transition-colors ${isActive ? 'text-white' : 'text-gray-500'} ${isSortable ? 'cursor-pointer hover:text-white/70' : ''} ${col.width === 0 ? 'flex-1 min-w-0' : ''} ${['album', 'genre', 'year', 'bpm', 'bitrate', 'size'].includes(col.id) ? 'hidden md:flex' : ''}`}
+                        style={col.width !== 0 ? { width: col.width } : undefined}
+                    >
+                        {getColumnLabel(col.id)}
+                        {isActive && (historySortOrder === 'asc' ? <ChevronUp size={10} /> : <ChevronDown size={10} />)}
+                    </div>
+                );
+            })}
             <div className="w-10 flex-shrink-0" />
         </div>
     );
@@ -127,7 +184,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
                 key={`${track.logic.hash_sha256}-${index}`}
                 className={`group flex items-stretch px-4 py-2 border-b border-white/[0.02] last:border-0 rounded-none cursor-pointer transition-colors ${isPlaying ? 'bg-dominant/10' : 'hover:bg-white/5'}`}
                 onClick={() => handlePlay(track)}
-                onContextMenu={(e) => openItemContextMenu(e, track, historyTracks, undefined)}
+                onContextMenu={(e) => openItemContextMenu(e, track, sortedHistoryTracks, undefined)}
             >
                 {visibleColumns.map(col => (
                     <div
@@ -166,7 +223,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
                     </button>
                 </div>
 
-                {historyTracks.length === 0 ? (
+                {sortedHistoryTracks.length === 0 ? (
                     <EmptyState
                         icon={<Clock size={40} />}
                         title={t('historyView.noHistoryYet')}
@@ -177,7 +234,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
                     />
                 ) : (
                     <div className="space-y-1.5">
-                        {historyTracks.map((track, index) => {
+                        {sortedHistoryTracks.map((track, index) => {
                             const isPlaying = playerState.currentTrack?.logic.hash_sha256 === track.logic.hash_sha256;
                             return (
                                 <TrackRow
@@ -185,14 +242,14 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
                                     track={track}
                                     index={index}
                                     isPlaying={isPlaying}
-                                    list={historyTracks}
+                                    list={sortedHistoryTracks}
                                     showIndex={false}
                                     showArtwork={true}
                                     showCollection={false}
                                     showRating={false}
                                     showDuration
                                     onPlay={(t: TrackItem) => handlePlay(t)}
-                                    onContextMenu={(e: React.MouseEvent, t: TrackItem) => openItemContextMenu(e, t, historyTracks, undefined)}
+                                    onContextMenu={(e: React.MouseEvent, t: TrackItem) => openItemContextMenu(e, t, sortedHistoryTracks, undefined)}
                                     className={`rounded-xl border border-white/10 transition-colors ${isPlaying ? 'ring-1 ring-dominant/60 bg-dominant/10' : 'bg-white/[0.02] hover:bg-white/5'}`}
                                 />
                             );
@@ -226,7 +283,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
             <div className="flex-1 overflow-hidden flex flex-col bg-[#111]/40 rounded-t-2xl border-x border-t border-white/5">
                 {renderHeader()}
                 <div className="flex-1 overflow-hidden">
-                    {historyTracks.length === 0 ? (
+                    {sortedHistoryTracks.length === 0 ? (
                         <EmptyState
                             icon={<Clock size={48} />}
                             title={t('historyView.noHistoryYet')}
@@ -237,7 +294,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onNavigate: _onNavigat
                         />
                     ) : (
                         <VirtualList
-                            items={historyTracks}
+                            items={sortedHistoryTracks}
                             rowHeight={isMobile ? 54 : 60}
                             renderRow={(track: TrackItem, idx: number) => renderRow(track, idx)}
                             overscan={isMobile ? 3 : 5}

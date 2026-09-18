@@ -9,6 +9,7 @@ interface SeekBarProps {
     isBuffering?: boolean;
     onSeek: (position: number) => void;
     disabled?: boolean;
+    showTimeLabels?: boolean;
 }
 
 export const SeekBar: React.FC<SeekBarProps> = ({
@@ -18,6 +19,7 @@ export const SeekBar: React.FC<SeekBarProps> = ({
     isBuffering = false,
     onSeek,
     disabled = false,
+    showTimeLabels = true,
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -207,7 +209,7 @@ export const SeekBar: React.FC<SeekBarProps> = ({
                 </div>
             )}
 
-            <div className="hidden md:flex items-center justify-end gap-2 mt-1">
+            <div className={`${showTimeLabels ? 'hidden md:flex' : 'hidden'} items-center justify-end gap-2 mt-1`}>
                 <button
                     onClick={toggleTimeDisplay}
                     className="text-xs text-white hover:text-dominant transition-colors cursor-pointer tabular-nums"

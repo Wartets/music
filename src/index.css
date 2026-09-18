@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --color-dominant {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1a1a1a;
+}
+@property --color-dominant-light {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #333333;
+}
+@property --color-dominant-dark {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #000000;
+}
+@property --color-surface-secondary {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0a0a0a;
+}
+@property --color-surface-elevated {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #141414;
+}
+@property --color-text-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --color-border-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.2);
+}
+@property --color-badge-bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.1);
+}
+
 :root {
   /* Chameleon UI Default Variables */
   --color-dominant: #1a1a1a;
@@ -188,7 +229,7 @@
 
 @keyframes nowPlayingPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 0.6; transform: scale(0.88); }
 }
 
 @keyframes immersiveGrainShift {

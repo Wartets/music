@@ -164,20 +164,18 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const buildPaletteFromPrimary = useCallback((basePrimary: string, themeSettings: ThemeSettings): Palette => {
         let primary = basePrimary;
 
-        // Clamp lightness to prevent washed-out/white themes on dark UI
+        // Clamp lightness and saturation to prevent washed-out or overly violent theme swings
         const primaryRgb = hexToRgb(primary);
         if (primaryRgb) {
             const hsl = rgbToHsl(primaryRgb.r, primaryRgb.g, primaryRgb.b);
-            if (hsl.l > 55) {
-                hsl.l = 55;
-                const clamped = hslToRgb(hsl.h, hsl.s, hsl.l);
+            const clampedLightness = Math.min(55, Math.max(22, hsl.l));
+            if (clampedLightness !== hsl.l) {
+                const clamped = hslToRgb(hsl.h, hsl.s, clampedLightness);
                 primary = rgbToHex(clamped.r, clamped.g, clamped.b);
             }
         }
 
-        if (themeSettings.limitAggressiveColors) {
-            primary = limitSaturation(primary, 60);
-        }
+        primary = limitSaturation(primary, themeSettings.limitAggressiveColors ? 55 : 82);
 
         let light = lightenColor(primary, 20);
         let dark = darkenColor(primary, 30);

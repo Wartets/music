@@ -9,6 +9,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useTranslation } from '../../i18n/I18nContext';
 import { getTrackDisplayName, getTrackVersionDisplayName } from '../../utils/trackUtils';
 import { Info, Link2, Music, Volume1, Volume2, VolumeX } from 'lucide-react';
+import { SeekBar } from '../player/SeekBar';
 
 const IconPlay = React.memo(() => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transition-transform group-active:scale-90"><path d="M8 5v14l11-7z" /></svg>);
 const IconPause = React.memo(() => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="transition-transform group-active:scale-90"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>);
@@ -69,7 +70,6 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
     const track = state.currentTrack;
     const previousVolumeRef = useRef<number>(state.volume > 0 ? state.volume : 0.8);
 
-    const [isDragging, setIsDragging] = useState(false);
     const [localProgress, setLocalProgress] = useState(0);
     const rafRef = useRef<number | null>(null);
     const durationRef = useRef<number>(0);
@@ -89,7 +89,6 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
     const durationSec = parseDurationStr(track?.audio_specs?.duration || null);
     durationRef.current = durationSec;
     const safeProgress = Math.max(0, Math.min(localProgress, durationSec || 0));
-    const progressPercent = durationSec > 0 ? (safeProgress / durationSec) * 100 : 0;
 
     useEffect(() => {
         let lastTime = 0;
@@ -100,7 +99,7 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
         }
 
         const updateProgress = (timestamp: number) => {
-            if (timestamp - lastTime > 42 && !isDragging) {
+            if (timestamp - lastTime > 42) {
                 lastTime = timestamp;
                 const current = getProgress();
                 setLocalProgress(current);
@@ -113,37 +112,23 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
 
         if (state.isPlaying) {
             rafRef.current = requestAnimationFrame(updateProgress);
-        } else if (!isDragging) {
+        } else {
             setLocalProgress(getProgress());
         }
 
         return () => {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-    }, [getProgress, state.isPlaying, isDragging, track?.logic.hash_sha256]);
+    }, [getProgress, state.isPlaying, track?.logic.hash_sha256]);
 
-    const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number(e.target.value);
+    const handleSeekCommit = useCallback((value: number) => {
         setLocalProgress(value);
         if (track) {
             seek(value);
         }
-    };
-
-    const handleSeekPointerDown = (e: React.PointerEvent<HTMLInputElement>) => {
-        e.currentTarget.setPointerCapture(e.pointerId);
-        setIsDragging(true);
-    };
-
-    const handleSeekPointerUp = (e: React.PointerEvent<HTMLInputElement>) => {
-        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
-            e.currentTarget.releasePointerCapture(e.pointerId);
-        }
-        setIsDragging(false);
-    };
+    }, [seek, track]);
 
     const isCompact = persistenceService.get('ui_compact_player') === true;
-    const isGlowEnabled = persistenceService.get('ui_glow') !== false;
 
     const artworkDetails = track?.artworks?.track_artwork?.[0] || track?.artworks?.album_artwork?.[0];
     const isLossless = track?.audio_specs?.is_lossless;
@@ -158,13 +143,13 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
     }, [state.volume]);
 
     useEffect(() => {
-        if (!isDragging && track) {
+        if (track) {
             const currentProgress = getProgress();
             if (Math.abs(currentProgress - localProgress) > 1) {
                 setLocalProgress(currentProgress);
             }
         }
-    }, [track, getProgress, isDragging]);
+    }, [track, getProgress]);
 
     const handleRepeatToggle = useCallback(() => {
         setRepeat(state.repeat === RepeatMode.None ? RepeatMode.All : state.repeat === RepeatMode.All ? RepeatMode.One : RepeatMode.None);
@@ -273,40 +258,15 @@ export const PlayerBar: React.FC<{ onToggleContext?: () => void, onNavigate: (vi
             ></div>
 
             {/* Seek Bar */}
-            <div className="w-full relative h-[6px] group -mt-[3px] cursor-pointer" style={{ pointerEvents: track ? 'auto' : 'none' }}>
-                <input
-                    type="range"
-                    min={0}
-                    max={durationSec}
-                    step={0.1}
-                    value={localProgress}
-                    onChange={handleSeekChange}
-                    onPointerDown={handleSeekPointerDown}
-                    onPointerUp={handleSeekPointerUp}
-                    onPointerCancel={() => setIsDragging(false)}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 touch-none"
+            <div className="w-full px-3 md:px-4 pt-1" style={{ pointerEvents: track ? 'auto' : 'none', opacity: track ? 1 : 0.4 }}>
+                <SeekBar
+                    duration={durationSec}
+                    position={localProgress}
+                    isPlaying={state.isPlaying}
+                    onSeek={handleSeekCommit}
                     disabled={!track}
-                    aria-label={t('player.trackPosition')}
+                    showTimeLabels={false}
                 />
-
-                {/* Background Line */}
-                <div className="absolute inset-x-0 h-[2px] top-1/2 -translate-y-1/2 bg-white/10 group-hover:h-[4px] transition-all pointer-events-none rounded-full mx-1"></div>
-
-                {/* Progress Fill */}
-                <div
-                    className={`absolute inset-y-0 left-0 bg-dominant group-hover:bg-dominant-light transition-all rounded-r-full pointer-events-none top-1/2 -translate-y-1/2 h-[2px] group-hover:h-[4px] mx-1 origin-left ${isCompact ? '' : isGlowEnabled ? 'shadow-[0_0_15px_rgba(var(--color-dominant-rgb),0.5)]' : ''}`}
-                    style={{ transform: `scaleX(${durationSec > 0 ? safeProgress / durationSec : 0})`, width: 'calc(100% - 8px)' }}
-                ></div>
-
-                {/* Visual Feedback on Drag */}
-                {isDragging && (
-                    <div
-                        className="absolute -top-8 bg-black/80 text-white text-[10px] font-bold px-2 py-1 rounded border border-white/10 transition-opacity pointer-events-none translate-x-1/2"
-                        style={{ right: `calc(${100 - progressPercent}%)` }}
-                    >
-                        {formatDuration(localProgress)}
-                    </div>
-                )}
             </div>
 
             <div className="flex-1 flex items-center justify-between px-2 md:px-6 pt-0.5 md:pt-1">

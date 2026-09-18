@@ -8,10 +8,12 @@ interface NowPlayingIndicatorProps {
     className?: string;
 }
 
-const PULSE_ANIMATION = 'animate-[nowPlayingPulse_2.4s_ease-in-out_infinite]';
+const PULSE_ANIMATION = 'animate-[nowPlayingPulse_3.6s_ease-in-out_infinite]';
 
 const Dot: React.FC<{ isAnimating: boolean }> = ({ isAnimating }) => (
-    <div className={`w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.8)] ${isAnimating ? PULSE_ANIMATION : ''}`} />
+    <div className="flex items-center justify-center w-4 h-4 rounded-full bg-black/60 backdrop-blur-sm ring-1 ring-white/40 shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+        <div className={`w-2 h-2 rounded-full bg-dominant shadow-[0_0_8px_2px_rgba(var(--color-dominant-rgb),0.85)] ${isAnimating ? PULSE_ANIMATION : ''}`} />
+    </div>
 );
 
 const BAR_HEIGHTS = [40, 100, 60, 90, 50];
