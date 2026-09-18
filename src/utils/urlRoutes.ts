@@ -1,6 +1,7 @@
 import type { TrackItem } from '../types/music';
 import type { ViewType } from '../components/layout/viewRouting';
 import { getTrackDisplayName } from './trackUtils';
+import { getDeploymentBasePath } from './basePath';
 
 export type ParsedAppRoute =
     | { kind: 'track'; shortHash: string; slug?: string }
@@ -19,10 +20,7 @@ export const slugify = (value: string): string => {
         .slice(0, 72);
 };
 
-export const getBasePath = (): string => {
-    const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
-    return base;
-};
+export const getBasePath = (): string => getDeploymentBasePath();
 
 const VIEW_PATH_MAP: Partial<Record<ViewType, string>> = {
     Dashboard: '/',
@@ -37,10 +35,11 @@ const VIEW_PATH_MAP: Partial<Record<ViewType, string>> = {
 
 export const routeForView = (view: ViewType): string => {
     const suffix = VIEW_PATH_MAP[view];
+    const base = getBasePath();
     if (!suffix || suffix === '/') {
-        return getBasePath() || '/';
+        return base ? `${base}/` : '/';
     }
-    return `${getBasePath()}${suffix}`;
+    return `${base}${suffix}`;
 };
 
 export const routeForTrack = (track: TrackItem): string => {

@@ -272,6 +272,8 @@ const AppContent: React.FC<AppContentProps> = ({
 
     // Keep URL concise and shareable based on current context
     useEffect(() => {
+        if (!initialRouteHandledRef.current) return;
+
         let nextPath = '/';
 
         if (currentView === 'SongDetail' && viewData && typeof viewData === 'object' && (viewData as any).logic?.hash_sha256) {

@@ -7,8 +7,9 @@ import { audioEngine } from './services/audioEngine';
 import { parseDuration } from './utils/formatters';
 import { resolvePreferredAssetUrl } from './services/assetResolver';
 import { getTrackDisplayName } from './utils/trackUtils';
+import { getDeploymentBasePath } from './utils/basePath';
 
-const DEFAULT_APP_ICON = `${import.meta.env.BASE_URL}icon-192.svg`;
+const DEFAULT_APP_ICON = `${getDeploymentBasePath()}/icon-192.svg`;
 
 const resolveArtworkSrc = (rawPath?: string): string => {
     if (!rawPath) return '';

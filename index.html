@@ -8,7 +8,8 @@
           var decoded = l.search.slice(1).split('&').map(function (s) {
             return s.replace(/~and~/g, '&');
           }).join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+          var basePath = l.pathname.charAt(l.pathname.length - 1) === '/' ? l.pathname.slice(0, -1) : l.pathname;
+          window.history.replaceState(null, null, basePath + decoded + l.hash);
         }
       }(window.location));
     </script>

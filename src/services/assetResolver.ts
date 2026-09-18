@@ -1,5 +1,7 @@
+import { getDeploymentBasePath } from '../utils/basePath';
+
 const ABSOLUTE_URL_REGEX = /^[a-z][a-z0-9+.-]*:\/\//i;
-const BASE_URL = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '') || '/';
+const BASE_URL = getDeploymentBasePath() || '/';
 const MEDIA_BASE_URL = (import.meta.env.VITE_MEDIA_BASE_URL || '').replace(/\/+$/, '');
 
 const toPosixPath = (value: string): string => value.replace(/\\/g, '/').replace(/\/+/g, '/').trim();

@@ -1,6 +1,6 @@
-const STATIC_CACHE = 'music-library-static-v4';
-const ARTWORK_CACHE = 'music-library-artwork-v4';
-const DATA_CACHE = 'music-library-data-v4';
+const STATIC_CACHE = 'music-library-static-v5';
+const ARTWORK_CACHE = 'music-library-artwork-v5';
+const DATA_CACHE = 'music-library-data-v5';
 const APP_SCOPE = new URL(self.registration.scope);
 const APP_BASE_PATH = APP_SCOPE.pathname.endsWith('/') ? APP_SCOPE.pathname.slice(0, -1) : APP_SCOPE.pathname;
 const toScopedPath = (path) => `${APP_BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;
@@ -98,12 +98,14 @@ self.addEventListener('fetch', (event) => {
   if (request.destination === 'document') {
     event.respondWith(
       fetch(request)
-        .then((response) => {
+        .then(async (response) => {
           if (response.ok) {
             const copy = response.clone();
             caches.open(STATIC_CACHE).then((cache) => cache.put(request, copy)).catch(() => {});
+            return response;
           }
-          return response;
+          const shellFallback = await caches.match(toScopedPath('/index.html'));
+          return shellFallback || response;
         })
         .catch(async () => {
           const cached = await caches.match(request);

@@ -7,6 +7,7 @@ import { LibraryProvider } from './contexts/LibraryContext';
 import { PlayerProvider } from './contexts/PlayerContext';
 import { UIProvider } from './contexts/UIContext';
 import { I18nProvider } from './i18n/I18nContext';
+import { getDeploymentBasePath } from './utils/basePath';
 import './index.css';
 
 const MAX_OPEN_PAYLOAD_LENGTH = 16 * 1024;
@@ -100,7 +101,7 @@ if (typeof window !== 'undefined') {
         window.addEventListener('load', () => {
             if (shouldRegisterServiceWorker) {
                 navigator.serviceWorker
-                    .register(`${import.meta.env.BASE_URL}sw.js`)
+                    .register(`${getDeploymentBasePath()}/sw.js`)
                     .catch(() => {
                         // Ignore service-worker registration errors in unsupported environments.
                     });
