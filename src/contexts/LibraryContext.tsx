@@ -79,10 +79,10 @@ export const LibraryProvider: React.FC<{ children: ReactNode }> = ({ children })
                     return track;
                 }).filter(t => !hiddenTrackIds.has(t.logic?.hash_sha256));
 
-                // Group tracks by track_name and folder
                 const groupedMap = new Map<string, TrackItem[]>();
                 rawTracks.forEach(t => {
-                    const key = `${t.logic?.track_name || 'unknown'}-${t.logic?.hierarchy?.folder || 'root'}`;
+                    const directoryKey = (t.file?.dir || t.logic?.hierarchy?.folder || 'unknown-directory').toLowerCase();
+                    const key = `${directoryKey}::${(t.logic?.track_name || 'unknown').toLowerCase()}`;
                     if (!groupedMap.has(key)) {
                         groupedMap.set(key, []);
                     }
