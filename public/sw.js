@@ -1,6 +1,6 @@
-const STATIC_CACHE = 'music-library-static-v5';
-const ARTWORK_CACHE = 'music-library-artwork-v5';
-const DATA_CACHE = 'music-library-data-v5';
+const STATIC_CACHE = 'music-library-static-v6';
+const ARTWORK_CACHE = 'music-library-artwork-v6';
+const DATA_CACHE = 'music-library-data-v6';
 const APP_SCOPE = new URL(self.registration.scope);
 const APP_BASE_PATH = APP_SCOPE.pathname.endsWith('/') ? APP_SCOPE.pathname.slice(0, -1) : APP_SCOPE.pathname;
 const toScopedPath = (path) => `${APP_BASE_PATH}${path.startsWith('/') ? path : `/${path}`}`;

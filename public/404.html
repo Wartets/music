@@ -3,17 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Music Library</title>
-    <script>
-      var pathSegmentsToKeep = 1;
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
-    </script>
   </head>
-  <body></body>
+  <body>
+    <p>Page not found. <a href="/music/">Return to Music Library</a>.</p>
+  </body>
 </html>
